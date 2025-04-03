@@ -1,0 +1,3356 @@
+[
+    {
+        "name": "Nguyên sang"
+    },
+    {
+        "name": "Diễn sinh"
+    },
+    {
+        "name": "Ngôn tình"
+    },
+    {
+        "name": "Nam sinh"
+    },
+    {
+        "name": "Đam mỹ"
+    },
+    {
+        "name": "Bách hợp"
+    },
+    {
+        "name": "Nữ tôn"
+    },
+    {
+        "name": "Không CP"
+    },
+    {
+        "name": "Cổ đại"
+    },
+    {
+        "name": "Cận đại"
+    },
+    {
+        "name": "Hiện đại"
+    },
+    {
+        "name": "Tương lai"
+    },
+    {
+        "name": "HE"
+    },
+    {
+        "name": "SE"
+    },
+    {
+        "name": "OE"
+    },
+    {
+        "name": "Tình cảm"
+    },
+    {
+        "name": "Tiên hiệp"
+    },
+    {
+        "name": "Huyền huyễn"
+    },
+    {
+        "name": "Khoa học viễn tưởng"
+    },
+    {
+        "name": "Mạt thế"
+    },
+    {
+        "name": "Sinh tồn"
+    },
+    {
+        "name": "Tranh bá"
+    },
+    {
+        "name": "Võ hiệp"
+    },
+    {
+        "name": "Trinh thám"
+    },
+    {
+        "name": "Kinh dị"
+    },
+    {
+        "name": "Quan trường"
+    },
+    {
+        "name": "Kinh thương"
+    },
+    {
+        "name": "Quân sự"
+    },
+    {
+        "name": "Xây dựng"
+    },
+    {
+        "name": "Làm ruộng"
+    },
+    {
+        "name": "Huyền học"
+    },
+    {
+        "name": "Giám bảo"
+    },
+    {
+        "name": "Y thuật"
+    },
+    {
+        "name": "Thể thao"
+    },
+    {
+        "name": "Viết văn"
+    },
+    {
+        "name": "Giới giải trí"
+    },
+    {
+        "name": "Võng du"
+    },
+    {
+        "name": "Group chat"
+    },
+    {
+        "name": "Manga anime"
+    },
+    {
+        "name": "Phim ảnh"
+    },
+    {
+        "name": "Hồng Lâu"
+    },
+    {
+        "name": "Tam Quốc"
+    },
+    {
+        "name": "Marvel"
+    },
+    {
+        "name": "Korean novel"
+    },
+    {
+        "name": "Japanese novel"
+    },
+    {
+        "name": "EU novel"
+    },
+    {
+        "name": "Kim Bảng 🏆"
+    },
+    {
+        "name": "Kim bài đề cử 🥇"
+    },
+    {
+        "name": "Ngân bài đề cử 🥈"
+    },
+    {
+        "name": "Liên Thành 3 sao"
+    },
+    {
+        "name": "Liên Thành 4 sao"
+    },
+    {
+        "name": "Liên Thành 5 sao"
+    },
+    {
+        "name": "ABO"
+    },
+    {
+        "name": "EABO"
+    },
+    {
+        "name": "A x A"
+    },
+    {
+        "name": "B x B"
+    },
+    {
+        "name": "O x O"
+    },
+    {
+        "name": "E x A"
+    },
+    {
+        "name": "E x B"
+    },
+    {
+        "name": "E x O"
+    },
+    {
+        "name": "A x B"
+    },
+    {
+        "name": "A x O"
+    },
+    {
+        "name": "B x A"
+    },
+    {
+        "name": "B x O"
+    },
+    {
+        "name": "O x A"
+    },
+    {
+        "name": "O x B"
+    },
+    {
+        "name": "Nữ A nam O"
+    },
+    {
+        "name": "Nữ công"
+    },
+    {
+        "name": "Nữ ko sinh con"
+    },
+    {
+        "name": "Công sinh con"
+    },
+    {
+        "name": "Sinh con"
+    },
+    {
+        "name": "Song tính"
+    },
+    {
+        "name": "Đơn tính"
+    },
+    {
+        "name": "Song JJ"
+    },
+    {
+        "name": "Sản nhũ"
+    },
+    {
+        "name": "Lính gác dẫn đường"
+    },
+    {
+        "name": "Fork&Cake"
+    },
+    {
+        "name": "Xúc tu"
+    },
+    {
+        "name": "Trùng tộc"
+    },
+    {
+        "name": "Ngọt sủng"
+    },
+    {
+        "name": "Nhẹ nhàng"
+    },
+    {
+        "name": "Ấm áp"
+    },
+    {
+        "name": "Hài hước"
+    },
+    {
+        "name": "Lôi"
+    },
+    {
+        "name": "Cẩu huyết"
+    },
+    {
+        "name": "Ngược luyến"
+    },
+    {
+        "name": "Tiểu bạch văn"
+    },
+    {
+        "name": "Hắc ám"
+    },
+    {
+        "name": "Sảng văn"
+    },
+    {
+        "name": "Thanh thủy văn"
+    },
+    {
+        "name": "Đoản văn"
+    },
+    {
+        "name": "Quân văn"
+    },
+    {
+        "name": "Chậm nhiệt"
+    },
+    {
+        "name": "Chữa lành"
+    },
+    {
+        "name": "Tế thuỷ trường lưu"
+    },
+    {
+        "name": "Đơn nguyên văn"
+    },
+    {
+        "name": "Ăn dưa văn"
+    },
+    {
+        "name": "Quần tượng văn"
+    },
+    {
+        "name": "Tam quan bất chính"
+    },
+    {
+        "name": "Hồng hoang"
+    },
+    {
+        "name": "Dị thế"
+    },
+    {
+        "name": "Thú nhân"
+    },
+    {
+        "name": "Tinh tế"
+    },
+    {
+        "name": "Nam nam thế giới"
+    },
+    {
+        "name": "Thế giới song song"
+    },
+    {
+        "name": "Nguyên thủy"
+    },
+    {
+        "name": "Cyberpunk"
+    },
+    {
+        "name": "Steampunk"
+    },
+    {
+        "name": "Phế thổ"
+    },
+    {
+        "name": "Thai xuyên"
+    },
+    {
+        "name": "Thân xuyên"
+    },
+    {
+        "name": "Xuyên việt"
+    },
+    {
+        "name": "Xuyên thư"
+    },
+    {
+        "name": "Xuyên game"
+    },
+    {
+        "name": "Xuyên nhanh"
+    },
+    {
+        "name": "Xuyên chậm"
+    },
+    {
+        "name": "Cổ xuyên kim"
+    },
+    {
+        "name": "Cổ đại xuyên tươg lai"
+    },
+    {
+        "name": "Tg lai xuyên hiện đại"
+    },
+    {
+        "name": "Tg lai xuyên cổ đại"
+    },
+    {
+        "name": "Đàn xuyên"
+    },
+    {
+        "name": "Song xuyên"
+    },
+    {
+        "name": "Phản phái xuyên việt"
+    },
+    {
+        "name": "Xuyên về thế giới cũ"
+    },
+    {
+        "name": "Trọng sinh"
+    },
+    {
+        "name": "Song trọng sinh"
+    },
+    {
+        "name": "Phản phái trọng sinh"
+    },
+    {
+        "name": "Hoán đổi linh hồn"
+    },
+    {
+        "name": "Qua lại thời không"
+    },
+    {
+        "name": "Vị diện"
+    },
+    {
+        "name": "Thời Xuân Thu"
+    },
+    {
+        "name": "Thời Chiến Quốc"
+    },
+    {
+        "name": "Đại Tần"
+    },
+    {
+        "name": "Đại Hán"
+    },
+    {
+        "name": "Đại Đường"
+    },
+    {
+        "name": "Đại Tống"
+    },
+    {
+        "name": "Đại Minh"
+    },
+    {
+        "name": "Đại Thanh"
+    },
+    {
+        "name": "Dân quốc"
+    },
+    {
+        "name": "Đô thị tình duyên"
+    },
+    {
+        "name": "Hào môn thế gia"
+    },
+    {
+        "name": "Cung đình hầu tước"
+    },
+    {
+        "name": "Tam giáo cửu lưu"
+    },
+    {
+        "name": "Hắc bang"
+    },
+    {
+        "name": "Vườn trường"
+    },
+    {
+        "name": "Chức trường"
+    },
+    {
+        "name": "Giang hồ ân oán"
+    },
+    {
+        "name": "Phương Tây"
+    },
+    {
+        "name": "Niên đại văn"
+    },
+    {
+        "name": "Truyện cổ tích"
+    },
+    {
+        "name": "Tĩnh Khang chi sỉ"
+    },
+    {
+        "name": "Linh khí sống lại"
+    },
+    {
+        "name": "Đệ tứ thiên tai"
+    },
+    {
+        "name": "Lưu đày"
+    },
+    {
+        "name": "Chạy nạn"
+    },
+    {
+        "name": "Lịch sử"
+    },
+    {
+        "name": "Giả tưởng lịch sử"
+    },
+    {
+        "name": "Nộp bàn tay vàng"
+    },
+    {
+        "name": "Hệ thống"
+    },
+    {
+        "name": "Song hệ thống"
+    },
+    {
+        "name": "Tùy thân không gian"
+    },
+    {
+        "name": "Cẩm lý thể chất"
+    },
+    {
+        "name": "App"
+    },
+    {
+        "name": "Thấu thị"
+    },
+    {
+        "name": "Thôi miên"
+    },
+    {
+        "name": "Đọc tâm"
+    },
+    {
+        "name": "Ngôn linh"
+    },
+    {
+        "name": "Đánh dấu"
+    },
+    {
+        "name": "Thương thành"
+    },
+    {
+        "name": "Hồi đương"
+    },
+    {
+        "name": "Rút thăm trúng thưởng"
+    },
+    {
+        "name": "Bắt chước khí"
+    },
+    {
+        "name": "Hợp thành"
+    },
+    {
+        "name": "Vô hiệu hóa"
+    },
+    {
+        "name": "Làn đạn"
+    },
+    {
+        "name": "Mỹ thực"
+    },
+    {
+        "name": "Chế tác"
+    },
+    {
+        "name": "Khoa cử"
+    },
+    {
+        "name": "Cơ giáp"
+    },
+    {
+        "name": "Thi đấu cạnh kỹ"
+    },
+    {
+        "name": "Đổ thạch"
+    },
+    {
+        "name": "Phong thủy"
+    },
+    {
+        "name": "Giới giải trí Hàn"
+    },
+    {
+        "name": "Giới giải trí Mỹ"
+    },
+    {
+        "name": "Phá án"
+    },
+    {
+        "name": "Trộm mộ"
+    },
+    {
+        "name": "Phát sóng trực tiếp"
+    },
+    {
+        "name": "Võng phối"
+    },
+    {
+        "name": "Trò chơi"
+    },
+    {
+        "name": "Võng hồng"
+    },
+    {
+        "name": "Thẻ bài"
+    },
+    {
+        "name": "Thực tế ảo"
+    },
+    {
+        "name": "Làm giàu"
+    },
+    {
+        "name": "Ngự thú"
+    },
+    {
+        "name": "Dưỡng oa"
+    },
+    {
+        "name": "Lữ hành"
+    },
+    {
+        "name": "Mạo hiểm"
+    },
+    {
+        "name": "Oa tổng"
+    },
+    {
+        "name": "Luyến tổng"
+    },
+    {
+        "name": "Giới thời trang"
+    },
+    {
+        "name": "Tây huyễn"
+    },
+    {
+        "name": "Linh dị thần quái"
+    },
+    {
+        "name": "Tu chân"
+    },
+    {
+        "name": "Ma pháp"
+    },
+    {
+        "name": "Đấu khí"
+    },
+    {
+        "name": "Dị năng"
+    },
+    {
+        "name": "Thần tiên yêu quái"
+    },
+    {
+        "name": "Vampire"
+    },
+    {
+        "name": "Thần thoại"
+    },
+    {
+        "name": "Triệu hoán"
+    },
+    {
+        "name": "Cthulhu"
+    },
+    {
+        "name": "Làm sự nghiệp"
+    },
+    {
+        "name": "Phản bàn tay vàng"
+    },
+    {
+        "name": "Phản anh hùng"
+    },
+    {
+        "name": "Otome"
+    },
+    {
+        "name": "Báo thù"
+    },
+    {
+        "name": "Ngược tra"
+    },
+    {
+        "name": "Cung đấu"
+    },
+    {
+        "name": "Trạch đấu"
+    },
+    {
+        "name": "Vô hạn lưu"
+    },
+    {
+        "name": "Thăng cấp lưu"
+    },
+    {
+        "name": "Cải trang giả dạng"
+    },
+    {
+        "name": "Bình bộ thanh vân"
+    },
+    {
+        "name": "Nghịch tập"
+    },
+    {
+        "name": "Vả mặt"
+    },
+    {
+        "name": "Bình dân sinh hoạt"
+    },
+    {
+        "name": "Vô địch lưu"
+    },
+    {
+        "name": "Phế sài lưu"
+    },
+    {
+        "name": "Kỹ thuật lưu"
+    },
+    {
+        "name": "Phàm nhân lưu"
+    },
+    {
+        "name": "Cao nhân lưu"
+    },
+    {
+        "name": "Sáng thế lưu"
+    },
+    {
+        "name": "Cứu thế lưu"
+    },
+    {
+        "name": "Hắc thủ lưu"
+    },
+    {
+        "name": "Áo choàng lưu"
+    },
+    {
+        "name": "Đoàn đội lưu"
+    },
+    {
+        "name": "Toàn dân lưu"
+    },
+    {
+        "name": "Hằng ngày"
+    },
+    {
+        "name": "Quyền mưu"
+    },
+    {
+        "name": "Công lược nhiệm vụ"
+    },
+    {
+        "name": "Trưởng thành"
+    },
+    {
+        "name": "Mang cầu chạy"
+    },
+    {
+        "name": "Mang cầu không chạy"
+    },
+    {
+        "name": "Hoa Hạ cực đoan"
+    },
+    {
+        "name": "Xuyên thành vai chính"
+    },
+    {
+        "name": "Xuyên thành vai ác"
+    },
+    {
+        "name": "Main là động vật"
+    },
+    {
+        "name": "Main là thực vật"
+    },
+    {
+        "name": "Main là đồ vật"
+    },
+    {
+        "name": "Main là hệ thống"
+    },
+    {
+        "name": "Thật giả thiên kim"
+    },
+    {
+        "name": "Thật giả thiếu gia"
+    },
+    {
+        "name": "Chức nghiệp tinh anh"
+    },
+    {
+        "name": "Thiên chi kiêu tử"
+    },
+    {
+        "name": "Cường giả trở về"
+    },
+    {
+        "name": "Thiên tài"
+    },
+    {
+        "name": "Trạch nam"
+    },
+    {
+        "name": "Trạch nữ"
+    },
+    {
+        "name": "Phổ nam"
+    },
+    {
+        "name": "Phổ nữ"
+    },
+    {
+        "name": "Mary Sue"
+    },
+    {
+        "name": "Jack Sue"
+    },
+    {
+        "name": "Nữ phụ"
+    },
+    {
+        "name": "Nam phụ"
+    },
+    {
+        "name": "Nữ biến nam"
+    },
+    {
+        "name": "Nam biến nữ"
+    },
+    {
+        "name": "Nữ trang đại lão"
+    },
+    {
+        "name": "Nữ giả nam trang"
+    },
+    {
+        "name": "Nam giả nữ trang"
+    },
+    {
+        "name": "Người qua đường"
+    },
+    {
+        "name": "Vợ cũ"
+    },
+    {
+        "name": "Chồng cũ"
+    },
+    {
+        "name": "NPC"
+    },
+    {
+        "name": "Pháo hôi"
+    },
+    {
+        "name": "Bạch nguyệt quang"
+    },
+    {
+        "name": "Mỹ cường thảm"
+    },
+    {
+        "name": "Vạn nhân mê"
+    },
+    {
+        "name": "Vạn người ngại"
+    },
+    {
+        "name": "Chim hoàng yến"
+    },
+    {
+        "name": "Kim chủ"
+    },
+    {
+        "name": "Manh bảo"
+    },
+    {
+        "name": "Manh sủng"
+    },
+    {
+        "name": "Đoàn sủng"
+    },
+    {
+        "name": "Nãi nãi"
+    },
+    {
+        "name": "Học bá"
+    },
+    {
+        "name": "Giáo bá"
+    },
+    {
+        "name": "Giáo thảo"
+    },
+    {
+        "name": "Đại lão"
+    },
+    {
+        "name": "Trùm cuối"
+    },
+    {
+        "name": "Họa sĩ"
+    },
+    {
+        "name": "Thợ code"
+    },
+    {
+        "name": "Điệp viên"
+    },
+    {
+        "name": "Bộ đội đặc chủng"
+    },
+    {
+        "name": "Pháp y"
+    },
+    {
+        "name": "Lão sư"
+    },
+    {
+        "name": "Quản gia"
+    },
+    {
+        "name": "Đế vương"
+    },
+    {
+        "name": "Nam sủng"
+    },
+    {
+        "name": "Xướng kỹ"
+    },
+    {
+        "name": "Thủ phụ"
+    },
+    {
+        "name": "Thái y"
+    },
+    {
+        "name": "Ngỗ tác"
+    },
+    {
+        "name": "Đạo tặc"
+    },
+    {
+        "name": "Sát thủ"
+    },
+    {
+        "name": "Hòa thượng"
+    },
+    {
+        "name": "Thái giám thật"
+    },
+    {
+        "name": "Thái giám giả"
+    },
+    {
+        "name": "Lão phu nhân"
+    },
+    {
+        "name": "Nguyên phối"
+    },
+    {
+        "name": "Cung nữ"
+    },
+    {
+        "name": "Nha hoàn"
+    },
+    {
+        "name": "Thông phòng"
+    },
+    {
+        "name": "Tiểu thiếp"
+    },
+    {
+        "name": "Tiểu tam"
+    },
+    {
+        "name": "Mỹ nhân"
+    },
+    {
+        "name": "Bệnh mỹ nhân"
+    },
+    {
+        "name": "Mỹ nhân ngư"
+    },
+    {
+        "name": "Tang thi"
+    },
+    {
+        "name": "Mị ma"
+    },
+    {
+        "name": "Ô nhiễm vật"
+    },
+    {
+        "name": "Tinh linh"
+    },
+    {
+        "name": "Phi nhân loại"
+    },
+    {
+        "name": "Giả tưởng sinh vật"
+    },
+    {
+        "name": "Ngoại tinh sinh vật"
+    },
+    {
+        "name": "Nhân vật 2D"
+    },
+    {
+        "name": "Nhân vật thức tỉnh"
+    },
+    {
+        "name": "Thánh nữ"
+    },
+    {
+        "name": "Thánh tử"
+    },
+    {
+        "name": "Thần minh"
+    },
+    {
+        "name": "Tác giả"
+    },
+    {
+        "name": "Đa nhân cách"
+    },
+    {
+        "name": "Mất trí nhớ"
+    },
+    {
+        "name": "Nhân phu"
+    },
+    {
+        "name": "Nhân thê"
+    },
+    {
+        "name": "Giả heo ăn hổ"
+    },
+    {
+        "name": "Bạch thiết hắc"
+    },
+    {
+        "name": "Phúc hắc"
+    },
+    {
+        "name": "Văn nhã bại hoại"
+    },
+    {
+        "name": "Cơ trí"
+    },
+    {
+        "name": "Bình tĩnh"
+    },
+    {
+        "name": "Độc miệng"
+    },
+    {
+        "name": "Cuốn vương"
+    },
+    {
+        "name": "Cá mặn"
+    },
+    {
+        "name": "Phật hệ"
+    },
+    {
+        "name": "Bình phàm"
+    },
+    {
+        "name": "Ôn nhu"
+    },
+    {
+        "name": "Kiều khí"
+    },
+    {
+        "name": "Ngốc manh"
+    },
+    {
+        "name": "Xã khủng"
+    },
+    {
+        "name": "Xã ngưu"
+    },
+    {
+        "name": "Sa điêu"
+    },
+    {
+        "name": "Dương quang"
+    },
+    {
+        "name": "Nhiệt liệt"
+    },
+    {
+        "name": "Cố chấp"
+    },
+    {
+        "name": "Điên phê"
+    },
+    {
+        "name": "Hắc hóa"
+    },
+    {
+        "name": "Bệnh kiều"
+    },
+    {
+        "name": "Ngạo kiều"
+    },
+    {
+        "name": "Biệt nữu"
+    },
+    {
+        "name": "Trung khuyển"
+    },
+    {
+        "name": "Chó săn"
+    },
+    {
+        "name": "Liếm cẩu"
+    },
+    {
+        "name": "Muộn tao"
+    },
+    {
+        "name": "Mặt dày"
+    },
+    {
+        "name": "Trà xanh"
+    },
+    {
+        "name": "Bạch liên hoa"
+    },
+    {
+        "name": "Làm tinh"
+    },
+    {
+        "name": "Câu hệ"
+    },
+    {
+        "name": "Cha hệ"
+    },
+    {
+        "name": "Lưu manh"
+    },
+    {
+        "name": "Cấm dục"
+    },
+    {
+        "name": "Cao lãnh chi hoa"
+    },
+    {
+        "name": "Băng sơn"
+    },
+    {
+        "name": "Si tình"
+    },
+    {
+        "name": "Vô tình"
+    },
+    {
+        "name": "Phong lưu"
+    },
+    {
+        "name": "Hải vương"
+    },
+    {
+        "name": "Ngựa giống"
+    },
+    {
+        "name": "Dấm vương"
+    },
+    {
+        "name": "Chiếm hữu dục"
+    },
+    {
+        "name": "Si hán"
+    },
+    {
+        "name": "Tháo hán"
+    },
+    {
+        "name": "Tham ăn"
+    },
+    {
+        "name": "Tham tài"
+    },
+    {
+        "name": "Thanh mai trúc mã"
+    },
+    {
+        "name": "Hoan hỉ oan gia"
+    },
+    {
+        "name": "Song hướng yêu thầm"
+    },
+    {
+        "name": "Đơn hướng yêu thầm"
+    },
+    {
+        "name": "Nhất kiến chung tình"
+    },
+    {
+        "name": "Gương vỡ lại lành"
+    },
+    {
+        "name": "Gương vỡ không lành"
+    },
+    {
+        "name": "Cưới trước yêu sau"
+    },
+    {
+        "name": "Khế ước tình nhân"
+    },
+    {
+        "name": "Từ giả thành thật"
+    },
+    {
+        "name": "Kiếp trước kiếp này"
+    },
+    {
+        "name": "Cận thủy lâu đài"
+    },
+    {
+        "name": "Duyên trời tác hợp"
+    },
+    {
+        "name": "Trâu già gặm cỏ non"
+    },
+    {
+        "name": "Tương ái tương sát"
+    },
+    {
+        "name": "Chế phục tình duyên"
+    },
+    {
+        "name": "Cường thủ hào đoạt"
+    },
+    {
+        "name": "Cưỡng chế ái"
+    },
+    {
+        "name": "Cầm tù"
+    },
+    {
+        "name": "Thế thân"
+    },
+    {
+        "name": "Song thế thân"
+    },
+    {
+        "name": "Tình địch"
+    },
+    {
+        "name": "Cứu rỗi"
+    },
+    {
+        "name": "Tình bạn"
+    },
+    {
+        "name": "Tình thân"
+    },
+    {
+        "name": "Dưỡng thành"
+    },
+    {
+        "name": "Tái hôn"
+    },
+    {
+        "name": "Nữ truy nam"
+    },
+    {
+        "name": "Hỏa táng tràng"
+    },
+    {
+        "name": "Tu la tràng"
+    },
+    {
+        "name": "Bạn cùng phòng"
+    },
+    {
+        "name": "Cấp trên cấp dưới"
+    },
+    {
+        "name": "Hạ khắc thượng"
+    },
+    {
+        "name": "Pháo hữu"
+    },
+    {
+        "name": "SM"
+    },
+    {
+        "name": "NTR"
+    },
+    {
+        "name": "PUA"
+    },
+    {
+        "name": "PTSD"
+    },
+    {
+        "name": "Tây Du"
+    },
+    {
+        "name": "Thủy Hử"
+    },
+    {
+        "name": "Bảng Phong Thần"
+    },
+    {
+        "name": "Kiếm Tam"
+    },
+    {
+        "name": "Liêu trai"
+    },
+    {
+        "name": "Phích Lịch"
+    },
+    {
+        "name": "Thất hiệp ngũ nghĩa"
+    },
+    {
+        "name": "Thử Miêu"
+    },
+    {
+        "name": "Kim Dung"
+    },
+    {
+        "name": "Cổ Long"
+    },
+    {
+        "name": "Quỳnh Dao"
+    },
+    {
+        "name": "Đấu La đại lục"
+    },
+    {
+        "name": "Đấu phá thương khung"
+    },
+    {
+        "name": "Ma đạo tổ sư"
+    },
+    {
+        "name": "Toàn chức cao thủ"
+    },
+    {
+        "name": "Đạo mộ bút ký"
+    },
+    {
+        "name": "Phim Anh Mỹ"
+    },
+    {
+        "name": "Trò chơi vương quyền"
+    },
+    {
+        "name": "Siêu anh hùng"
+    },
+    {
+        "name": "Sherlock Holmes"
+    },
+    {
+        "name": "Harry Potter"
+    },
+    {
+        "name": "DC"
+    },
+    {
+        "name": "Ultraman"
+    },
+    {
+        "name": "Gundam"
+    },
+    {
+        "name": "Kanmusu"
+    },
+    {
+        "name": "Liên Minh Huyền Thoại"
+    },
+    {
+        "name": "Âm Dương Sư"
+    },
+    {
+        "name": "Plants vs. Zombies"
+    },
+    {
+        "name": "Resident Evil"
+    },
+    {
+        "name": "World of Warcraft"
+    },
+    {
+        "name": "Genshin"
+    },
+    {
+        "name": "Honkai"
+    },
+    {
+        "name": "Honkai: Star Rail"
+    },
+    {
+        "name": "Arknights"
+    },
+    {
+        "name": "Naruto"
+    },
+    {
+        "name": "One Piece"
+    },
+    {
+        "name": "Pokemon"
+    },
+    {
+        "name": "Conan"
+    },
+    {
+        "name": "Dragon Ball"
+    },
+    {
+        "name": "Hunter x Hunter"
+    },
+    {
+        "name": "Hoàng tử Tennis"
+    },
+    {
+        "name": "Bleach"
+    },
+    {
+        "name": "Gintama"
+    },
+    {
+        "name": "Inuyasha"
+    },
+    {
+        "name": "Fairy Tail"
+    },
+    {
+        "name": "Kuroko no basket"
+    },
+    {
+        "name": "JOJO"
+    },
+    {
+        "name": "Saiki"
+    },
+    {
+        "name": "Hitman Reborn"
+    },
+    {
+        "name": "Đao kiếm loạn vũ"
+    },
+    {
+        "name": "Attack on Titan"
+    },
+    {
+        "name": "Bungo Stray Dogs"
+    },
+    {
+        "name": "Kimetsu no Yaiba"
+    },
+    {
+        "name": "Jujutsu Kaisen"
+    },
+    {
+        "name": "K Project"
+    },
+    {
+        "name": "My Hero Academia"
+    },
+    {
+        "name": "CC Sakura"
+    },
+    {
+        "name": "Yu-Gi-Oh!"
+    },
+    {
+        "name": "Tokyo Ghoul"
+    },
+    {
+        "name": "Tokyo Revengers"
+    },
+    {
+        "name": "Toriko"
+    },
+    {
+        "name": "Natsume Yuujinchou"
+    },
+    {
+        "name": "Haikyuu!!"
+    },
+    {
+        "name": "One-Punch Man"
+    },
+    {
+        "name": "Blue Lock"
+    },
+    {
+        "name": "Captain Tsubasa"
+    },
+    {
+        "name": "Aoashi"
+    },
+    {
+        "name": "Type-Moon"
+    },
+    {
+        "name": "Fate"
+    },
+    {
+        "name": "Identity V"
+    },
+    {
+        "name": "Trần Tình Lệnh"
+    },
+    {
+        "name": "Lượng kiếm"
+    },
+    {
+        "name": "T.mãn cửu đạo loan"
+    },
+    {
+        "name": "T.mãn tứ hợp viện"
+    },
+    {
+        "name": "Thiếu niên ca hành"
+    },
+    {
+        "name": "Nhất nhân chi hạ"
+    },
+    {
+        "name": "Liên Hoa Lâu"
+    },
+    {
+        "name": "Thục nam thục nữ"
+    },
+    {
+        "name": "Tra công tiện thụ"
+    },
+    {
+        "name": "Tra công tra thụ"
+    },
+    {
+        "name": "Tra nam"
+    },
+    {
+        "name": "Tra nữ"
+    },
+    {
+        "name": "Tiện nam"
+    },
+    {
+        "name": "Tiện nữ"
+    },
+    {
+        "name": "Tra công"
+    },
+    {
+        "name": "Tra thụ"
+    },
+    {
+        "name": "Tiện công"
+    },
+    {
+        "name": "Tiện thụ"
+    },
+    {
+        "name": "Nhược công"
+    },
+    {
+        "name": "Nhược thụ"
+    },
+    {
+        "name": "Mỹ công"
+    },
+    {
+        "name": "Mỹ thụ"
+    },
+    {
+        "name": "Sửu công"
+    },
+    {
+        "name": "Sửu thụ"
+    },
+    {
+        "name": "Sửu nam"
+    },
+    {
+        "name": "Sửu nữ"
+    },
+    {
+        "name": "Tráng công"
+    },
+    {
+        "name": "Tráng thụ"
+    },
+    {
+        "name": "Hỗ công"
+    },
+    {
+        "name": "Hỗ thụ"
+    },
+    {
+        "name": "Tự công tự thụ"
+    },
+    {
+        "name": "Nữ vương thụ"
+    },
+    {
+        "name": "Tổng tài thụ"
+    },
+    {
+        "name": "Kim chủ thụ"
+    },
+    {
+        "name": "Nam sủng công"
+    },
+    {
+        "name": "Chim hoàng yến công"
+    },
+    {
+        "name": "Niên thượng"
+    },
+    {
+        "name": "Niên hạ"
+    },
+    {
+        "name": "Cường cường"
+    },
+    {
+        "name": "Mỹ cường"
+    },
+    {
+        "name": "Cường nhược"
+    },
+    {
+        "name": "Nhược cường"
+    },
+    {
+        "name": "Nhược nhược"
+    },
+    {
+        "name": "Nữ cường"
+    },
+    {
+        "name": "1v1"
+    },
+    {
+        "name": "Nhiều CP"
+    },
+    {
+        "name": "NP"
+    },
+    {
+        "name": "L luân"
+    },
+    {
+        "name": "Mẫu tử"
+    },
+    {
+        "name": "Phụ tử"
+    },
+    {
+        "name": "Huynh đệ"
+    },
+    {
+        "name": "Huynh muội"
+    },
+    {
+        "name": "Tỷ đệ"
+    },
+    {
+        "name": "Công tức"
+    },
+    {
+        "name": "Thúc chất"
+    },
+    {
+        "name": "Thúc tẩu"
+    },
+    {
+        "name": "Tỷ phu"
+    },
+    {
+        "name": "Kế phụ"
+    },
+    {
+        "name": "Kế mẫu"
+    },
+    {
+        "name": "Sư đồ"
+    },
+    {
+        "name": "Chủ phó"
+    },
+    {
+        "name": "Song khiết 🕊️"
+    },
+    {
+        "name": "Phi song khiết 🌂"
+    },
+    {
+        "name": "NP toàn khiết 🕊️"
+    },
+    {
+        "name": "Thụ cao hơn công"
+    },
+    {
+        "name": "Thụ tráng hơn công"
+    },
+    {
+        "name": "Công ysl"
+    },
+    {
+        "name": "Công dưa ko khiết"
+    },
+    {
+        "name": "Công cúc ko khiết"
+    },
+    {
+        "name": "Thụ dưa ko khiết"
+    },
+    {
+        "name": "Thụ cúc ko khiết"
+    },
+    {
+        "name": "Nam 9 ko khiết"
+    },
+    {
+        "name": "Nữ 9 ko khiết"
+    },
+    {
+        "name": "Giẻ lau"
+    },
+    {
+        "name": "Đổi người yêu"
+    },
+    {
+        "name": "Đổi công"
+    },
+    {
+        "name": "Đổi thụ"
+    },
+    {
+        "name": "Thụ chuyển công"
+    },
+    {
+        "name": "Công chuyển thụ"
+    },
+    {
+        "name": "Thị giác nam chủ"
+    },
+    {
+        "name": "Thị giác nữ chủ"
+    },
+    {
+        "name": "Chủ công"
+    },
+    {
+        "name": "Chủ thụ"
+    },
+    {
+        "name": "Ngôi thứ nhất"
+    },
+    {
+        "name": "Ngôi thứ hai"
+    },
+    {
+        "name": "Xem ảnh thể"
+    },
+    {
+        "name": "Diễn đàn thể"
+    },
+    {
+        "name": "Đối thoại thể"
+    },
+    {
+        "name": "Đa thị giác"
+    },
+    {
+        "name": "Song thị giác"
+    },
+    {
+        "name": "Kim Bảng 🏆"
+    },
+    {
+        "name": "Kim bài đề cử 🥇"
+    },
+    {
+        "name": "Ngân bài đề cử 🥈"
+    },
+    {
+        "name": "Liên Thành 3 sao"
+    },
+    {
+        "name": "Liên Thành 4 sao"
+    },
+    {
+        "name": "Liên Thành 5 sao"
+    },
+    {
+        "name": "ABO"
+    },
+    {
+        "name": "EABO"
+    },
+    {
+        "name": "A x A"
+    },
+    {
+        "name": "B x B"
+    },
+    {
+        "name": "O x O"
+    },
+    {
+        "name": "E x A"
+    },
+    {
+        "name": "E x B"
+    },
+    {
+        "name": "E x O"
+    },
+    {
+        "name": "A x B"
+    },
+    {
+        "name": "A x O"
+    },
+    {
+        "name": "B x A"
+    },
+    {
+        "name": "B x O"
+    },
+    {
+        "name": "O x A"
+    },
+    {
+        "name": "O x B"
+    },
+    {
+        "name": "Nữ A nam O"
+    },
+    {
+        "name": "Nữ công"
+    },
+    {
+        "name": "Nữ ko sinh con"
+    },
+    {
+        "name": "Công sinh con"
+    },
+    {
+        "name": "Sinh con"
+    },
+    {
+        "name": "Song tính"
+    },
+    {
+        "name": "Đơn tính"
+    },
+    {
+        "name": "Song JJ"
+    },
+    {
+        "name": "Sản nhũ"
+    },
+    {
+        "name": "Lính gác dẫn đường"
+    },
+    {
+        "name": "Fork&Cake"
+    },
+    {
+        "name": "Xúc tu"
+    },
+    {
+        "name": "Trùng tộc"
+    },
+    {
+        "name": "Ngọt sủng"
+    },
+    {
+        "name": "Nhẹ nhàng"
+    },
+    {
+        "name": "Ấm áp"
+    },
+    {
+        "name": "Hài hước"
+    },
+    {
+        "name": "Lôi"
+    },
+    {
+        "name": "Cẩu huyết"
+    },
+    {
+        "name": "Ngược luyến"
+    },
+    {
+        "name": "Tiểu bạch văn"
+    },
+    {
+        "name": "Hắc ám"
+    },
+    {
+        "name": "Sảng văn"
+    },
+    {
+        "name": "Thanh thủy văn"
+    },
+    {
+        "name": "Đoản văn"
+    },
+    {
+        "name": "Quân văn"
+    },
+    {
+        "name": "Chậm nhiệt"
+    },
+    {
+        "name": "Chữa lành"
+    },
+    {
+        "name": "Tế thuỷ trường lưu"
+    },
+    {
+        "name": "Đơn nguyên văn"
+    },
+    {
+        "name": "Ăn dưa văn"
+    },
+    {
+        "name": "Quần tượng văn"
+    },
+    {
+        "name": "Tam quan bất chính"
+    },
+    {
+        "name": "Hồng hoang"
+    },
+    {
+        "name": "Dị thế"
+    },
+    {
+        "name": "Thú nhân"
+    },
+    {
+        "name": "Tinh tế"
+    },
+    {
+        "name": "Nam nam thế giới"
+    },
+    {
+        "name": "Thế giới song song"
+    },
+    {
+        "name": "Nguyên thủy"
+    },
+    {
+        "name": "Cyberpunk"
+    },
+    {
+        "name": "Steampunk"
+    },
+    {
+        "name": "Phế thổ"
+    },
+    {
+        "name": "Thai xuyên"
+    },
+    {
+        "name": "Thân xuyên"
+    },
+    {
+        "name": "Xuyên việt"
+    },
+    {
+        "name": "Xuyên thư"
+    },
+    {
+        "name": "Xuyên game"
+    },
+    {
+        "name": "Xuyên nhanh"
+    },
+    {
+        "name": "Xuyên chậm"
+    },
+    {
+        "name": "Cổ xuyên kim"
+    },
+    {
+        "name": "Cổ đại xuyên tươg lai"
+    },
+    {
+        "name": "Tg lai xuyên hiện đại"
+    },
+    {
+        "name": "Tg lai xuyên cổ đại"
+    },
+    {
+        "name": "Đàn xuyên"
+    },
+    {
+        "name": "Song xuyên"
+    },
+    {
+        "name": "Phản phái xuyên việt"
+    },
+    {
+        "name": "Xuyên về thế giới cũ"
+    },
+    {
+        "name": "Trọng sinh"
+    },
+    {
+        "name": "Song trọng sinh"
+    },
+    {
+        "name": "Phản phái trọng sinh"
+    },
+    {
+        "name": "Hoán đổi linh hồn"
+    },
+    {
+        "name": "Qua lại thời không"
+    },
+    {
+        "name": "Vị diện"
+    },
+    {
+        "name": "Thời Xuân Thu"
+    },
+    {
+        "name": "Thời Chiến Quốc"
+    },
+    {
+        "name": "Đại Tần"
+    },
+    {
+        "name": "Đại Hán"
+    },
+    {
+        "name": "Đại Đường"
+    },
+    {
+        "name": "Đại Tống"
+    },
+    {
+        "name": "Đại Minh"
+    },
+    {
+        "name": "Đại Thanh"
+    },
+    {
+        "name": "Dân quốc"
+    },
+    {
+        "name": "Đô thị tình duyên"
+    },
+    {
+        "name": "Hào môn thế gia"
+    },
+    {
+        "name": "Cung đình hầu tước"
+    },
+    {
+        "name": "Tam giáo cửu lưu"
+    },
+    {
+        "name": "Hắc bang"
+    },
+    {
+        "name": "Vườn trường"
+    },
+    {
+        "name": "Chức trường"
+    },
+    {
+        "name": "Giang hồ ân oán"
+    },
+    {
+        "name": "Phương Tây"
+    },
+    {
+        "name": "Niên đại văn"
+    },
+    {
+        "name": "Truyện cổ tích"
+    },
+    {
+        "name": "Tĩnh Khang chi sỉ"
+    },
+    {
+        "name": "Linh khí sống lại"
+    },
+    {
+        "name": "Đệ tứ thiên tai"
+    },
+    {
+        "name": "Lưu đày"
+    },
+    {
+        "name": "Chạy nạn"
+    },
+    {
+        "name": "Lịch sử"
+    },
+    {
+        "name": "Giả tưởng lịch sử"
+    },
+    {
+        "name": "Nộp bàn tay vàng"
+    },
+    {
+        "name": "Hệ thống"
+    },
+    {
+        "name": "Song hệ thống"
+    },
+    {
+        "name": "Tùy thân không gian"
+    },
+    {
+        "name": "Cẩm lý thể chất"
+    },
+    {
+        "name": "App"
+    },
+    {
+        "name": "Thấu thị"
+    },
+    {
+        "name": "Thôi miên"
+    },
+    {
+        "name": "Đọc tâm"
+    },
+    {
+        "name": "Ngôn linh"
+    },
+    {
+        "name": "Đánh dấu"
+    },
+    {
+        "name": "Thương thành"
+    },
+    {
+        "name": "Hồi đương"
+    },
+    {
+        "name": "Rút thăm trúng thưởng"
+    },
+    {
+        "name": "Bắt chước khí"
+    },
+    {
+        "name": "Hợp thành"
+    },
+    {
+        "name": "Vô hiệu hóa"
+    },
+    {
+        "name": "Làn đạn"
+    },
+    {
+        "name": "Mỹ thực"
+    },
+    {
+        "name": "Chế tác"
+    },
+    {
+        "name": "Khoa cử"
+    },
+    {
+        "name": "Cơ giáp"
+    },
+    {
+        "name": "Thi đấu cạnh kỹ"
+    },
+    {
+        "name": "Đổ thạch"
+    },
+    {
+        "name": "Phong thủy"
+    },
+    {
+        "name": "Giới giải trí Hàn"
+    },
+    {
+        "name": "Giới giải trí Mỹ"
+    },
+    {
+        "name": "Phá án"
+    },
+    {
+        "name": "Trộm mộ"
+    },
+    {
+        "name": "Phát sóng trực tiếp"
+    },
+    {
+        "name": "Võng phối"
+    },
+    {
+        "name": "Trò chơi"
+    },
+    {
+        "name": "Võng hồng"
+    },
+    {
+        "name": "Thẻ bài"
+    },
+    {
+        "name": "Thực tế ảo"
+    },
+    {
+        "name": "Làm giàu"
+    },
+    {
+        "name": "Ngự thú"
+    },
+    {
+        "name": "Dưỡng oa"
+    },
+    {
+        "name": "Lữ hành"
+    },
+    {
+        "name": "Mạo hiểm"
+    },
+    {
+        "name": "Oa tổng"
+    },
+    {
+        "name": "Luyến tổng"
+    },
+    {
+        "name": "Giới thời trang"
+    },
+    {
+        "name": "Tây huyễn"
+    },
+    {
+        "name": "Linh dị thần quái"
+    },
+    {
+        "name": "Tu chân"
+    },
+    {
+        "name": "Ma pháp"
+    },
+    {
+        "name": "Đấu khí"
+    },
+    {
+        "name": "Dị năng"
+    },
+    {
+        "name": "Thần tiên yêu quái"
+    },
+    {
+        "name": "Vampire"
+    },
+    {
+        "name": "Thần thoại"
+    },
+    {
+        "name": "Triệu hoán"
+    },
+    {
+        "name": "Cthulhu"
+    },
+    {
+        "name": "Làm sự nghiệp"
+    },
+    {
+        "name": "Phản bàn tay vàng"
+    },
+    {
+        "name": "Phản anh hùng"
+    },
+    {
+        "name": "Otome"
+    },
+    {
+        "name": "Báo thù"
+    },
+    {
+        "name": "Ngược tra"
+    },
+    {
+        "name": "Cung đấu"
+    },
+    {
+        "name": "Trạch đấu"
+    },
+    {
+        "name": "Vô hạn lưu"
+    },
+    {
+        "name": "Thăng cấp lưu"
+    },
+    {
+        "name": "Cải trang giả dạng"
+    },
+    {
+        "name": "Bình bộ thanh vân"
+    },
+    {
+        "name": "Nghịch tập"
+    },
+    {
+        "name": "Vả mặt"
+    },
+    {
+        "name": "Bình dân sinh hoạt"
+    },
+    {
+        "name": "Vô địch lưu"
+    },
+    {
+        "name": "Phế sài lưu"
+    },
+    {
+        "name": "Kỹ thuật lưu"
+    },
+    {
+        "name": "Phàm nhân lưu"
+    },
+    {
+        "name": "Cao nhân lưu"
+    },
+    {
+        "name": "Sáng thế lưu"
+    },
+    {
+        "name": "Cứu thế lưu"
+    },
+    {
+        "name": "Hắc thủ lưu"
+    },
+    {
+        "name": "Áo choàng lưu"
+    },
+    {
+        "name": "Đoàn đội lưu"
+    },
+    {
+        "name": "Toàn dân lưu"
+    },
+    {
+        "name": "Hằng ngày"
+    },
+    {
+        "name": "Quyền mưu"
+    },
+    {
+        "name": "Công lược nhiệm vụ"
+    },
+    {
+        "name": "Trưởng thành"
+    },
+    {
+        "name": "Mang cầu chạy"
+    },
+    {
+        "name": "Mang cầu không chạy"
+    },
+    {
+        "name": "Hoa Hạ cực đoan"
+    },
+    {
+        "name": "Xuyên thành vai chính"
+    },
+    {
+        "name": "Xuyên thành vai ác"
+    },
+    {
+        "name": "Main là động vật"
+    },
+    {
+        "name": "Main là thực vật"
+    },
+    {
+        "name": "Main là đồ vật"
+    },
+    {
+        "name": "Main là hệ thống"
+    },
+    {
+        "name": "Thật giả thiên kim"
+    },
+    {
+        "name": "Thật giả thiếu gia"
+    },
+    {
+        "name": "Chức nghiệp tinh anh"
+    },
+    {
+        "name": "Thiên chi kiêu tử"
+    },
+    {
+        "name": "Cường giả trở về"
+    },
+    {
+        "name": "Thiên tài"
+    },
+    {
+        "name": "Trạch nam"
+    },
+    {
+        "name": "Trạch nữ"
+    },
+    {
+        "name": "Phổ nam"
+    },
+    {
+        "name": "Phổ nữ"
+    },
+    {
+        "name": "Mary Sue"
+    },
+    {
+        "name": "Jack Sue"
+    },
+    {
+        "name": "Nữ phụ"
+    },
+    {
+        "name": "Nam phụ"
+    },
+    {
+        "name": "Nữ biến nam"
+    },
+    {
+        "name": "Nam biến nữ"
+    },
+    {
+        "name": "Nữ trang đại lão"
+    },
+    {
+        "name": "Nữ giả nam trang"
+    },
+    {
+        "name": "Nam giả nữ trang"
+    },
+    {
+        "name": "Người qua đường"
+    },
+    {
+        "name": "Vợ cũ"
+    },
+    {
+        "name": "Chồng cũ"
+    },
+    {
+        "name": "NPC"
+    },
+    {
+        "name": "Pháo hôi"
+    },
+    {
+        "name": "Bạch nguyệt quang"
+    },
+    {
+        "name": "Mỹ cường thảm"
+    },
+    {
+        "name": "Vạn nhân mê"
+    },
+    {
+        "name": "Vạn người ngại"
+    },
+    {
+        "name": "Chim hoàng yến"
+    },
+    {
+        "name": "Kim chủ"
+    },
+    {
+        "name": "Manh bảo"
+    },
+    {
+        "name": "Manh sủng"
+    },
+    {
+        "name": "Đoàn sủng"
+    },
+    {
+        "name": "Nãi nãi"
+    },
+    {
+        "name": "Học bá"
+    },
+    {
+        "name": "Giáo bá"
+    },
+    {
+        "name": "Giáo thảo"
+    },
+    {
+        "name": "Đại lão"
+    },
+    {
+        "name": "Trùm cuối"
+    },
+    {
+        "name": "Họa sĩ"
+    },
+    {
+        "name": "Thợ code"
+    },
+    {
+        "name": "Điệp viên"
+    },
+    {
+        "name": "Bộ đội đặc chủng"
+    },
+    {
+        "name": "Pháp y"
+    },
+    {
+        "name": "Lão sư"
+    },
+    {
+        "name": "Quản gia"
+    },
+    {
+        "name": "Đế vương"
+    },
+    {
+        "name": "Nam sủng"
+    },
+    {
+        "name": "Xướng kỹ"
+    },
+    {
+        "name": "Thủ phụ"
+    },
+    {
+        "name": "Thái y"
+    },
+    {
+        "name": "Ngỗ tác"
+    },
+    {
+        "name": "Đạo tặc"
+    },
+    {
+        "name": "Sát thủ"
+    },
+    {
+        "name": "Hòa thượng"
+    },
+    {
+        "name": "Thái giám thật"
+    },
+    {
+        "name": "Thái giám giả"
+    },
+    {
+        "name": "Lão phu nhân"
+    },
+    {
+        "name": "Nguyên phối"
+    },
+    {
+        "name": "Cung nữ"
+    },
+    {
+        "name": "Nha hoàn"
+    },
+    {
+        "name": "Thông phòng"
+    },
+    {
+        "name": "Tiểu thiếp"
+    },
+    {
+        "name": "Tiểu tam"
+    },
+    {
+        "name": "Mỹ nhân"
+    },
+    {
+        "name": "Bệnh mỹ nhân"
+    },
+    {
+        "name": "Mỹ nhân ngư"
+    },
+    {
+        "name": "Tang thi"
+    },
+    {
+        "name": "Mị ma"
+    },
+    {
+        "name": "Ô nhiễm vật"
+    },
+    {
+        "name": "Tinh linh"
+    },
+    {
+        "name": "Phi nhân loại"
+    },
+    {
+        "name": "Giả tưởng sinh vật"
+    },
+    {
+        "name": "Ngoại tinh sinh vật"
+    },
+    {
+        "name": "Nhân vật 2D"
+    },
+    {
+        "name": "Nhân vật thức tỉnh"
+    },
+    {
+        "name": "Thánh nữ"
+    },
+    {
+        "name": "Thánh tử"
+    },
+    {
+        "name": "Thần minh"
+    },
+    {
+        "name": "Tác giả"
+    },
+    {
+        "name": "Đa nhân cách"
+    },
+    {
+        "name": "Mất trí nhớ"
+    },
+    {
+        "name": "Nhân phu"
+    },
+    {
+        "name": "Nhân thê"
+    },
+    {
+        "name": "Giả heo ăn hổ"
+    },
+    {
+        "name": "Bạch thiết hắc"
+    },
+    {
+        "name": "Phúc hắc"
+    },
+    {
+        "name": "Văn nhã bại hoại"
+    },
+    {
+        "name": "Cơ trí"
+    },
+    {
+        "name": "Bình tĩnh"
+    },
+    {
+        "name": "Độc miệng"
+    },
+    {
+        "name": "Cuốn vương"
+    },
+    {
+        "name": "Cá mặn"
+    },
+    {
+        "name": "Phật hệ"
+    },
+    {
+        "name": "Bình phàm"
+    },
+    {
+        "name": "Ôn nhu"
+    },
+    {
+        "name": "Kiều khí"
+    },
+    {
+        "name": "Ngốc manh"
+    },
+    {
+        "name": "Xã khủng"
+    },
+    {
+        "name": "Xã ngưu"
+    },
+    {
+        "name": "Sa điêu"
+    },
+    {
+        "name": "Dương quang"
+    },
+    {
+        "name": "Nhiệt liệt"
+    },
+    {
+        "name": "Cố chấp"
+    },
+    {
+        "name": "Điên phê"
+    },
+    {
+        "name": "Hắc hóa"
+    },
+    {
+        "name": "Bệnh kiều"
+    },
+    {
+        "name": "Ngạo kiều"
+    },
+    {
+        "name": "Biệt nữu"
+    },
+    {
+        "name": "Trung khuyển"
+    },
+    {
+        "name": "Chó săn"
+    },
+    {
+        "name": "Liếm cẩu"
+    },
+    {
+        "name": "Muộn tao"
+    },
+    {
+        "name": "Mặt dày"
+    },
+    {
+        "name": "Trà xanh"
+    },
+    {
+        "name": "Bạch liên hoa"
+    },
+    {
+        "name": "Làm tinh"
+    },
+    {
+        "name": "Câu hệ"
+    },
+    {
+        "name": "Cha hệ"
+    },
+    {
+        "name": "Lưu manh"
+    },
+    {
+        "name": "Cấm dục"
+    },
+    {
+        "name": "Cao lãnh chi hoa"
+    },
+    {
+        "name": "Băng sơn"
+    },
+    {
+        "name": "Si tình"
+    },
+    {
+        "name": "Vô tình"
+    },
+    {
+        "name": "Phong lưu"
+    },
+    {
+        "name": "Hải vương"
+    },
+    {
+        "name": "Ngựa giống"
+    },
+    {
+        "name": "Dấm vương"
+    },
+    {
+        "name": "Chiếm hữu dục"
+    },
+    {
+        "name": "Si hán"
+    },
+    {
+        "name": "Tháo hán"
+    },
+    {
+        "name": "Tham ăn"
+    },
+    {
+        "name": "Tham tài"
+    },
+    {
+        "name": "Thanh mai trúc mã"
+    },
+    {
+        "name": "Hoan hỉ oan gia"
+    },
+    {
+        "name": "Song hướng yêu thầm"
+    },
+    {
+        "name": "Đơn hướng yêu thầm"
+    },
+    {
+        "name": "Nhất kiến chung tình"
+    },
+    {
+        "name": "Gương vỡ lại lành"
+    },
+    {
+        "name": "Gương vỡ không lành"
+    },
+    {
+        "name": "Cưới trước yêu sau"
+    },
+    {
+        "name": "Khế ước tình nhân"
+    },
+    {
+        "name": "Từ giả thành thật"
+    },
+    {
+        "name": "Kiếp trước kiếp này"
+    },
+    {
+        "name": "Cận thủy lâu đài"
+    },
+    {
+        "name": "Duyên trời tác hợp"
+    },
+    {
+        "name": "Trâu già gặm cỏ non"
+    },
+    {
+        "name": "Tương ái tương sát"
+    },
+    {
+        "name": "Chế phục tình duyên"
+    },
+    {
+        "name": "Cường thủ hào đoạt"
+    },
+    {
+        "name": "Cưỡng chế ái"
+    },
+    {
+        "name": "Cầm tù"
+    },
+    {
+        "name": "Thế thân"
+    },
+    {
+        "name": "Song thế thân"
+    },
+    {
+        "name": "Tình địch"
+    },
+    {
+        "name": "Cứu rỗi"
+    },
+    {
+        "name": "Tình bạn"
+    },
+    {
+        "name": "Tình thân"
+    },
+    {
+        "name": "Dưỡng thành"
+    },
+    {
+        "name": "Tái hôn"
+    },
+    {
+        "name": "Nữ truy nam"
+    },
+    {
+        "name": "Hỏa táng tràng"
+    },
+    {
+        "name": "Tu la tràng"
+    },
+    {
+        "name": "Bạn cùng phòng"
+    },
+    {
+        "name": "Cấp trên cấp dưới"
+    },
+    {
+        "name": "Hạ khắc thượng"
+    },
+    {
+        "name": "Pháo hữu"
+    },
+    {
+        "name": "SM"
+    },
+    {
+        "name": "NTR"
+    },
+    {
+        "name": "PUA"
+    },
+    {
+        "name": "PTSD"
+    },
+    {
+        "name": "Tây Du"
+    },
+    {
+        "name": "Thủy Hử"
+    },
+    {
+        "name": "Bảng Phong Thần"
+    },
+    {
+        "name": "Kiếm Tam"
+    },
+    {
+        "name": "Liêu trai"
+    },
+    {
+        "name": "Phích Lịch"
+    },
+    {
+        "name": "Thất hiệp ngũ nghĩa"
+    },
+    {
+        "name": "Thử Miêu"
+    },
+    {
+        "name": "Kim Dung"
+    },
+    {
+        "name": "Cổ Long"
+    },
+    {
+        "name": "Quỳnh Dao"
+    },
+    {
+        "name": "Đấu La đại lục"
+    },
+    {
+        "name": "Đấu phá thương khung"
+    },
+    {
+        "name": "Ma đạo tổ sư"
+    },
+    {
+        "name": "Toàn chức cao thủ"
+    },
+    {
+        "name": "Đạo mộ bút ký"
+    },
+    {
+        "name": "Phim Anh Mỹ"
+    },
+    {
+        "name": "Trò chơi vương quyền"
+    },
+    {
+        "name": "Siêu anh hùng"
+    },
+    {
+        "name": "Sherlock Holmes"
+    },
+    {
+        "name": "Harry Potter"
+    },
+    {
+        "name": "DC"
+    },
+    {
+        "name": "Ultraman"
+    },
+    {
+        "name": "Gundam"
+    },
+    {
+        "name": "Kanmusu"
+    },
+    {
+        "name": "Liên Minh Huyền Thoại"
+    },
+    {
+        "name": "Âm Dương Sư"
+    },
+    {
+        "name": "Plants vs. Zombies"
+    },
+    {
+        "name": "Resident Evil"
+    },
+    {
+        "name": "World of Warcraft"
+    },
+    {
+        "name": "Genshin"
+    },
+    {
+        "name": "Honkai"
+    },
+    {
+        "name": "Honkai: Star Rail"
+    },
+    {
+        "name": "Arknights"
+    },
+    {
+        "name": "Naruto"
+    },
+    {
+        "name": "One Piece"
+    },
+    {
+        "name": "Pokemon"
+    },
+    {
+        "name": "Conan"
+    },
+    {
+        "name": "Dragon Ball"
+    },
+    {
+        "name": "Hunter x Hunter"
+    },
+    {
+        "name": "Hoàng tử Tennis"
+    },
+    {
+        "name": "Bleach"
+    },
+    {
+        "name": "Gintama"
+    },
+    {
+        "name": "Inuyasha"
+    },
+    {
+        "name": "Fairy Tail"
+    },
+    {
+        "name": "Kuroko no basket"
+    },
+    {
+        "name": "JOJO"
+    },
+    {
+        "name": "Saiki"
+    },
+    {
+        "name": "Hitman Reborn"
+    },
+    {
+        "name": "Đao kiếm loạn vũ"
+    },
+    {
+        "name": "Attack on Titan"
+    },
+    {
+        "name": "Bungo Stray Dogs"
+    },
+    {
+        "name": "Kimetsu no Yaiba"
+    },
+    {
+        "name": "Jujutsu Kaisen"
+    },
+    {
+        "name": "K Project"
+    },
+    {
+        "name": "My Hero Academia"
+    },
+    {
+        "name": "CC Sakura"
+    },
+    {
+        "name": "Yu-Gi-Oh!"
+    },
+    {
+        "name": "Tokyo Ghoul"
+    },
+    {
+        "name": "Tokyo Revengers"
+    },
+    {
+        "name": "Toriko"
+    },
+    {
+        "name": "Natsume Yuujinchou"
+    },
+    {
+        "name": "Haikyuu!!"
+    },
+    {
+        "name": "One-Punch Man"
+    },
+    {
+        "name": "Blue Lock"
+    },
+    {
+        "name": "Captain Tsubasa"
+    },
+    {
+        "name": "Aoashi"
+    },
+    {
+        "name": "Type-Moon"
+    },
+    {
+        "name": "Fate"
+    },
+    {
+        "name": "Identity V"
+    },
+    {
+        "name": "Trần Tình Lệnh"
+    },
+    {
+        "name": "Lượng kiếm"
+    },
+    {
+        "name": "T.mãn cửu đạo loan"
+    },
+    {
+        "name": "T.mãn tứ hợp viện"
+    },
+    {
+        "name": "Thiếu niên ca hành"
+    },
+    {
+        "name": "Nhất nhân chi hạ"
+    },
+    {
+        "name": "Liên Hoa Lâu"
+    },
+    {
+        "name": "Thục nam thục nữ"
+    },
+    {
+        "name": "Tra công tiện thụ"
+    },
+    {
+        "name": "Tra công tra thụ"
+    },
+    {
+        "name": "Tra nam"
+    },
+    {
+        "name": "Tra nữ"
+    },
+    {
+        "name": "Tiện nam"
+    },
+    {
+        "name": "Tiện nữ"
+    },
+    {
+        "name": "Tra công"
+    },
+    {
+        "name": "Tra thụ"
+    },
+    {
+        "name": "Tiện công"
+    },
+    {
+        "name": "Tiện thụ"
+    },
+    {
+        "name": "Nhược công"
+    },
+    {
+        "name": "Nhược thụ"
+    },
+    {
+        "name": "Mỹ công"
+    },
+    {
+        "name": "Mỹ thụ"
+    },
+    {
+        "name": "Sửu công"
+    },
+    {
+        "name": "Sửu thụ"
+    },
+    {
+        "name": "Sửu nam"
+    },
+    {
+        "name": "Sửu nữ"
+    },
+    {
+        "name": "Tráng công"
+    },
+    {
+        "name": "Tráng thụ"
+    },
+    {
+        "name": "Hỗ công"
+    },
+    {
+        "name": "Hỗ thụ"
+    },
+    {
+        "name": "Tự công tự thụ"
+    },
+    {
+        "name": "Nữ vương thụ"
+    },
+    {
+        "name": "Tổng tài thụ"
+    },
+    {
+        "name": "Kim chủ thụ"
+    },
+    {
+        "name": "Nam sủng công"
+    },
+    {
+        "name": "Chim hoàng yến công"
+    },
+    {
+        "name": "Niên thượng"
+    },
+    {
+        "name": "Niên hạ"
+    },
+    {
+        "name": "Cường cường"
+    },
+    {
+        "name": "Mỹ cường"
+    },
+    {
+        "name": "Cường nhược"
+    },
+    {
+        "name": "Nhược cường"
+    },
+    {
+        "name": "Nhược nhược"
+    },
+    {
+        "name": "Nữ cường"
+    },
+    {
+        "name": "1v1"
+    },
+    {
+        "name": "Nhiều CP"
+    },
+    {
+        "name": "NP"
+    },
+    {
+        "name": "L luân"
+    },
+    {
+        "name": "Mẫu tử"
+    },
+    {
+        "name": "Phụ tử"
+    },
+    {
+        "name": "Huynh đệ"
+    },
+    {
+        "name": "Huynh muội"
+    },
+    {
+        "name": "Tỷ đệ"
+    },
+    {
+        "name": "Công tức"
+    },
+    {
+        "name": "Thúc chất"
+    },
+    {
+        "name": "Thúc tẩu"
+    },
+    {
+        "name": "Tỷ phu"
+    },
+    {
+        "name": "Kế phụ"
+    },
+    {
+        "name": "Kế mẫu"
+    },
+    {
+        "name": "Sư đồ"
+    },
+    {
+        "name": "Chủ phó"
+    },
+    {
+        "name": "Song khiết 🕊️"
+    },
+    {
+        "name": "Phi song khiết 🌂"
+    },
+    {
+        "name": "NP toàn khiết 🕊️"
+    },
+    {
+        "name": "Thụ cao hơn công"
+    },
+    {
+        "name": "Thụ tráng hơn công"
+    },
+    {
+        "name": "Công ysl"
+    },
+    {
+        "name": "Công dưa ko khiết"
+    },
+    {
+        "name": "Công cúc ko khiết"
+    },
+    {
+        "name": "Thụ dưa ko khiết"
+    },
+    {
+        "name": "Thụ cúc ko khiết"
+    },
+    {
+        "name": "Nam 9 ko khiết"
+    },
+    {
+        "name": "Nữ 9 ko khiết"
+    },
+    {
+        "name": "Giẻ lau"
+    },
+    {
+        "name": "Đổi người yêu"
+    },
+    {
+        "name": "Đổi công"
+    },
+    {
+        "name": "Đổi thụ"
+    },
+    {
+        "name": "Thụ chuyển công"
+    },
+    {
+        "name": "Công chuyển thụ"
+    },
+    {
+        "name": "Thị giác nam chủ"
+    },
+    {
+        "name": "Thị giác nữ chủ"
+    },
+    {
+        "name": "Chủ công"
+    },
+    {
+        "name": "Chủ thụ"
+    },
+    {
+        "name": "Ngôi thứ nhất"
+    },
+    {
+        "name": "Ngôi thứ hai"
+    },
+    {
+        "name": "Xem ảnh thể"
+    },
+    {
+        "name": "Diễn đàn thể"
+    },
+    {
+        "name": "Đối thoại thể"
+    },
+    {
+        "name": "Đa thị giác"
+    },
+    {
+        "name": "Song thị giác"
+    }
+]

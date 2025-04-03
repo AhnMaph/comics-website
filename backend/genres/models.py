@@ -4,7 +4,6 @@ class Genre(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     name = models.CharField(max_length=255)
-    description = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

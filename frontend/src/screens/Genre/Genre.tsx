@@ -33,8 +33,8 @@ const Genre: React.FC = () => {
                 {genres.length > 0 ? (
                     genres.map((genre) => (
                     <div>
-                        <button className="border-amber-500 bg-white text-black">
-                                <a className="text-black" href={`/tim-truyen/${genre.name}`}>{genre.name}</a>
+                        <button className=" bg-white text-black text-sm w-full  hover:bg-yellow-400">
+                                <a className="text-black hover:text-white" href={`/tim-truyen/${genre.name}`}>{genre.name}</a>
                         </button>
                     </div>
                     ))
