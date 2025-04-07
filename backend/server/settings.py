@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     'audio',
     'genres',
     'users',
+    'forum',
 ]
 
 MIDDLEWARE = [

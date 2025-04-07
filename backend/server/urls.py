@@ -11,6 +11,7 @@ urlpatterns = [
     path('api/', include('genres.urls')),  # API starts with /api/
     path('api/', include('users.urls')),
     path('api/', include('chapter.urls')),
+    path('api/', include('forum.urls')),  # API starts with /api/
     path('', home),
 ]
 
