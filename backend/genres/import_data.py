@@ -36,4 +36,4 @@ def create_genres(apps, schema_editor):
 if __name__ == '__main__':
     json_file_path = os.path.join(project_path, 'genres', 'unique_genres.json')
     import_genres(json_file_path)
-    print("✅ Đã lọc và tải truyện lên database.")
+    print("✅ Đã lọc và tải thể loại lên database.")

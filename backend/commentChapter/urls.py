@@ -1,14 +1,7 @@
-# app/urls.py
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import *
-
-router = DefaultRouter()
-router.register(r'comments', CommentViewSet)
+from django.urls import path
+from .views import get_comments, post_comment
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('comments/', get_comments, name='get-comments'),
+    path('comments/post/', post_comment, name='post-comment'),
 ]
-
-
-

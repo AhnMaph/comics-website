@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { login } from '../types/user/userSlice';
-import { CommentPayload } from '../types/user/User';
 const baseURL = 'http://localhost:8000'
     
 export const registerUser = async (name: string, email: string, password: string) => {
@@ -98,20 +97,20 @@ export const useAutoLogin = () => {
     }, [dispatch]);
 };
 
-export const useComment = async (payload: CommentPayload): Promise<void> => {
-  try{
-    const config = {
-      headers: {'Content-Type': 'Application/json'},
-      withCredentials:true,
-    };
-    const response = await axios.post(
-      `${baseURL}/api/comment/`,
-        payload,
-        config
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Error sending comment:", error);
-    throw error;
-  }
-}
+// export const useComment = async (payload: CommentPayload): Promise<void> => {
+//   try{
+//     const config = {
+//       headers: {'Content-Type': 'Application/json'},
+//       withCredentials:true,
+//     };
+//     const response = await axios.post(
+//       `${baseURL}/api/comment/`,
+//         payload,
+//         config
+//     );
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error sending comment:", error);
+//     throw error;
+//   }
+// }

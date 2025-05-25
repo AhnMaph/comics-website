@@ -108,7 +108,7 @@ def refreshTokenView(request):
         return response
 
     except Exception:
-        return Response({"error": "Refresh token không hợp lệ!"}, status=status.HTTP_401_UNAUTHORIZED)   
+        return Response({"error": "Refresh token không hợp lệ!"}, Exception)   
 
 
     
@@ -178,34 +178,34 @@ class LikeViewSet(viewsets.ModelViewSet):
         instance.delete()
 
 
-class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comments.objects.all()
-    serializer_class = CommentsSerializer
-    permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        user = self.request.user
-        # Lọc các bình luận của người dùng hiện tại
-        return Comments.objects.filter(user=user)
+# class CommentViewSet(viewsets.ModelViewSet):
+#     queryset = Comments.objects.all()
+#     serializer_class = CommentsSerializer
+#     permission_classes = [IsAuthenticated]
+#     def get_queryset(self):
+#         user = self.request.user
+#         # Lọc các bình luận của người dùng hiện tại
+#         return Comments.objects.filter(user=user)
     
-    def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(user=self.request.user)
+#     def perform_create(self, serializer):
+#         if serializer.is_valid():
+#             serializer.save(user=self.request.user)
     
-            # Cập nhật số lượt thích cho Novel
-            novel = serializer.validated_data['novel'] # Lấy đối tượng Novel từ Comment
-            novel.numComments += 1  # Tăng thêm 1 lượt thích
-            novel.save(update_fields=['numComments'])
-        else: 
-            print(serializer.errors)
-    def perform_destroy(self, instance):
-        # Truy cập đối tượng Novel liên quan đến Comments
-        novel = instance.novel
-        # Giảm số lượt thích cho Novel
-        novel.numComments -= 1  # Giảm bớt 1 lượt thích
-        novel.save(update_fields=['numComments'])  # Lưu lại sự thay đổi
+#             # Cập nhật số lượt thích cho Novel
+#             novel = serializer.validated_data['novel'] # Lấy đối tượng Novel từ Comment
+#             novel.numComments += 1  # Tăng thêm 1 lượt thích
+#             novel.save(update_fields=['numComments'])
+#         else: 
+#             print(serializer.errors)
+#     def perform_destroy(self, instance):
+#         # Truy cập đối tượng Novel liên quan đến Comments
+#         novel = instance.novel
+#         # Giảm số lượt thích cho Novel
+#         novel.numComments -= 1  # Giảm bớt 1 lượt thích
+#         novel.save(update_fields=['numComments'])  # Lưu lại sự thay đổi
         
-        # Xóa đối tượng Comment
-        instance.delete()
+#         # Xóa đối tượng Comment
+#         instance.delete()
 
 
 class FavoriteViewSet(viewsets.ModelViewSet):

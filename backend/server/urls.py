@@ -9,13 +9,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('audio.urls')),
     
-    path('api/', include('manga.urls')),  # API starts with /api/
-    path('api/', include('genres.urls')),  # API starts with /api/
+    path('api/', include('manga.urls')),  
+    path('api/', include('genres.urls')), 
     path('api/', include('users.urls')),
     path('api/', include('chapter.urls')),
     path('api/', include('novel.urls')),
     path('api/', include('commentChapter.urls')),
     path('api/', include('forum.urls')),
+    
 
     path('', home),
 ]

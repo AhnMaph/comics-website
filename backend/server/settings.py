@@ -232,3 +232,9 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5174",  # Thay bằng URL frontend của bạn
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5174",  # giống frontend
+]
+
+CSRF_COOKIE_HTTPONLY = False

@@ -15,6 +15,23 @@ django.setup()
 from novel.models import Novel
 from chapter.models import NovelChapter
 from genres.models import Genre
+from django.db import transaction
+
+def import_novel(path):
+    with transaction.atomic():
+        # Tất cả thao tác với database bên trong đây
+        novel, _ = Novel.objects.get_or_create(...)
+
+# def download_image_to_file(url):
+#     fallback_path = os.path.join(project_path, 'novel', 'hello.webp')
+#     try:
+#         with open(fallback_path, 'rb') as f:
+#             print("✅ Luôn dùng ảnh mặc định hello.webp")
+#             return ContentFile(f.read()), 'hello.webp'
+#     except Exception as fallback_error:
+#         print(f"❌ Không thể mở ảnh mặc định: {fallback_error}")
+#         return None, None
+
 def download_image_to_file(url):
     try:
         response = requests.get(url)
@@ -27,7 +44,8 @@ def download_image_to_file(url):
     
 def delete_all_novels():
     try:
-        Novel.objects.all().delete()
+        # Novel.objects.all().delete()
+        Novel.objects.filter(numChapters=0).delete()
         print("✅ All novels deleted successfully!")
     except Exception as e:
         print(f"❌ Failed to delete novels: {e}")
@@ -74,11 +92,11 @@ def import_novel(json_file_path):
 if __name__ == '__main__':
     print(f"Using Django settings module: {os.environ.get('DJANGO_SETTINGS_MODULE')}")
     delete_all_novels()
-    for i in range(2):
-        for j in range(26):
-            json_file_path = os.path.join(project_path, 'novel', 'truyen-save-2', f'page{i+1}_truyen{j+1}.json')
-            if os.path.isfile(json_file_path): 
-                import_novel(json_file_path)
-            else:
-                print(f'File không tồn tại: {json_file_path}')
-                break
+    # for i in range(2):
+    #     for j in range(26):
+    #         json_file_path = os.path.join(project_path, 'novel', 'truyen-save', f'page{i+1}_truyen{j+1}.json')
+    #         if os.path.isfile(json_file_path): 
+    #             import_novel(json_file_path)
+    #         else:
+    #             print(f'File không tồn tại: {json_file_path}')
+    #             break
