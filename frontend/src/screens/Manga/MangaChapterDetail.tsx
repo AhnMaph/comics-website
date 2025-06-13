@@ -1,49 +1,36 @@
-// src/pages/ChapterDetailPage.tsx
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { MangaChapter} from '../../types/manga/mangaChapters';
+import { MangaChapter } from '../../types/manga/mangaChapters';
 import { fetchMangaChapterDetail, fetchMangaChapters } from '../../actions/mangaActions';
 import { CommentList } from '../../components/CommentGrid';
+
 const ChapterMangaDetailPage = () => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
-  const [chapter, setChapter] = useState<MangaChapter | null>(null);
+  const [chapter, setChapter] = useState<MangaChapter & {
+    previousChapterId?: string | null;
+    nextChapterId?: string | null;
+  } | null>(null);
   const baseUrl = import.meta.env.VITE_ADMIN_URL;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (!chapterId) return;
-        console.log("chapterId:", chapterId);
-        // Gọi API lấy chi tiết chương
         const currentChapter = await fetchMangaChapterDetail(chapterId);
-  
-        // Gọi API lấy danh sách chương của truyện đó
         const chapterList = await fetchMangaChapters(currentChapter.manga);
 
-        console.log("chapterList trả về từ API:", chapterList);
-        if (!chapterList || !Array.isArray(chapterList)) {
-          console.error("chapterList không hợp lệ:", chapterList);
-          return;
-        } 
-        
-  
-        // currentChapter là chương hiện tại bạn đã lấy từ API
-      const currentNumber = currentChapter.chapter_number;
-      console.log("currentNumber:", currentNumber);
-      // Tìm chương trước
-      const previousChapters = chapterList.filter((c:MangaChapter) => c.chapter_number === currentNumber - 1);
-      const previous = previousChapters.sort((a:MangaChapter, b:MangaChapter) =>
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      )[0]?._id || null;
+        const currentNumber = currentChapter.chapter_number;
 
-      // Tìm chương sau
-      const nextChapters = chapterList.filter((c:MangaChapter) => c.chapter_number === currentNumber + 1);
-      const next = nextChapters.sort((a:MangaChapter, b:MangaChapter) =>
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
-      )[0]?._id || null;
+        // Find previous and next chapter IDs
+        const previous = chapterList
+          .filter((c: MangaChapter) => c.chapter_number === currentNumber - 1)
+          .sort((a: MangaChapter, b: MangaChapter) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())[0]?._id || null;
 
-  
-        // Gộp dữ liệu lại để set vào state
+        const next = chapterList
+          .filter((c: MangaChapter) => c.chapter_number === currentNumber + 1)
+          .sort((a: MangaChapter, b: MangaChapter) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())[0]?._id || null;
+
         setChapter({
           ...currentChapter,
           previousChapterId: previous,
@@ -53,8 +40,6 @@ const ChapterMangaDetailPage = () => {
         console.error("Lỗi khi tải nội dung chương:", err);
       }
     };
-
-  
     fetchData();
   }, [chapterId]);
 
@@ -70,65 +55,72 @@ const ChapterMangaDetailPage = () => {
     }
   };
 
-  console.log("Nội dung: ", chapter);
-
-  if (!chapter) return <p>Đang tải chương...</p>;
+  if (!chapter) return (
+    <div className="flex justify-center items-center min-h-[40vh]">
+      <span className="text-lg text-gray-500">Đang tải chương...</span>
+    </div>
+  );
 
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 md:p-8">
-      <h1 className="text-4xl sm:text-4xl font-bold text-center text-orange-600 mb-6">
+    <div className="max-w-4xl lg:max-w-6xl mx-auto p-2 sm:p-4 md:p-6">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-orange-600 mb-4 sm:mb-6 drop-shadow">
         {chapter.title}
       </h1>
 
-
-      <div className="flex flex-col gap-4 items-center">
-        {chapter.images && chapter.images.map( (img: any, index: number) => 
-          (
+      <div className="flex flex-col gap-2 sm:gap-4 items-center mb-6 sm:mb-8">
+        {chapter.images && chapter.images.length > 0 ? (
+          chapter.images.map((img: any, index: number) => (
             <img
               key={index}
               src={`${baseUrl}/${img.image}`}
-              alt={`Page ${img.page}`}
-              className="max-w-full h-auto rounded-lg shadow-md"
+              alt={`Trang ${img.page}`}
+              className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl rounded-lg shadow-lg border border-orange-100"
+              style={{ background: "#fff" }}
+              loading="lazy"
             />
-          )
+          ))
+        ) : (
+          <div className="text-center text-gray-400 italic">Chưa có ảnh cho chương này.</div>
         )}
       </div>
 
-
-
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-10">
-      <button
-        onClick={goToPrevious}
-        disabled={!chapter.previousChapterId}
-        className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-          chapter.previousChapterId
-            ? "bg-orange-500 text-white hover:bg-orange-600"
-            : "bg-gray-300 text-gray-500 cursor-not-allowed"
-        }`}
-      >
-        ⬅ Chương trước
-      </button>
-
-        <Link to={`/manga/${chapter.manga}`}>
-        <button className="px-6 py-3 rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200">
-          📚 Quay lại chi tiết
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 mt-6 mb-6 sm:mt-8 sm:mb-8 overflow-x-auto">
+        <button
+          onClick={goToPrevious}
+          disabled={!chapter.previousChapterId}
+          className={`w-full sm:w-auto mb-2 sm:mb-0 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-200 shadow ${
+            chapter.previousChapterId
+              ? "bg-orange-500 text-white hover:bg-orange-600"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+        >
+          <span className="inline sm:hidden">&lt;</span>
+          <span className="hidden sm:inline">⬅ Chương trước</span>
         </button>
+
+        <Link to={`/manga/${chapter.manga}`} className="w-full sm:w-auto">
+          <button className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 shadow">
+            📚 Chi tiết
+          </button>
         </Link>
 
         <button
-        onClick={goToNext}
-        disabled={!chapter.nextChapterId}
-        className={`px-6 py-3 rounded-full font-medium transition-all duration-200 ${
-          chapter.nextChapterId
-            ? "bg-orange-500 text-white hover:bg-orange-600"
-            : "bg-gray-300 text-gray-500 cursor-not-allowed"
-        }`}
-      >
-        Chương sau ➡
-      </button>
+          onClick={goToNext}
+          disabled={!chapter.nextChapterId}
+          className={`w-full sm:w-auto mt-2 sm:mt-0 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-200 shadow ${
+            chapter.nextChapterId
+              ? "bg-orange-500 text-white hover:bg-orange-600"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+        >
+          <span className="inline sm:hidden">&gt;</span>
+          <span className="hidden sm:inline">Chương sau ➡</span>
+          
+        </button>
       </div>
-      <div className="flex-1 mt-10">
-        <CommentList/>
+
+      <div className="mt-8 sm:mt-10">
+        <CommentList />
       </div>
     </div>
   );
