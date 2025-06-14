@@ -15,30 +15,30 @@ django.setup()
 from novel.models import Novel
 from chapter.models import NovelChapter
 from genres.models import Genre
-# def download_image_to_file(url):
-#     try:
-#         response = requests.get(url)
-#         response.raise_for_status()
-#         file_name = os.path.basename(url)
-#         return ContentFile(response.content), file_name
-#     except Exception as e:
-#         print(f"❌ Failed to download image from {url}: {e}")
-#         return None, None
 def download_image_to_file(url):
     try:
-        # Đường dẫn file ảnh Doraemon1.jpg trong thư mục hiện tại
-        file_path = os.path.join(os.getcwd(), "novel", "Doraemon1.jpg")
-
-        # Mở file ảnh và đọc nội dung
-        with open(file_path, "rb") as f:
-            content = f.read()
-
-        # Trả về ContentFile và tên file "Doraemon1.jpg"
-        return ContentFile(content), "Doraemon1.jpg"
-
+        response = requests.get(url)
+        response.raise_for_status()
+        file_name = os.path.basename(url)
+        return ContentFile(response.content), file_name
     except Exception as e:
-        print(f"❌ Failed to read image file Doraemon1.jpg: {e}")
+        print(f"❌ Failed to download image from {url}: {e}")
         return None, None
+# def download_image_to_file(url):
+#     try:
+#         # Đường dẫn file ảnh Doraemon1.jpg trong thư mục hiện tại
+#         file_path = os.path.join(os.getcwd(), "novel", "Doraemon1.jpg")
+
+#         # Mở file ảnh và đọc nội dung
+#         with open(file_path, "rb") as f:
+#             content = f.read()
+
+#         # Trả về ContentFile và tên file "Doraemon1.jpg"
+#         return ContentFile(content), "Doraemon1.jpg"
+
+    # except Exception as e:
+    #     print(f"❌ Failed to read image file Doraemon1.jpg: {e}")
+    #     return None, None
     
 def delete_all_novels():
     try:

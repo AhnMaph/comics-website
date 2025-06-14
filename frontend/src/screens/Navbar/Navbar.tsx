@@ -71,7 +71,7 @@ const Navbar = () => {
             <li key={index} className="h-full flex-1 p-0">
               <Link
                 to={item.path}
-                className="h-full flex items-center text-black justify-center dark:bg-black px-0 py-0 min-w-[100px] hover:text-black hover:bg-yellow-400 hover:border-yellow-500 hover:rounded-lg transition duration-300"
+                className="h-full flex items-center text-black justify-center px-0 py-0 min-w-[100px] hover:text-black hover:bg-yellow-400 hover:border-yellow-500 hover:rounded-lg transition duration-300"
               >
                 {item.name}
               </Link>

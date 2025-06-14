@@ -1,7 +1,7 @@
 from users.models import Notification, Favorite
  
 def sendNotify(chapter):
-    print("sendNotify called for chapter:", chapter)
+    # print("sendNotify called for chapter:", chapter)
     if hasattr(chapter, 'novel'):
         item = chapter.novel
         title = item.title

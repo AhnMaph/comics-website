@@ -18,9 +18,9 @@ const MangaGrid = React.memo(({ mangas }: { mangas: Manga[] }) => {
           key={manga._id}
           className="bg-white shadow-md p-3 rounded-lg flex flex-col justify-between min-h-[360px]"
         >
-          <Link to={`/manga/${manga._id}`} className="flex flex-col h-full">
+          <Link to={`/manga/${manga._id}`} className="flex flex-col h-full bg-white">
             <div
-              className="w-full overflow-hidden rounded"
+              className="w-full overflow-hidde  n bg-white"
               style={{ aspectRatio: "5 / 7" }}
             >
               <img
@@ -33,7 +33,7 @@ const MangaGrid = React.memo(({ mangas }: { mangas: Manga[] }) => {
                 height={280}
               />
             </div>
-            <div className="flex-1 flex flex-col justify-between mt-2">
+            <div className="flex-1 flex flex-col justify-between mt-2 bg-white">
               <div>
                 <h3
                   className="font-bold text-base text-gray-900 line-clamp-2 text-center"

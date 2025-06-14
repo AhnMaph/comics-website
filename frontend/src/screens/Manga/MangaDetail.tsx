@@ -190,12 +190,12 @@ const StoryDetailPage = () => {
               <aside className="w-full lg:w-70 flex-shrink-0 h-full">
                   <div className="bg-white rounded-xl shadow p-4 w-full h-full">
                     <h3 className="font-bold text-lg mb-4">Gợi ý cho bạn</h3>
-                    <div className="space-y-4">
+                    <div className="space-y-4 ">
                       {recommends.map(manga => (
                         <Link
                           to={`/manga/${manga._id}`}
                           key={manga._id}
-                          className="flex items-center gap-3 hover:bg-sky-100 rounded p-2 transition"
+                          className="flex items-center gap-3 bg-white hover:bg-sky-100 rounded p-2 transition"
                         >
                           <img
                             src={manga.cover_image}

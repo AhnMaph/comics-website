@@ -125,7 +125,7 @@ return (
             <img
               src={story.cover_image}
               alt="Ảnh bìa"
-              className="w-full h-auto object-cover rounded-lg shadow-md"
+              className="w-full h-auto object-cover rounded-lg shadow-md bg-white"
             />
           </div>
 
@@ -218,7 +218,7 @@ return (
             <div className="bg-white rounded-xl shadow p-4 w-full h-full">
 
             <h3 className="font-bold text-lg mb-4">Gợi ý cho bạn</h3>
-            <div className="space-y-4">
+            <div className="space-y-4 ">
               {recommends.map(novel => (
                 <Link
                   to={`/novel/${novel._id}`}

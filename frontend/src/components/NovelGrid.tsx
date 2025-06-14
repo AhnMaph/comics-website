@@ -27,7 +27,7 @@ const NovelGrid = ({ novels }: { novels: Novel[] }) => {
                 style={{ width: 170, height: 230 }}
               />
             </div>
-            <div className="flex-1 flex flex-col justify-between mt-2">
+            <div className="flex-1 flex flex-col justify-between mt-2 bg-white">
               <div>
                 <h3
                   className="font-bold text-base text-gray-900 line-clamp-2 text-center"
