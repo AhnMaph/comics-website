@@ -82,7 +82,7 @@ const AdvancedSearch: React.FC = () => {
             <button
               key={g._id}
               onClick={() => toggleGenreState(g._id)}
-              className={`px-3 py-1 rounded ${genreColors[state]} hover:opacity-80 transition-all`}
+              className={`px-3 py-1 rounded ${genreColors[state]} hover:opacity-80 text-black transition-all`}
               title={genreStates[state]}
             >
               {g.name}

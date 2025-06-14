@@ -29,8 +29,6 @@ const MangaGrid = React.memo(({ mangas }: { mangas: Manga[] }) => {
                 className="w-full h-full object-cover rounded"
                 loading={index === 0 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "auto"}
-                width={200}
-                height={280}
               />
             </div>
             <div className="flex-1 flex flex-col justify-between mt-2 bg-white">

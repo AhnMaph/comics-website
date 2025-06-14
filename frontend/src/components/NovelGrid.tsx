@@ -24,7 +24,6 @@ const NovelGrid = ({ novels }: { novels: Novel[] }) => {
                 className="w-full h-full object-cover rounded"
                 loading={index === 0 ? "eager" : "lazy"}
                 fetchPriority={index === 0 ? "high" : "auto"}
-                style={{ width: 170, height: 230 }}
               />
             </div>
             <div className="flex-1 flex flex-col justify-between mt-2 bg-white">
