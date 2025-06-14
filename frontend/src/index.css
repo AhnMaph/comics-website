@@ -1,46 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-
 @import "tailwindcss/preflight";
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
 
-
-/* Cấu hình mặc định */
+/* ====== Base Styles ====== */
 :root {
   color: white;
-  background-color: #171717; /* bg-neutral-900 */
+  background-color: #171717;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 400;
   font-synthesis: none;
   font-display: swap;
   min-height: 100vh;
-  
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Link */
+/* ====== Typography ====== */
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* ====== Links ====== */
 a {
   font-weight: 500;
-  color: #3b82f6; /* text-blue-500 */
+  color: #3b82f6;
   text-decoration: none;
   transition: color 0.2s;
 }
 a:hover {
-  color: #60a5fa; /* text-blue-400 */
+  color: #60a5fa;
 }
 
-/* Body */
+/* ====== Body & Container ====== */
 body {
   width: 100%;
-  min-width: 1200px; /* Ngăn trang bị co lại như mobile */
+  min-width: 1200px;
   margin: 0;
   padding: 0;
   font-family: "Nunito Sans", sans-serif;
 }
-
-/* Định dạng container chính */
 .container {
   max-width: 1200px;
   width: 100%;
@@ -50,6 +52,8 @@ body {
   align-items: center;
   text-align: center;
 }
+
+/* ====== Utility Classes ====== */
 .offscreen {
   position: absolute;
   left: -9999px;
@@ -67,33 +71,26 @@ body {
   padding: 0.5rem;
   margin-bottom: 0.5rem;
 }
-/* Tiêu đề */
-h1 {
-  font-size: 2.25rem; /* text-4xl */
-  font-weight: 700; /* font-bold */
-  line-height: 1.25; /* leading-tight */
-}
 
-/* Button */
+/* ====== Button ====== */
 button {
-  border-radius: 0.5rem; /* rounded-lg */
+  border-radius: 0.5rem;
   border: 1px solid transparent;
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  font-size: 1rem; /* text-base */
-  font-weight: 500; /* font-medium */
-  background-color: #262626; /* bg-neutral-800 */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #262626;
   transition: border-color 0.2s;
 }
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3); /* focus:ring-4 focus:ring-blue-300 */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
 }
 
-/* Responsive */
+/* ====== Responsive ====== */
 @media (max-width: 1024px) {
   body {
     min-width: unset;
-    font-family: "Nunito Sans", sans-serif;
   }
   .container {
     max-width: 100%;
@@ -101,85 +98,70 @@ button:focus {
   }
 }
 
+/* ====== Light Mode ====== */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #1f2937; /* text-gray-900 */
+    color: #1f2937;
     background-color: white;
   }
   a:hover {
-    color: #6366f1; /* text-indigo-500 */
+    color: #6366f1;
   }
   button {
-    background-color: #f3f4f6; /* bg-gray-100 */
+    background-color: #f3f4f6;
   }
 }
 
+/* ====== Dark Mode ====== */
 .dark {
   background-color: #4d4d4d;
   color: white;
 }
-
 .dark input {
   background-color: #222;
   color: white;
 }
-
-.dark #Homepage {
+.dark #Homepage,
+.dark #navtop,
+.dark #navbottom,
+.dark .forum {
   background-color: #4d4d4d !important;
   color: white !important;
 }
-
-
-
-.dark #navtop {
-  background-color: #4d4d4d !important;
-  color: white;
-}
-
 .dark #navbottom {
   background-color: #262626 !important;
 }
-
 .dark #navbottom a {
   color: white !important;
   background-color: #262626;
 }
-
 .dark #navbottom a:hover {
   color: black;
-  background-color: #fede0e; /* Yellow color */
+  background-color: #fede0e;
 }
-
-.loginchange{
+.loginchange {
   background-color: #262626;
   color: white;
 }
-.dark .forum {
-  background-color: #4d4d4d !important;
-  color: white;
-}
-
 .dark a {
   background-color: #4d4d4d;
   color: white;
 }
-
-.dark .Emphasize{
+.dark .Emphasize {
   background-color: #4d4d4d;
   color: black;
 }
-.dark #gernes a{
+.dark #gernes a {
   background-color: white;
-  color:black;
+  color: black;
 }
 
-/* search bar */
+/* ====== Search Bar ====== */
 .search-container {
   position: relative;
   width: 100%;
   max-width: 400px;
 }
-
 .search-results {
   position: absolute;
   top: 100%;
@@ -194,29 +176,22 @@ button:focus {
   list-style: none;
   z-index: 1000;
 }
-
 .search-result-item {
   padding: 8px;
   border-bottom: 1px solid #eee;
 }
-
 .search-result-item:last-child {
   border-bottom: none;
 }
 
-
+/* ====== Animation ====== */
 @keyframes shine {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
-
 .animate-shine {
   animation: shine 2s infinite;
 }
 
+/* ====== FontAwesome (optional) ====== */
 /* @import "@fortawesome/fontawesome-free/css/all.min.css"; */
-

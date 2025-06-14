@@ -10,7 +10,6 @@ const handleClick = async () => {
         console.log("User not logged in");
         return;
     }
-
     try {
         const config = {
             headers: {'Content-Type': 'application/json'},
@@ -23,8 +22,8 @@ const handleClick = async () => {
 
         console.log(response); 
         return response;
-        // xử lý data nếu muốn
-    } catch (error) {
+    } 
+    catch (error) {
         console.error("Error fetching notifications:", error);
     }
 };

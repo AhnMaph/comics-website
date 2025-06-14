@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchGenre } from "../../actions/genreAction";
-import type { Genre } from "../../types/genre/genreDetails";
+import type { Genre as GenreType } from "../../types/genre/genreDetails";
 
-const Genre: React.FC = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+const Genre = () => {
+  const [genres, setGenres] = useState<GenreType[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getGenres = async () => {
       try {
         const data = await fetchGenre();
-        setGenres(data); // Đảm bảo đây là một mảng
-      } catch (err) {
+        setGenres(data);
+      } catch {
         setError("Lỗi khi tải thể loại!");
       } finally {
         setLoading(false);
@@ -25,24 +25,24 @@ const Genre: React.FC = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="w-full max-w-screen-lg overflow-hidden relative flex justify-center mx-auto mt-3">
-        <div className="h-[50px]"></div>
-        <div className="w-full max-w-screen-lg overflow-hidden relative"> 
-            <h2 className="font-bold text-lg flex justify-center">🌟 THỂ LOẠI 🌟</h2>
-            <div  className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 mx-auto items-center justify-center">
-                {genres.length > 0 ? (
-                    genres.map((genre) => (
-                    <div  id = "gernes"  key={genre._id}>
-                        <button className=" bg-white text-black text-sm w-full  hover:bg-yellow-400">
-                                <a className="text-black hover:text-white" href={`/avsearch?include_genres=${genre._id}`}>{genre.name}</a>
-                        </button>
-                    </div>
-                    ))
-                ) : (
-                    <p>Không có thể loại nào!</p>
-                )}
+    <div className="w-full max-w-screen-lg mx-auto mt-3">
+      <h2 className="font-bold text-lg text-center mb-4">🌟 THỂ LOẠI 🌟</h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2">
+        {genres.length > 0 ? (
+          genres.map((genre) => (
+            <div key={genre._id}>
+              <a
+                href={`/avsearch?include_genres=${genre._id}`}
+                className="block bg-white text-black text-sm w-full py-2 rounded hover:bg-yellow-400 hover:text-white text-center transition"
+              >
+                {genre.name}
+              </a>
             </div>
-        </div>
+          ))
+        ) : (
+          <p className="col-span-full text-center">Không có thể loại nào!</p>
+        )}
+      </div>
     </div>
   );
 };

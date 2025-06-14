@@ -1,16 +1,12 @@
 import axios from 'axios';
-//import { Dispatch } from 'redux';
 import { Manga } from '../types/manga/mangaDetails'; 
 import { MangaChapter } from '../types/manga/mangaChapters'; 
 import { AdvancedFilter } from "../types/search/advanceSearch";
 const baseURL = import.meta.env.VITE_ADMIN_URL;
 
-// string id = "baa9a61e-35d5-4ac1-9d55-1fbfefbc21ef";
-
 export const fetchMangaDetails = async (mangaid: string) => {
     try{
-      const response = await axios.get(`${baseURL}/api/manga/${mangaid}`)
-      //const response = await axios.get(`${baseURL}/api/novel/baa9a61e-35d5-4ac1-9d55-1fbfefbc21ef`)
+      const response = await axios.get(`${baseURL}/api/manga/${mangaid}`);
       console.log("manga details:");
       console.log(response.data);
       return response.data;
@@ -23,7 +19,6 @@ export const fetchMangaDetails = async (mangaid: string) => {
 
 export const fetchMangaChapters = async (mangaid: string) => {
   try {
-    //const response = await axios.get(`${baseURL}/api/novel/baa9a61e-35d5-4ac1-9d55-1fbfefbc21ef/chapters`);
     const response = await axios.get(`${baseURL}/api/manga/${mangaid}/chapters`);
     console.log("list chapters:");
       console.log(response.data);
@@ -39,7 +34,6 @@ export const fetchMangaChapters = async (mangaid: string) => {
 
 export const fetchMangaChapterDetail = async (chapterId: string) => {
   try {
-    //const response = await axios.get(`${baseURL}/api/novel/chapters/${chapterId}`);
     const response = await axios.get(`${baseURL}/api/manga/chapter/${chapterId}`);
     console.log("chapter details:");
     console.log(response.data);
@@ -51,7 +45,7 @@ export const fetchMangaChapterDetail = async (chapterId: string) => {
       title: raw.title,
       chapter_number: raw.chapter_number,
       created_at: raw.created_at,
-      images: raw.chapterImages, // Ánh xạ đúng với interface
+      images: raw.chapterImages, 
       previousChapterId: raw.previousChapterId ?? null,
       nextChapterId: raw.nextChapterId ?? null,
     };
@@ -63,19 +57,6 @@ export const fetchMangaChapterDetail = async (chapterId: string) => {
   }
 };
 
-export const updateNumberFavoriteManga  = async (novelid: string) => {
-  try{
-      //const response = await axios.post(`${baseURL}/api/novel/baa9a61e-35d5-4ac1-9d55-1fbfefbc21ef/updateNumFavorite/`);
-      const response = await axios.put(`${baseURL}/api/manga/${novelid}/updateNumFavorite/`);
-      console.log(response.data);
-      return response.data;
-  }
-
-  catch (error) {
-    console.error("Error update number favorite:", error);
-    throw error;
-  }
-}
 const API_BASE_URL = `${baseURL}/api/manga/`
 export const fetchManga = async (page=1): Promise<Manga[]> => {
     try {

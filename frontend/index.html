@@ -4,19 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="google-site-verification" content="sZfTKRTqB4bUl6BWJZshg1Fj0ymuYVPfednjvcyqtvo" />
-    
-    <!-- Preconnect nhanh Google Fonts -->
+
+    <!-- Google Fonts: Nunito Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Preload & Load font Google Nunito Sans -->
-    <!-- <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    /> -->
-
     <link
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap"
@@ -27,11 +18,10 @@
       <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet" />
     </noscript>
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
-    
-    <!-- Inline Critical CSS (phần CSS quan trọng cần render nhanh) -->
+    <!-- Critical CSS -->
     <style>
       :root {
         color: white;
@@ -53,33 +43,23 @@
       }
     </style>
 
-    <!-- Preload và load CSS Tailwind build sẵn -->
+    <!-- Tailwind CSS -->
     <link rel="preload" href="/css/tailwind.css" as="style" />
-    <link
-      href="/css/tailwind.css"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
+    <link href="/css/tailwind.css" rel="stylesheet" media="print" onload="this.media='all'" />
     <noscript>
       <link href="/css/tailwind.css" rel="stylesheet" />
     </noscript>
-    
+
     <title>MangaDAKH - Website truyện chính thức từ bộ ba A-D-K-ANTN2023</title>
     <meta name="description" content="Đổi mới, sáng tạo, tiên phong. Tại đây với hàng nghìn mẫu truyện, bạn thoải mái đắm chìm vào thế giới của riêng bạn. Website cập nhật truyện mỗi ngày, đa dạng các thể loại,...Còn chần chừ gì nữa, hãy tham gia cùng chúng tôi nào!!!" >
     <meta name="keywords" content="truyện tranh, manga, truyện, truyện hay, manga hay, truyện mới, manga mới, truyện online, manga online, đọc truyện online, đọc manga online, A-D-K-ANTN2023" />
   </head>
-
   <body>
     <div id="root"></div>
-    
-    <!-- Script chính dùng module -->
+
+    <!-- Main JS -->
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Script external -->
-    <script
-      src="https://code.responsivevoice.org/responsivevoice.js?key=zzqcuKfu"
-      defer
-    ></script>
+    <!-- ResponsiveVoice External Script -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=zzqcuKfu" defer></script>
   </body>
 </html>
