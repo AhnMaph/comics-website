@@ -75,7 +75,8 @@ function Description({ description }: { description: string }) {
   useEffect(() => {
     const el = contentRef.current;
     if (el) {
-      setIsOverflowing(el.scrollHeight > el.clientHeight);
+      setIsOverflowing(el.scrollHeight > 600);
+      setExpanded(el.scrollHeight <= 600); 
     }
   }, [description]);
 
@@ -99,7 +100,7 @@ function Description({ description }: { description: string }) {
       {isOverflowing && (
         <button
           onClick={toggleExpanded}
-          className="mt-2 text-blue-500 hover:underline self-start"
+          className="mt-2 text-blue-500 hover:underline self-start "
         >
           {expanded ? 'Thu gọn' : 'Xem thêm'}
         </button>

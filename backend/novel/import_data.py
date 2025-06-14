@@ -97,3 +97,11 @@ if __name__ == '__main__':
             else:
                 print(f'File không tồn tại: {json_file_path}')
                 break
+    for i in range(2):
+        for j in range(26):
+            json_file_path = os.path.join(project_path, 'novel', 'truyen-save-2', f'page{i+1}_truyen{j+1}.json')
+            if os.path.isfile(json_file_path): 
+                import_novel(json_file_path)
+            else:
+                print(f'File không tồn tại: {json_file_path}')
+                break

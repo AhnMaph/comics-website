@@ -101,7 +101,8 @@ function Description({ description }: { description: string }) {
   useEffect(() => {
     const el = contentRef.current;
     if (el) {
-      setIsOverflowing(el.scrollHeight > el.clientHeight);
+      setIsOverflowing(el.scrollHeight > 600);
+      setExpanded(el.scrollHeight <= 600); 
     }
   }, [description]);
 
