@@ -1,24 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Manga } from '../../types/manga/mangaDetails';
 import { updateLike, updateFavorite } from "../../actions/userAction";
 import { MangaChapter } from '../../types/manga/mangaChapters';
-import { fetchMangaDetails, fetchMangaChapters, fetchManga } from '../../actions/mangaActions'; 
+import { fetchMangaDetails, fetchMangaChapters} from '../../actions/mangaActions'; 
 import { faEye, faCommentDots, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
-
-// Helper: Lấy ngẫu nhiên n manga, loại trừ id nếu có
-function getRandomMangas(n: number, mangas: Manga[], excludeId?: string) {
-  const filtered = excludeId ? mangas.filter(m => m._id !== excludeId) : mangas;
-  const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, n);
-}
-
+import RecommendGrid from "../../components/RecommendGrid";
 // Component: Thông tin truyện
 function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any) {
   return (
-    <div className="flex flex-col md:flex-row gap-5 items-start">
+    <div className="flex flex-col md:flex-row gap-5 items-start max-h-[600px]">
       {/* Ảnh bìa */}
       <div className="w-1/2 md:w-[200px] flex-shrink-0 mx-auto md:mx-0">
         <img
@@ -68,53 +61,52 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
         </div>
       </div>
     </div>
+    
   );
 }
 
+
 // Component: Mô tả truyện
-function MangaDescription({ description }: { description: string }) {
+function Description({ description }: { description: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (el) {
+      setIsOverflowing(el.scrollHeight > el.clientHeight);
+    }
+  }, [description]);
+
+  const toggleExpanded = () => setExpanded(!expanded);
+
   return (
     <div className="flex flex-col mt-8">
-      <h2 className="font-bold">Mô tả</h2>
-      <p className="text-justify leading-relaxed">
+      <h2 className="Emphasize font-bold text-2xl mb-2">Mô tả</h2>
+
+      <div
+        ref={contentRef}
+        className={`text-justify leading-relaxed overflow-hidden transition-all duration-300 ${
+          expanded ? 'max-h-full' : 'max-h-[600px]' // Giới hạn chiều cao nếu chưa mở rộng
+        }`}
+      >
         {description.split('\n').map((line, idx) => (
           <span key={idx}>{line}<br /></span>
         ))}
-      </p>
+      </div>
+
+      {isOverflowing && (
+        <button
+          onClick={toggleExpanded}
+          className="mt-2 text-blue-500 hover:underline self-start"
+        >
+          {expanded ? 'Thu gọn' : 'Xem thêm'}
+        </button>
+      )}
     </div>
   );
 }
-
-// Component: Gợi ý truyện
-function RecommendBox({ mangas }: { mangas: Manga[] }) {
-  return (
-    <aside className="w-full lg:w-70 flex-shrink-0 h-full">
-      <div className="bg-white rounded-xl shadow p-4 w-full h-full">
-        <h3 className="font-bold text-lg mb-4">Gợi ý cho bạn</h3>
-        <div className="space-y-4">
-          {mangas.map(manga => (
-            <Link
-              to={`/manga/${manga._id}`}
-              key={manga._id}
-              className="flex items-center gap-3 hover:bg-sky-100 rounded p-2 transition"
-            >
-              <img
-                src={manga.cover_image}
-                alt={manga.title}
-                className="w-20 h-28 md:w-24 md:h-32 object-cover rounded shadow"
-              />
-              <div className="flex-1">
-                <div className="font-semibold text-sm line-clamp-2">{manga.title}</div>
-                <div className="text-xs text-gray-500">{manga.author}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </aside>
-  );
-}
-
 // Component: Danh sách chương
 function ChapterList({ chapters, visible, onLoadMore }: any) {
   const rows = Array.from({ length: Math.ceil(chapters.length / 3) });
@@ -157,7 +149,6 @@ const StoryDetailPage = () => {
   const { postId } = useParams();
   const [story, setStory] = useState<Manga | null>(null);
   const [chapters, setChapters] = useState<MangaChapter[]>([]);
-  const [allMangas, setAllMangas] = useState<Manga[]>([]);
   const [visible, setVisible] = useState(15);
 
   useEffect(() => {
@@ -190,19 +181,6 @@ const StoryDetailPage = () => {
     fetchChapter();
   }, [postId]);
 
-  // Lấy tất cả manga để gợi ý
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const mangas = await fetchManga(1);
-        setAllMangas(mangas);
-      } catch (error) {
-        console.error("Lỗi khi load danh sách truyện:", error);
-      }
-    };
-    fetchAll();
-  }, []);
-
   // Xử lý sự kiện
   const handleLoadMore = () => setVisible(prev => prev + 10);
 
@@ -226,11 +204,6 @@ const StoryDetailPage = () => {
     }
   };
 
-  const recommends = useMemo(
-    () => getRandomMangas(10, allMangas, story?._id),
-    [allMangas, story?._id]
-  );
-
   const firstChapter = chapters[0];
   const lastChapter = chapters[chapters.length - 1];
 
@@ -247,13 +220,22 @@ const StoryDetailPage = () => {
                 onLike={handleLikeClick}
                 onFavorite={handleFavoriteClick}
               />
-              <MangaDescription description={story.description} />
+              <Description description={story.description} />
             </>
           ) : (
             <p>Đang tải truyện...</p>
           )}
         </div>
-        <RecommendBox mangas={recommends} />
+        {/* Gợi ý truyện */}
+        <div className="h-[700px] overflow-y-auto">
+          {story ? (
+            <>
+              <RecommendGrid type="novel" genre={story.genres[0]} currentId={story._id} />
+            </>
+          ) : (
+            <p></p>
+          )}
+        </div>
       </div>
       <ChapterList chapters={chapters} visible={visible} onLoadMore={handleLoadMore} />
       <div className="flex-1 mt-10">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Manga } from '../../types/manga/mangaDetails'; 
 import { fetchManga } from "../../actions/mangaActions"; 
-import MangaGrid from "../../components/MangaGrid";
+import ListGrid from "../../components/ListGrid";
 
 const MangaList = () => {
   // cache dữ liệu manga theo page
@@ -51,7 +51,7 @@ const MangaList = () => {
       {isLoading ? (
         <p>Đang tải...</p>
       ) : (
-        <MangaGrid mangas={mangas} />
+        <ListGrid posts={mangas} type={"manga"} />
       )}
 
       <div className="flex justify-center items-center gap-6 mt-8">

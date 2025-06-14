@@ -3,7 +3,7 @@ import { GenreState, AdvancedFilter, STATUS_OPTIONS } from "../../types/search/a
 import { Novel } from '../../types/novel/novelDetails';
 import { Genre } from "../../types/genre/genreDetails";
 import {fetchGenre} from "../../actions/genreAction"; // nếu có API thật, bạn gọi từ đây
-import NovelGrid from "../../components/NovelGrid";
+import ListGrid from "../../components/ListGrid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { buildQueryFromFilters } from "../../actions/searchActions"; // nếu có hàm này, bạn gọi từ utils
 import { parseQueryToFilters, fetchAdvancedSearch } from "../../actions/searchActions"; // nếu có hàm này, bạn gọi từ utils
@@ -33,6 +33,7 @@ const AdvancedSearch: React.FC = () => {
 
    useEffect(() => {
     const fetchData = async () => {
+      console.log("Fetching data with location:", location.search);
       const filters: AdvancedFilter = parseQueryToFilters(location.search);
       console.log("Parsed Filters:", filters);
       const results = await fetchAdvancedSearch(filters, "novel"); // hoặc "manga", tùy bạn
@@ -134,7 +135,7 @@ const AdvancedSearch: React.FC = () => {
         <p>Không có kết quả nào phù hợp với bộ lọc của bạn.</p>
       ) : (
        <div ref={resultsRef}>
-        <NovelGrid novels={results} />
+        <ListGrid posts={results} type={"novel"} />
       </div>
 
       )}

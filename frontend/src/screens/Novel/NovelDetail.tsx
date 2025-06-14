@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Novel } from '../../types/novel/novelDetails';
 import { updateLike, updateFavorite } from "../../actions/userAction";
@@ -7,13 +7,7 @@ import { NovelChapter } from '../../types/novel/novelChapters';
 import { fetchStoryDetails, fetchStoryChapters, fetchNovel } from '../../actions/novelAction'; 
 import { faEye, faCommentDots, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
-
-// Helper: Lấy ngẫu nhiên n novel, loại trừ id nếu có
-function getRandomNovels(n: number, novels: Novel[], excludeId?: string) {
-  const filtered = excludeId ? novels.filter(nv => nv._id !== excludeId) : novels;
-  const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, n);
-}
+import RecommendGrid from "../../components/RecommendGrid";
 
 // Component: Thông tin truyện
 function NovelInfo({
@@ -99,46 +93,44 @@ function NovelInfo({
 }
 
 // Component: Mô tả truyện
-function NovelDescription({ description }: { description: string }) {
+function Description({ description }: { description: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (el) {
+      setIsOverflowing(el.scrollHeight > el.clientHeight);
+    }
+  }, [description]);
+
+  const toggleExpanded = () => setExpanded(!expanded);
+
   return (
     <div className="flex flex-col mt-8">
-      <h2 className="Emphasize font-bold text-2xl">Mô tả</h2>
-      <p className="text-justify leading-relaxed">
+      <h2 className="Emphasize font-bold text-2xl mb-2">Mô tả</h2>
+
+      <div
+        ref={contentRef}
+        className={`text-justify leading-relaxed overflow-hidden transition-all duration-300 ${
+          expanded ? 'max-h-full' : 'max-h-[600px]' // Giới hạn chiều cao nếu chưa mở rộng
+        }`}
+      >
         {description.split('\n').map((line, idx) => (
           <span key={idx}>{line}<br /></span>
         ))}
-      </p>
-    </div>
-  );
-}
-
-// Component: Gợi ý truyện
-function RecommendBox({ novels }: { novels: Novel[] }) {
-  return (
-    <aside className="w-full lg:w-70 flex-shrink-0 h-full">
-      <div className="bg-white rounded-xl shadow p-4 w-full h-full">
-        <h3 className="font-bold text-lg mb-4">Gợi ý cho bạn</h3>
-        <div className="space-y-4">
-          {novels.map(novel => (
-            <Link
-              to={`/novel/${novel._id}`}
-              key={novel._id}
-              className="flex items-center gap-3 hover:bg-sky-100 rounded p-2 transition"
-            >
-              <img
-                src={novel.cover_image}
-                alt={novel.title}
-                className="w-20 h-28 md:w-24 md:h-32 object-cover rounded shadow"
-              />
-              <div className="flex-1">
-                <div className="font-semibold text-sm line-clamp-2">{novel.title}</div>
-                <div className="text-xs text-gray-500">{novel.author}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
       </div>
-    </aside>
+
+      {isOverflowing && (
+        <button
+          onClick={toggleExpanded}
+          className="mt-2 text-blue-500 hover:underline self-start "
+        >
+          {expanded ? 'Thu gọn' : 'Xem thêm'}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -195,7 +187,6 @@ const StoryDetailPage = () => {
   const { postId } = useParams();
   const [story, setStory] = useState<Novel | null>(null);
   const [chapters, setChapters] = useState<NovelChapter[]>([]);
-  const [allNovels, setAllNovels] = useState<Novel[]>([]);
   const [visible, setVisible] = useState(15);
 
   const firstChapter = chapters[0];
@@ -231,19 +222,6 @@ const StoryDetailPage = () => {
     fetchChapter();
   }, [postId]);
 
-  // Lấy tất cả novel để gợi ý
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const novels = await fetchNovel(1);
-        setAllNovels(novels);
-      } catch (error) {
-        console.error("Lỗi khi load danh sách truyện:", error);
-      }
-    };
-    fetchAll();
-  }, []);
-
   // Xử lý sự kiện
   const handleLoadMore = () => setVisible(prev => prev + 10);
 
@@ -267,10 +245,6 @@ const StoryDetailPage = () => {
     }
   };
 
-  const recommends = useMemo(
-    () => getRandomNovels(10, allNovels, story?._id),
-    [allNovels, story?._id]
-  );
 
   return (
     <div className="max-w-screen-lg mx-auto px-0 py-10">
@@ -285,13 +259,22 @@ const StoryDetailPage = () => {
                 onLike={handleLikeClick}
                 onFavorite={handleFavoriteClick}
               />
-              <NovelDescription description={story.description} />
+              <Description description={story.description} />
             </>
           ) : (
             <p>Đang tải truyện...</p>
           )}
         </div>
-        <RecommendBox novels={recommends} />
+        {/* Gợi ý truyện */}
+        <div className="h-[900px] overflow-y-auto">
+          {story ? (
+            <>
+              <RecommendGrid type="novel" genre={story.genres[0]} currentId={story._id} />
+            </>
+          ) : (
+            <p></p>
+          )}
+        </div>
       </div>
       <ChapterList chapters={chapters} visible={visible} onLoadMore={handleLoadMore} />
       <div className="flex-1 mt-10">
