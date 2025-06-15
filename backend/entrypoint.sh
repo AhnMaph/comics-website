@@ -1,7 +1,13 @@
 #!/bin/sh
+
+echo "🔧 Đang chạy makemigrations..."
 python manage.py makemigrations
-echo "🔧 Chạy migrate..."
+
+echo "🔧 Đang chạy migrate..."
 python manage.py migrate
 
-echo "🚀 Khởi động server..."
-python manage.py runserver 0.0.0.0:8000
+echo "📦 Đang collect static files..."
+python manage.py collectstatic --noinput
+
+echo "🚀 Khởi động Gunicorn..."
+gunicorn server.wsgi:application --bind 0.0.0.0:8000

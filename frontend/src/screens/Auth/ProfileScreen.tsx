@@ -1,341 +1,464 @@
-import { useSelector } from "react-redux";
-import { selectUser } from "../../types/user/userSlice";
-import { useEffect, useState, useRef, useLayoutEffect } from "react";
-import { motion } from "framer-motion";
-import React from "react";
-import { useSearchParams } from "react-router-dom";
-import {fetchProfile} from "../../actions/userAction";
-import { User } from "../../types/user/User";
-import { FaEdit } from "react-icons/fa";
-import { useParams } from "react-router-dom";
-import { updateAvatar, updateProfile } from "../../actions/userAction";
-
-// 1. Define the tab keys and their content types
-type TabKey = "info" | "uploads" | "mdlists";
-
-
-interface TabContent {
-    title: string;
-    component: React.ReactNode;
-}
-
-export default function ProfileScreen() {
-        const userInfo = useSelector(selectUser);
-        const [searchParams, setSearchParams] = useSearchParams();
-        const tabRefs = useRef<{ [key in TabKey]?: HTMLAnchorElement | null }>({});
-        const { username } = useParams();
-        const [isValid,setValid] = useState<boolean>(false);
-        const [selectorStyles, setSelectorStyles] =  useState<{ left: number; width: number } | null>(null);
-        const [selectorReady, setSelectorReady] = useState(false);
-        const [profile, setProfile] = useState<User | null>(null);
-        const isOwner = !username || username === userInfo?.name;
-        const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-            const file = e.target.files?.[0];
-            if (!file) return;
-
-            const formData = new FormData();
-            formData.append("avatar", file);
-
-            try {
-                await updateAvatar(formData);
-                const updatedProfile = await fetchProfile();
-                setEditProfile(updatedProfile);
-                console.log("Avatar updated successfully", updatedProfile?.cover);
-            } catch (error) {
-                console.error("Error updating avatar:", error);
-            }
-        };
-
-        // Define tabs with their content
-        const tabsConfig: Record<TabKey, TabContent> = {
-            info: {
-                title: "Information",
-                component: <div>Overview content</div>
+import React, { useState, useRef, useEffect } from 'react';
+import { 
+  User, 
+  BookOpen, 
+  Upload,
+  Heart, 
+  Calendar,
+  Camera,
+  Mail,
+  Edit3,
+  Save,
+  X,
+  Star,
+  Eye,
+  MessageCircle
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import {selectUser } from "../../types/user/userSlice";
+import {useSelector } from "react-redux";
+import {getFavorite} from '../../actions/userAction';
+import { Novel } from '../../types/novel/novelDetails';
+import store from '../../store';
+import { updateAvatar } from '../../actions/userAction';
+import { getUploader } from '../../actions/novelAction';
+const ProfileScreen = () => {
+  const [activeTab, setActiveTab] = useState('info');
+  const [isEditing, setIsEditing] = useState(false);
+  const [showAvatarUpload, setShowAvatarUpload] = useState(false);
+  const [favNovel, setFavNovel] = useState<Novel[]>([]);
+  const [upNovel, setUpNovel] = useState<Novel[]>([]);  
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const baseInfo = useSelector(selectUser);
+  const baseURL = import.meta.env.VITE_ADMIN_URL;
+  if(!baseInfo?.isLogin){
+    return <p> Chưa Đăng nhập hoặc Đăng ký</p>
+  }
+  const [userInfo, setUserInfo] = useState({
+    name: baseInfo?.name,
+    email: baseInfo?.email,
+    bio: baseInfo?.bio,
+    joinDate: baseInfo.date_joined,
+    avatar: baseInfo?.cover,
+    isUploader: true,
+    stats: {
+      bookmarks: 0,
+      uploads: 0,
+      followers: 0,
+      following: 0
+    }
+  });
+   useEffect(() => {
+      const fetchData = async () => {
+        const res_fav = await getFavorite({ username: baseInfo.name, type:"novel" });
+        const favCount = res_fav ? res_fav.length : 0;
+        setFavNovel([]);
+        for (let i = 0; i < favCount; i++) {
+            const newNovel = res_fav[i].post;
+            setFavNovel(prev => {
+                if (prev === null) return [newNovel]; // nếu ban đầu là null
+                return [...prev, newNovel]; // thêm vào cuối mảng
+              });
+            console.log("Favorite post item:", newNovel.title); // ví dụ truy cập title
+            // xử lý gì đó với từng item
+        }
+        const res_uploader = await getUploader(baseInfo.id);
+        const upCount = res_uploader ? res_uploader.length : 0;
+        setUpNovel([]);
+        for (let i = 0; i < upCount; i++) {
+            const newNovel = res_uploader[i];
+            setUpNovel(prev => {
+                if (prev === null) return [newNovel]; // nếu ban đầu là null
+                return [...prev, newNovel]; // thêm vào cuối mảng
+              });
+            console.log("Favorite post item:", newNovel.title); // ví dụ truy cập title
+            // xử lý gì đó với từng item
+        }
+        setUserInfo({
+            name: baseInfo?.name,
+            email: baseInfo?.email,
+            bio: baseInfo?.bio,
+            joinDate: baseInfo.date_joined,
+            avatar: baseInfo?.cover,
+            isUploader: true,
+            stats: {
+              bookmarks: favCount,
+              uploads: upCount,
+              followers: 0,
+              following: 0,
             },
-            uploads: {
-                title: "My Uploads",
-                component: <div>Uploads content</div>
-            },
-            mdlists: {
-                title: "My Lists",
-                component: <div>MDLists content</div>
-            }
-        };
+          });
 
-        const tabs = Object.keys(tabsConfig) as TabKey[];
-        
-        // Get active tab from URL or default to 'info'
-        const [activeTab, setActiveTab] = useState<TabKey>(() => {
-            const tabParam = searchParams.get("tab") as TabKey;
-            return tabs.includes(tabParam) ? tabParam : "info";
-        });
+      };
+      fetchData();
+      
+    }, [baseInfo]);
+  
 
-        useEffect(() => {
-            setSearchParams({ tab: activeTab });
-        }, [activeTab, searchParams]);
+  const [editForm, setEditForm] = useState({ ...userInfo });
 
-        const tabContent = Object.fromEntries(
-            Object.entries(tabsConfig).map(([key, { component }]) => [key, component])
-        ) as Record<TabKey, React.ReactNode>;
-        // Update selector khi tab thay đổi //
-        useLayoutEffect(() => {
-            const timer = setTimeout(() => {
-                const el = tabRefs.current[activeTab];
-                if (el) {
-                const { offsetLeft, offsetWidth } = el;
-                setSelectorStyles({ left: offsetLeft, width: offsetWidth });
-                setSelectorReady(true);
-                }
-            }, 0);
-        return () => clearTimeout(timer);
-        }, [activeTab, userInfo]);
+  // Mock data
+  const bookmarkedComics = [
+    { id: 1, title: 'The Amazing Spider-Man', cover: '/api/placeholder/150/200', author: 'Stan Lee', rating: 4.8 },
+    { id: 2, title: 'Attack on Titan', cover: '/api/placeholder/150/200', author: 'Hajime Isayama', rating: 4.9 },
+    { id: 3, title: 'Wonder Woman', cover: '/api/placeholder/150/200', author: 'George Pérez', rating: 4.7 },
+    { id: 4, title: 'One Piece', cover: '/api/placeholder/150/200', author: 'Eiichiro Oda', rating: 4.9 },
+  ];
 
-        // Fetch profile khi xác thực được đối tượng //
-        useEffect(()=>{
-          const fetchData = async () =>{
-              try {
-                var profileData = null;
-                  console.log("Fetching profile for user:", username," userInfo:", userInfo);
-                  if(username) 
-                    profileData = await fetchProfile(username);
-                  else profileData = await fetchProfile();
-                  if(profileData === null) setValid(false);
-                  else {
-                    setProfile(profileData);
-                    setValid(true);
-                  }
-                  console.log("Profile fetched:", profileData);
-                  
-              } catch (error) {
-                  console.error("Error fetching profile:", error);
-                  setValid(false);
-              }
-          }
-            fetchData();
-        },[searchParams]);
+  const uploadedComics = [
+    { id: 1, title: 'City Tales', cover: '/api/placeholder/150/200', views: 1250, likes: 89, comments: 23 },
+    { id: 2, title: 'Neon Dreams', cover: '/api/placeholder/150/200', views: 2100, likes: 156, comments: 45 },
+    { id: 3, title: 'Forest Spirits', cover: '/api/placeholder/150/200', views: 890, likes: 67, comments: 12 },
+  ];
 
-        // Thêm state cho chế độ chỉnh sửa //
-        const [editMode, setEditMode] = useState(false);
-        const [editProfile, setEditProfile] = useState<User | null>(null);
+  const handleSave = () => {
+    setUserInfo({ ...editForm });
+    setIsEditing(false);
+  };
 
-        // Khi nhấn chỉnh sửa, copy dữ liệu profile sang editProfile
-        const handleEdit = () => {
-          setEditProfile(profile);
-          setEditMode(true);
-        };
+  const handleCancel = () => {
+    setEditForm({ ...userInfo });
+    setIsEditing(false);
+  };
 
-        // Khi lưu chỉnh sửa
-        const handleSave = async () => {
-          // TODO: Gọi API cập nhật thông tin profile ở backend
-          // await updateProfile(editProfile);
-          setProfile(editProfile);
-          setEditMode(false);
-        };
+  const TabButton = ({ id, label, icon: Icon, count }: { id: string; label: string; icon: React.ElementType; count?: number }) => (
+    <button
+      onClick={() => setActiveTab(id)}
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
+        activeTab === id 
+          ? 'bg-blue-500 text-white shadow-lg' 
+          : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+      }`}
+    >
+      <Icon size={18} />
+      <span className="font-medium">{label}</span>
+      {count && <span className="bg-white bg-opacity-20 px-2 py-1 rounded-full text-xs text-black">{count}</span>}
+    </button>
+  );
 
-        // Khi hủy chỉnh sửa
-        const handleCancel = () => {
-          setEditMode(false);
-          setEditProfile(null);
-        };
+  const ComicCard = ({ comic, showStats = false }: { comic: any; showStats?: boolean }) => (
+    <Link to={`/novel/${comic._id}`}>
+    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4" 
+      style={{ aspectRatio: "5 / 7" }}>
+      <img 
+        src={baseURL+"/"+comic.cover_image}
+        alt={comic.title}
+        className="w-full h-full object-cover rounded"
+      />
+      <h3 className="font-semibold text-gray-800 mb-1 truncate">{comic.title}</h3>
+      {comic.author && (
+        <p className="text-sm text-gray-600 mb-2">by {comic.author}</p>
+      )}
+      {comic.rating && (
+        <div className="flex items-center gap-1 mb-2">
+          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+          <span className="text-sm font-medium">{comic.rating}</span>
+        </div>
+      )}
+      {showStats && (
+        <div className="flex justify-between text-xs text-gray-500">
+          <div className="flex items-center gap-1">
+            <Eye size={12} />
+            <span>{comic.numViews}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Heart size={12} />
+            <span>{comic.numFavorites}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <MessageCircle size={12} />
+            <span>{comic.numComments}</span>
+          </div>
+        </div>
+      )}
+    </div>
+    </Link>
+  );
+  const handleAvatarClick = () => {
+    setShowAvatarUpload(true);
+  };
 
-        // Khi thay đổi trường dữ liệu
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-          if (!editProfile) return;
-          const res = updateProfile(editProfile);
-          if (res) {
-            console.log("Profile updated successfully:", res);
-          } else {
-            console.error("Failed to update profile");
-          }
+  const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      alert('Please select a file to upload');
+      return;
+    }
 
-          setEditProfile({ ...editProfile, [e.target.name]: e.target.value });
-        };
+    const file = event.target.files[0];
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size must be less than 5MB');
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      alert('Please select an image file');
+      return;
+    }
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    try {
+      const res = await updateAvatar(formData);
+      console.log("Avatar updated successfully:", res);
+      setShowAvatarUpload(false);
+    } catch (err) {
+      console.error("Upload failed", err);
+      alert("Failed to upload avatar. Please try again.");
+    }
+  };
 
 
-        
-
-  return isValid ? (
-    <div className="bg-gray-100">
-      <div className="container mx-auto py-8">
-        <div className="w-full grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
-          {/* Left column */}
-          <div className="col-span-4 sm:col-span-3">
-            <div className="bg-white shadow rounded-lg p-6 min-h-[400px] flex flex-col">
-              <div className="flex flex-col items-center">
-                <div className="relative">
-               
-                  <img
-                  src={profile?.cover}
-                  className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0"
-                  alt="Profile image"
+  const removeAvatar = () => {
+    const defaultAvatar = '/api/placeholder/120/120';
+    setUserInfo(prev => ({ ...prev, avatar: defaultAvatar }));
+    setEditForm(prev => ({ ...prev, avatar: defaultAvatar }));
+    setShowAvatarUpload(false);
+  };
+  return (
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+            <div className="relative">
+              <img 
+                src={userInfo.avatar} 
+                alt="Profile Avatar"
+                className="w-24 h-24 rounded-full object-cover border-4 border-blue-100 cursor-pointer transition-opacity group-hover:opacity-80"
+                onClick={handleAvatarClick}
+              />
+              <div className="absolute -bottom-1 -right-1 bg-green-500 w-6 h-6 rounded-full border-2 border-white"></div>
+              {/* Avatar Upload Overlay */}
+              <div 
+                onClick={handleAvatarClick}
+                className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+              >
+                <Camera className="text-white" size={24} />
+              </div>
+            </div>
+            
+            <div className="flex-1">
+              {isEditing ? (
+                <div className="space-y-3">
+                  <input
+                    type="text"
+                    value={editForm.name}
+                    onChange={(e) => setEditForm({...editForm, name: e.target.value})}
+                    className="text-2xl font-bold text-blue-700 border-b-2 border-blue-300 bg-transparent outline-none"
                   />
-
-                {/* Nút đổi avatar */}
-                {editMode && (
-              <>
-                <input
-                  type="file"
-                  accept="image/*"
-                  id="avatar-upload"
-                  className="hidden"
-                  onChange={handleAvatarChange}
-                />
-                  <label
-                    htmlFor="avatar-upload"
-                    className="absolute bottom-2 right-2 bg-white rounded-full p-2 shadow cursor-pointer hover:bg-gray-200"
-                    title="Đổi ảnh đại diện"
-                  >
-                    <FaEdit size={20} className="text-gray-700" />
-                  </label>
-                  </>
-                        )}
-                      </div>
-
-
-                <h2 className="text-xl font-bold">{profile?.username}</h2>
-
-                <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                  <button className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">
-                    Theo dõi
-                  </button>
+                  <input
+                    type="email"
+                    value={editForm.email}
+                    onChange={(e) => setEditForm({...editForm, email: e.target.value})}
+                    className="flex items-center gap-2 text-gray-600 border-b border-gray-300 bg-transparent outline-none"
+                  />
+                  <textarea
+                    value={editForm.bio}
+                    onChange={(e) => setEditForm({...editForm, bio: e.target.value})}
+                    className="w-full text-gray-700 border border-gray-300 rounded-md p-2 outline-none focus:border-blue-400"
+                    rows={3}
+                  />
+                  
                 </div>
-              </div>
-              <hr className="my-6 border-t border-gray-300" />
-              <div className="flex flex-col">
-                <span className="text-gray-700 uppercase font-bold tracking-wider mb-2">
-                 {profile?.group ? profile.group : "Đã đăng nhập"}
-                </span>
-                
-              </div>
+              ) : (
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-800 mb-2">{userInfo.name}</h1>
+                  <div className="flex items-center gap-2 text-gray-600 mb-2">
+                    <Mail size={16} />
+                    <span>{userInfo.email}</span>
+                  </div>
+                  <p className="text-gray-700 mb-3">{userInfo.bio}</p>
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-1">
+                      <Calendar size={16} />
+                      <span>Tham gia từ {new Date(userInfo.joinDate).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              {isEditing ? (
+                <>
+                  <button
+                    onClick={handleSave}
+                    className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <Save size={18} />
+                    Lưu
+                  </button>
+                  <button
+                    onClick={handleCancel}
+                    className="flex items-center gap-2 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors"
+                  >
+                    <X size={18} />
+                    Hủy
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Edit3 size={18} />
+                  Sửa thông tin
+                </button>
+              )}
             </div>
           </div>
 
-          {/* Right column */}
-          <div className="col-span-4 justify-center sm:col-span-9 items-center">
-            <div className="bg-white shadow rounded-lg p-6 h-full min-h-[400px] max-h-[400px] overflow-y-auto">
-                {/* Animated Tabs */}
-                <div className="relative inline-flex items-center bg-gray-100 rounded-lg p-1 space-x-1">
-                {/* Animated background */}
-                <motion.div
-                    layout
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    className="absolute top-1 bottom-1 bg-black rounded-md z-0"
-                    style={{
-                    left: selectorStyles?.left,
-                    width: selectorStyles?.width,
-                    }}
-                />
-                {tabs.map((tab) => (
-                    <a
-                    key={tab}
-                    href={`?tab=${tab}`}
-                    ref={(el) => {
-                        tabRefs.current[tab] = el;
-                    }}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        setActiveTab(tab);
-                    }}
-                    className={`relative z-10 px-4 py-2 font-bold rounded-md transition-colors ${
-                        activeTab === tab && selectorReady
-                        ? "text-white"
-                        : "text-gray-400 hover:text-black"
-                    }`}
-                    >
-                    <span className="capitalize">{tab}</span>
-                    </a>
-                ))}
-
-
-                
-                </div>
-
-                  {/* Content */}
-              <div className="items-center mt-6 min-h-[200px]">
-                {activeTab === "info" ? (
-                  <div className="relative">
-                    {/* Nút chỉnh sửa */}
-                    {!editMode && isOwner && (
-                      <button
-                        className="absolute top-0 right-0 text-gray-500 hover:text-blue-600"
-                        onClick={handleEdit}
-                        title="Chỉnh sửa thông tin"
-                      >
-                        <FaEdit size={20} />
-                      </button>
-                    )}
-                    
-                      
-                     {/* Tên đăng nhập */}
-<div className="flex flex-col items-center gap-2 w-full py-4">
-  <label className="block font-semibold text-gray-700 text-4xl text-center" htmlFor="username">
-    Tên đăng nhập:
-  </label>
-  {editMode ? (
-    <input
-      type="text"
-      id="username"
-      name="username"
-      value={editProfile?.username || ""}
-      onChange={handleChange}
-      className="border rounded px-2 py-1 text-center text-2xl w-full max-w-xs"
-    />
-  ) : (
-    <span className="text-gray-800 text-4xl text-center">{profile?.username}</span>
-  )}
-</div>
-{/* Email */}
-<div className="flex flex-col items-center gap-2 w-full py-4">
-  <label className="block font-semibold text-gray-700 text-4xl text-center" htmlFor="email">
-    Email:
-  </label>
-  {editMode ? (
-    <input
-      type="email"
-      id="email"
-      name="email"
-      value={editProfile?.email || ""}
-      onChange={handleChange}
-      className="border rounded px-2 py-1 text-center text-2xl w-full max-w-xs"
-    />
-  ) : (
-    <span className="text-gray-800 text-4xl text-center">{profile?.email}</span>
-  )}
-</div>
-                      
-                      {/* Nút lưu/hủy */}
-                      {editMode && (
-                        <div className="flex gap-4 mt-2">
-                          <button
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                            onClick={handleSave}
-                            type="button"
-                          >
-                            Lưu
-                          </button>
-                          <button
-                            className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
-                            onClick={handleCancel}
-                            type="button"
-                          >
-                            Hủy
-                          </button>
-                        </div>
-                      )}
-                 
-                  </div>
-                ) : (
-                  tabContent[activeTab]
-                )}
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-blue-600">{userInfo.stats.bookmarks}</div>
+              <div className="text-sm text-gray-600">Đã lưu</div>
+            </div>
+            {userInfo.isUploader && (
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600">{userInfo.stats.uploads}</div>
+                <div className="text-sm text-gray-600">Đã đăng</div>
               </div>
+            )}
+            <div className="text-center">
+              <div className="text-2xl font-bold text-purple-600">{userInfo.stats.followers}</div>
+              <div className="text-sm text-gray-600">Người theo dõi</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold text-orange-600">{userInfo.stats.following}</div>
+              <div className="text-sm text-gray-600">Đang theo dõi</div>
             </div>
           </div>
         </div>
+        {/* Avatar Upload Modal */}
+        {showAvatarUpload && (
+          <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Change Avatar</h3>
+                <button
+                  onClick={() => setShowAvatarUpload(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              
+              <div className="text-center mb-6">
+                <img 
+                  src={userInfo.avatar} 
+                  alt="Current Avatar"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 mx-auto mb-4"
+                />
+                <p className="text-sm text-gray-600">
+                  Upload a new profile picture. Max file size: 5MB
+                </p>
+              </div>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleAvatarUpload}
+                className="hidden"
+              />
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <Upload size={18} />
+                  Upload New
+                </button>
+                <button
+                  onClick={removeAvatar}
+                  className="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                >
+                  <X size={18} />
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* Navigation Tabs */}
+        <div className="flex flex-wrap gap-3 mb-6 ">
+          <TabButton 
+            id="info" 
+            label="Thông tin" 
+            icon={User} 
+          />
+          <TabButton 
+            id="bookmarks" 
+            label="Truyện đã lưu" 
+            icon={BookOpen} 
+            count={userInfo.stats.bookmarks}
+          />
+          {userInfo.isUploader && (
+            <TabButton 
+              id="uploads" 
+              label="Truyện đã đăng" 
+              icon={Upload} 
+              count={userInfo.stats.uploads}
+            />
+          )}
+        </div>
+
+        {/* Content Area */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          {activeTab === 'info' && (
+            <div className="space-y-6">
+              <h2 className="text-xl font-semibold mb-4">Thông tin cá nhân</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-700 mb-2">Thông tin chi tiết</h3>
+                  <div className="space-y-3 text-gray-600">
+                    <div><strong>Tên:</strong> {userInfo.name}</div>
+                    <div><strong>Email:</strong> {userInfo.email}</div>
+                    <div><strong>Là thành viên từ:</strong> {new Date(userInfo.joinDate).toLocaleDateString()}</div>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-700 mb-2">Tiểu sử</h3>
+                  <p className="text-gray-600">{userInfo.bio}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'bookmarks' && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Danh sách truyện theo dõi</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {favNovel.map(comic => (
+                  <ComicCard key={comic._id} comic={comic} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'uploads' && userInfo.isUploader && (
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold">Truyện đã đăng</h2>
+                <button className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                  <Upload size={18} />
+                  Đăng Truyện Mới
+                </button>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {upNovel.map(comic => (
+                  <ComicCard key={comic._id} comic={comic} showStats={true} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  ) : (
-    <div className="flex items-center justify-center h-screen mt-1">
-      <h1 className="text-xl font-bold text-center">Profile không tồn tại</h1>
-    </div>
   );
-}
+};
+
+export default ProfileScreen;

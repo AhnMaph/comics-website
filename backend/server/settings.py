@@ -197,15 +197,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = 'staticfiles/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#print(STATIC_ROOT)
-# Additional static files (For frontend build)
+# static sẽ được phục vụ ở /static/
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles'),
-    os.path.join(BASE_DIR, "frontend", "dist"),
+    os.path.join(BASE_DIR, "frontend", "dist"),  # build của Vite
 ]
+
 # Media files (Uploaded images, documents, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

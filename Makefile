@@ -51,6 +51,8 @@ rebuild: clean build up
 clean-port:
 	docker ps --format '{{.ID}} {{.Ports}}' | grep '0.0.0.0:8000' | awk '{print $$1}' | xargs -r docker stop || true
 	docker ps --format '{{.ID}} {{.Ports}}' | grep '0.0.0.0:5174' | awk '{print $$1}' | xargs -r docker stop
+rm-network:
+	docker network rm comics-website_webnet
 
 .DEFAULT_GOAL := help
 help:
@@ -76,4 +78,5 @@ help:
 	@echo "  prune            Remove all containers, volumes, images unused"
 	@echo "  rebuild          Clean, build, and up containers"
 	@echo "  clean-port       Stop any container using port 8000/5174 on host"
-.PHONY: run-backend run-frontend migrate makemigrations up down restart logs build shell-backend shell-frontend ps clean prune rebuild add-data-base help clean-port
+	@echo "  rm-network       Remove the docker network"
+.PHONY: run-backend rm-network run-frontend migrate makemigrations up down restart logs build shell-backend shell-frontend ps clean prune rebuild add-data-base help clean-port

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { login, logout } from '../types/user/userSlice';
-import { LikeProp, User } from '../types/user/User';
+import { LikeProp, User, FavoriteProp } from '../types/user/User';
 import { Comment } from '../types/user/User';
 import store from '../store';
 import axiosAuth from './apiClient';
@@ -38,6 +38,7 @@ export const loginUser = async (username: string, password: string) => {
             config
         );
         const user = response.data.user;
+        console.log("User info when fetching profile:", user);
         store.dispatch(
                 login({
                     id: String(user.id),
@@ -46,6 +47,8 @@ export const loginUser = async (username: string, password: string) => {
                     first_name: user.first_name,
                     cover: `${baseURL}${user.cover}`,
                     isLogin: true,
+                    date_joined: user.date_joined,
+                    bio: user.bio,
                 })
             );
         console.log(response); // Debug kết quả
@@ -90,6 +93,7 @@ export const fetchProfile = async (username?:string): Promise<User | null> => {
                 config
             );
             user = response.data;
+            // console.log("User info when fetching profile:", user);
             if(user.cover) user.cover = `${baseURL}${user.cover}`;
             store.dispatch(
                 login({
@@ -99,6 +103,8 @@ export const fetchProfile = async (username?:string): Promise<User | null> => {
                     first_name: user.first_name,
                     cover: user.cover,
                     isLogin: true,
+                    date_joined: user.date_joined,
+                    bio: user.bio,
                 })
             );
             console.log("Me:", response);
@@ -208,27 +214,40 @@ export const updateLike  = async ({ post_id, type }: LikeProp) => {
   }
 }
 
-export const updateFavorite  = async ({ post_id, type }: LikeProp) => {
-  try{
-      const config = {
-            withCredentials:true,
-        }
-      const response = await axios.post(`${baseURL}/api/favorite/`,
-        {
-          post_id: post_id,
-          type: type
-        },
-        config
-      );
-      console.log("Fav update: ",response.data);
-      return response.data;
-  }
+export const getFavorite = async ({
+  username,
+  type,
+}: { username: string; type: string }): Promise<any[]> => {
+  try {
+    const config = { withCredentials: true };
+    const response = await axios.get(`${baseURL}/api/favorite/profile/${type}/${username}/`, config);
 
-  catch (error) {
-    console.error("Error update number favorite:", error);
+    console.log("Fav find: ", response.data);
+    return response.data.favorite ?? []; // ✅ fallback nếu undefined/null
+  } catch (error) {
+    console.error("Error find favorite:", error);
+    return []; // ✅ fallback lỗi → trả mảng rỗng thay vì throw
+  }
+};
+
+
+export const updateFavorite = async (post_id:string, type:string) => {
+  try{
+    const config = {
+      headers: {'Content-Type': 'application/json'},
+      withCredentials:true,
+    };
+    const response = await axiosAuth.post(
+      `${baseURL}/api/favorite/${type}/${post_id}/`,
+        {},
+        config
+    );
+    console.log("update Favorite:", response.data);   
+    return response.data;
+  } catch (error) {
+    console.error("Vui lòng đăng nhập trước khi gửi:", error);
     throw error;
   }
-  
 }
 
 export const updateAvatar = async (formData: FormData) => {
@@ -236,7 +255,7 @@ export const updateAvatar = async (formData: FormData) => {
     headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
   });
-
+  console.log("Update avatar:", res.data.avatar);
   const userInfo = store.getState().user.user;
     if(userInfo)
         store.dispatch(
@@ -244,8 +263,10 @@ export const updateAvatar = async (formData: FormData) => {
                 id: userInfo.id,
                 email:userInfo.email,
                 name: userInfo.name,
-                cover: `${baseURL}${userInfo.cover}`,
+                cover: `${baseURL}${res.data.avatar}`,
                 isLogin: true,
+                date_joined: userInfo.date_joined,
+                bio: userInfo.bio,
             })
         );
   return res;
@@ -269,6 +290,8 @@ export const updateProfile = async (user:User) => {
                 name: user.username,
                 cover: `${baseURL}${user.cover}`,
                 isLogin: true,
+                date_joined: user.date_joined || new Date().toISOString(),
+                bio: user.bio,
             })
         );
     console.log("Update profile:", res);

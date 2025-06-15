@@ -7,7 +7,7 @@ export interface Notification {
     user: {
         id: number;
         email: string;
-        first_name: string;
+        username: string;
         cover: string;
         groups: any[];
     };

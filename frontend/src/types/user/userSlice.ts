@@ -7,6 +7,8 @@ export interface User {
   email: string;
   isLogin: boolean;
   cover: string;
+  date_joined: string;
+  bio?: string;
 }
 
 interface UserState {

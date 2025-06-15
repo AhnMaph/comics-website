@@ -9,8 +9,8 @@ class UserSerializer(serializers.ModelSerializer):
     cover = serializers.SerializerMethodField()
     class Meta:
         model = CustomUser
-        fields = ['id','email', 'username','cover','groups']
-        read_only_fields = ['id']
+        fields = ['id','email', 'username','cover','groups','date_joined','bio']
+        read_only_fields = ['id','date_joined']
     def get_cover(self, obj):
         request = self.context.get("request", None)
         print("Request in UserSerializer:", request)
@@ -23,13 +23,47 @@ class UserSerializer(serializers.ModelSerializer):
 
 class FavoriteSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
+    post = serializers.SerializerMethodField(read_only=True)
+    target_model = serializers.CharField(write_only=True)
+    target_object_id = serializers.UUIDField(write_only=True)
+    numFavorites = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Favorite
-        fields = '__all__'
+        fields = ['user','post','target_model', 
+                  'target_object_id','numFavorites']
+        read_only_fields = ['user','post','numFavorites']
     def get_user(self,obj):
         user = obj.user
         serializers = UserSerializer(user,many=False,context=self.context)
         return serializers.data
+    def get_post(self, obj):
+        target = obj.content_object  # lấy đối tượng gốc từ GenericForeignKey
+
+        if target is None:
+            return None
+
+        # Gọi đúng serializer theo loại model
+        if target._meta.model_name == 'novel':
+            from novel.serializers import NovelSerializer
+            return NovelSerializer(target, context=self.context).data
+        elif target._meta.model_name == 'manga':
+            from manga.serializers import MangaSerializer
+            return MangaSerializer(target, context=self.context).data
+
+        # fallback nếu không có serializer tương ứng
+        return {"id": str(target.pk), "type": target._meta.model_name}
+    def get_numFavorites(self, obj):
+        # Lấy target object
+        target = obj.content_object
+        if hasattr(target, 'numFavorites'):
+            return target.numFavorites
+        return 0
+    def create(self, validated_data):
+        validated_data.pop('target_model')
+        validated_data.pop('target_object_id')
+        validated_data['user'] = self.context['request'].user
+        return Favorite.objects.create(**validated_data)
+
 class CommentsSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
     target_model = serializers.CharField(write_only=True)

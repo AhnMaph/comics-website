@@ -57,3 +57,15 @@ export const fetchNovel = async (page=1): Promise<Novel[]> => {
             return [];
         }
 };
+
+export const getUploader = async (uploader:string): Promise<Novel[]> => {
+    try {
+            const response = await axios.get(`${baseURL}/api/novel/uploader/${uploader}/`);
+            console.log("Uploader: ",response.data)
+            console.log(`uploader: ${baseURL}/api/novel/uploader/${uploader}/`)
+            return Array.isArray(response.data.post) ? response.data.post : [];
+        } catch (error) {
+            console.error("Failed to fetch novel:", error);
+            return [];
+        }
+};

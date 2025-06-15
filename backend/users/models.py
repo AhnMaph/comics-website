@@ -9,7 +9,7 @@ from django.conf import settings
 
 class CustomUser(AbstractUser):
     cover = models.ImageField(upload_to='user_covers/', null=False ,default='user_covers/default.jpg')
-
+    bio = models.TextField(blank=True, null=True, default ="Tiểu sử của bạn ở đây")
     def __str__(self):
         return self.username
 
@@ -22,7 +22,12 @@ class Favorite(models.Model):
     ]
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
-    post_id = models.CharField(blank=True, max_length=255)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, 
+                                     related_name='favorite_post_type', 
+                                     null=True,  
+                                     blank=True )
+    object_id = models.UUIDField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     type = models.CharField(

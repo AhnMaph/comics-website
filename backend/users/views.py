@@ -24,6 +24,7 @@ from users.authentication import CookieJWTAuthentication
 from rest_framework.decorators import authentication_classes
 from django.shortcuts import get_object_or_404
 from notify.utils import sendNotifyComment
+from rest_framework.views import APIView
 # from .models import Notification
 # from .serializers import NotificationSerializer
 User = get_user_model()
@@ -77,6 +78,8 @@ def LoginUser(request):
                     "username": user.username,
                     "id": user.id,
                     "cover": user.cover.url if user.cover else None,
+                    "date_joined": user.date_joined.strftime("%Y-%m-%d %H:%M:%S"),
+                    "bio": user.bio,
                 }
             }, status=status.HTTP_200_OK)
             response.set_cookie(
@@ -191,7 +194,7 @@ def UpdateAvatar(request):
     user.cover = avatar
     user.save()
 
-    return Response({"detail": "Cập nhật ảnh đại diện thành công."}, status=status.HTTP_200_OK)
+    return Response({"detail": "Cập nhật ảnh đại diện thành công.", "avatar": user.cover.url}, status=status.HTTP_200_OK)
 @api_view(["POST"])
 @authentication_classes([CookieJWTAuthentication])
 def UpdateProfile(request):
@@ -298,28 +301,101 @@ def ToggleFavorite(request):
         return Response({"status": "favorite","numFavorites":post.numFavorites}, status=status.HTTP_201_CREATED)
 
 @api_view(["GET"])
-@authentication_classes([CookieJWTAuthentication])
-def FindFavorite(request):
-    user = request.user
-    type = request.query_params.get("type")
-    if not user or not user.is_authenticated:
-        return Response({"error": "Missing user ID"}, status=status.HTTP_400_BAD_REQUEST)
-    if(type == "novel"):
+@permission_classes([AllowAny])
+def FindFavorite(request, model,username):
+    try:
         try:
-            fav = Favorite.objects.get(user=user.id, type="novel")
-        except Favorite.DoesNotExist:
-            return Response({"error": "Novel's favorite not found"}, status=status.HTTP_404_NOT_FOUND)
-    if(type == "manga"):
-        try:
-            fav = Favorite.objects.get(user=user.id, type="manga")
-        except Favorite.DoesNotExist:
-            return Response({"error": "Manga's favorite not found"}, status=status.HTTP_404_NOT_FOUND)
-    
-    if fav:
-        return Response({"favorite": fav}, status=status.HTTP_200_OK)
-    else:
-        return Response({"error": "Favorite not found"}, status=status.HTTP_404_NOT_FOUND)
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        content_type = ContentType.objects.get(model=model.lower())
+        fav = Favorite.objects.filter(
+            user=user,
+            content_type=content_type)
+        exists = fav.exists()
+        if(exists):
+            serializer = FavoriteSerializer(fav, many=True)
+            return Response({"is_favorited": exists,"favorite":serializer.data},status=status.HTTP_200_OK)
+        return Response({"is_favorited": exists,"favorite":[]},status=204)
+    except Exception:
+        return Response({"Error": "Credential is invalid"},status=403)
+class FavoriteToggleView(APIView):
+    authentication_classes = [CookieJWTAuthentication]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def get_object(self, model, object_id):
+        try:
+            content_type = ContentType.objects.get(model=model.lower())
+            model_class = content_type.model_class()
+            obj = model_class.objects.get(pk=object_id)
+            return content_type, obj
+        except Exception:
+            return None, None
+
+    def get(self, request, model, object_id):
+        content_type, obj = self.get_object(model, object_id)
+        if not obj:
+            return Response({"detail": "Not found."}, status=404)
+        fav = Favorite.objects.filter(
+            user=request.user,
+            content_type=content_type,
+            object_id=object_id)
+        exists = fav.exists()
+        if(exists):
+            serializer = FavoriteSerializer(fav, many=True)
+            return Response({"is_favorited": exists,"favorite":serializer.data},status=status.HTTP_200_OK)
+        return Response({"is_favorited": exists,"favorite":[]},status=204)
+
+    def post(self, request, model, object_id):
+        content_type, obj = self.get_object(model, object_id)
+        if not obj:
+            return Response({"detail": "Not found."}, status=404)
+
+        favorite_qs = Favorite.objects.filter(
+            user=request.user,
+            content_type=content_type,
+            object_id=object_id
+        )
+
+        if favorite_qs.exists():
+            favorite_qs.delete()
+            if hasattr(obj, 'numFavorites'):
+                obj.numFavorites = max(getattr(obj, 'numFavorites', 1) - 1, 0)
+                obj.save(update_fields=['numFavorites'])
+            return Response({"numFavorites": obj.numFavorites}, status=200)
+
+        favorite = Favorite.objects.create(
+            user=request.user,
+            content_type=content_type,
+            object_id=object_id
+        )
+        if hasattr(obj, 'numFavorites'):
+            obj.numFavorites = getattr(obj, 'numFavorites', 0) + 1
+            obj.save(update_fields=['numFavorites'])
+
+        # Use serializer
+        serializer = FavoriteSerializer(favorite, context={'request': request})
+        return Response(serializer.data, status=201)
+
+    def delete(self, request, model, object_id):
+        content_type, obj = self.get_object(model, object_id)
+        if not obj:
+            return Response({"detail": "Not found."}, status=404)
+
+        favorite_qs = Favorite.objects.filter(
+            user=request.user,
+            content_type=content_type,
+            object_id=object_id
+        )
+
+        if favorite_qs.exists():
+            favorite_qs.delete()
+            if hasattr(obj, 'numFavorites'):
+                obj.numFavorites = max(getattr(obj, 'numFavorites', 1) - 1, 0)
+                obj.save(update_fields=['numFavorites'])
+            return Response({"detail": "Unfavorited"}, status=204)
+
+        return Response({"detail": "Favorite not found."}, status=404)
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentsSerializer

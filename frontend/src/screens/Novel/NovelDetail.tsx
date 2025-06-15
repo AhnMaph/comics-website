@@ -229,7 +229,7 @@ const StoryDetailPage = () => {
   const handleFavoriteClick = async () => {
     if (!postId) return;
     try {
-      const updated = await updateFavorite({ post_id: postId, type: "novel" });
+      const updated = await updateFavorite(postId, "novel");
       if (story) setStory({ ...story, numFavorites: updated.numFavorites });
     } catch (error) {
       console.error("Lỗi khi cập nhật số fav:", error);

@@ -53,7 +53,14 @@ def advanced_search(request):
     serializer = NovelSerializer(novels, many=True, context={'request': request}) 
     # custom view nên cần request để biết base URL của server 
     return Response({"results": serializer.data})
-
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def FindUploader(request,uploader):
+    novels = Novel.objects.filter(uploader=uploader)
+    serializer = NovelSerializer(novels, many=True)
+    if(novels.exists()):
+        return Response({"post":serializer.data},status=status.HTTP_200_OK)
+    return Response({"post":[]},status=status.HTTP_204_NO_CONTENT)
 class NovelViewSet(viewsets.ModelViewSet):
     queryset = Novel.objects.all()
     serializer_class = NovelSerializer
