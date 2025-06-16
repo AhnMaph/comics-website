@@ -4,10 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Novel } from '../../types/novel/novelDetails';
 import { updateLike, updateFavorite } from "../../actions/userAction";
 import { NovelChapter } from '../../types/novel/novelChapters';
-import { fetchStoryDetails, fetchStoryChapters, fetchNovel } from '../../actions/novelAction'; 
-import { faEye, faCommentDots, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { fetchStoryDetails, fetchStoryChapters} from '../../actions/novelAction'; 
+import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
+import { Rows } from "lucide-react";
 
 // Component: Thông tin truyện
 function NovelInfo({
@@ -36,8 +37,10 @@ function NovelInfo({
       {/* Thông tin */}
       <div style={{ flex: 1 }}>
         <h1 className="mb-2">{story.title}</h1>
+        
         <p>
           <FontAwesomeIcon icon={faEye} className="w-3.5 h-3.5" /> {story.numViews}
+          <FontAwesomeIcon icon={faThumbsUp} className="w-3.5 h-3.5 pl-5.5" /> {story.numLikes}
           <FontAwesomeIcon icon={faHeart} className="w-3.5 h-3.5 pl-5.5" /> {story.numFavorites}
           <FontAwesomeIcon icon={faCommentDots} className="w-3.5 h-3.5 pl-5.5" /> {story.numComments}
         </p>
@@ -136,16 +139,11 @@ function Description({ description }: { description: string }) {
 }
 
 // Component: Danh sách chương với nút Load More
-function ChapterList({
-  chapters,
-  visible,
-  onLoadMore,
-}: {
-  chapters: NovelChapter[];
-  visible: number;
-  onLoadMore: () => void;
-}) {
+function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
   const rows = Array.from({ length: Math.ceil(chapters.length / 3) });
+  const canLoadMore = visible < rows.length;
+  const canHide = visible === rows.length && visible > 15
+
   return (
     <div className="flex-1 mt-10">
       <div className="bg-orange-300 text-center py-2">
@@ -155,7 +153,7 @@ function ChapterList({
         {rows.slice(0, visible).map((_, rowIndex) => (
           <div key={rowIndex} className="py-2">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-center">
-              {chapters.slice(rowIndex * 3, rowIndex * 3 + 3).map((chapter, colIndex) => (
+              {chapters.slice(rowIndex * 3, rowIndex * 3 + 3).map((chapter: NovelChapter, colIndex: number) => (
                 <div key={colIndex}>
                   <Link
                     to={`/novel/chapter/${chapter._id}`}
@@ -168,16 +166,23 @@ function ChapterList({
             </div>
           </div>
         ))}
-        {visible < rows.length && (
-          <div className="text-center mt-4">
+        <div className="text-center mt-4">
+          {canLoadMore ? (
             <button
               onClick={onLoadMore}
               className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
             >
               Xem thêm
             </button>
-          </div>
-        )}
+          ) : canHide ?(
+            <button
+              onClick={onCollapse}
+              className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+            >
+              Ẩn bớt
+            </button>
+          ): null}
+        </div>
       </div>
     </div>
   );
@@ -189,6 +194,9 @@ const StoryDetailPage = () => {
   const [story, setStory] = useState<Novel | null>(null);
   const [chapters, setChapters] = useState<NovelChapter[]>([]);
   const [visible, setVisible] = useState(15);
+  const handleCollapse = () => setVisible(15);
+  const totalRows = Math.ceil(chapters.length / 3);
+  const displayRows = Math.min(visible, totalRows)
 
   const firstChapter = chapters[0];
   const lastChapter = chapters[chapters.length - 1];
@@ -224,7 +232,7 @@ const StoryDetailPage = () => {
   }, [postId]);
 
   // Xử lý sự kiện
-  const handleLoadMore = () => setVisible(prev => prev + 10);
+  const handleLoadMore = () => setVisible(totalRows);
 
   const handleFavoriteClick = async () => {
     if (!postId) return;
@@ -277,7 +285,7 @@ const StoryDetailPage = () => {
           )}
         </div>
       </div>
-      <ChapterList chapters={chapters} visible={visible} onLoadMore={handleLoadMore} />
+      <ChapterList chapters={chapters} visible={displayRows} onLoadMore={handleLoadMore} onCollapse={handleCollapse} />
       <div className="flex-1 mt-10">
         <CommentList />
       </div>

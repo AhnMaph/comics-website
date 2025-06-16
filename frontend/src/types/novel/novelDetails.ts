@@ -14,6 +14,8 @@ export interface Novel {
     numFavorites: number;
     numChapters: number;
     numLikes: number;
+    averageRating: number;
+    numRatings: number;
     status: 'completed' | 'ongoing' | 'paused' | 'unverified';
 }
 

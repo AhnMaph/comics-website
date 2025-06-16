@@ -5,9 +5,10 @@ import { Manga } from '../../types/manga/mangaDetails';
 import { updateLike, updateFavorite } from "../../actions/userAction";
 import { MangaChapter } from '../../types/manga/mangaChapters';
 import { fetchMangaDetails, fetchMangaChapters} from '../../actions/mangaActions'; 
-import { faEye, faCommentDots, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
+import ReactStars from "react-rating-stars-component";
 // Component: Thông tin truyện
 function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any) {
   return (
@@ -25,6 +26,7 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
         <h1 className="mb-2">{story.title}</h1>
         <p>
           <FontAwesomeIcon icon={faEye} className="w-3.5 h-3.5" /> {story.numViews}
+          <FontAwesomeIcon icon={faThumbsUp} className="w-3.5 h-3.5 pl-5.5" /> {story.numLikes}
           <FontAwesomeIcon icon={faHeart} className="w-3.5 h-3.5 pl-5.5" /> {story.numFavorites}
           <FontAwesomeIcon icon={faCommentDots} className="w-3.5 h-3.5 pl-5.5" /> {story.numComments}
         </p>
@@ -109,8 +111,11 @@ function Description({ description }: { description: string }) {
   );
 }
 // Component: Danh sách chương
-function ChapterList({ chapters, visible, onLoadMore }: any) {
+function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
   const rows = Array.from({ length: Math.ceil(chapters.length / 3) });
+  const canLoadMore = visible < rows.length;
+  const canHide = visible === rows.length && visible > 15
+  
   return (
     <div className="flex-1 mt-10">
       <div className="bg-orange-300 text-center py-2">
@@ -130,16 +135,23 @@ function ChapterList({ chapters, visible, onLoadMore }: any) {
             </div>
           </div>
         ))}
-        {visible < rows.length && (
-          <div className="text-center mt-4">
+        <div className="text-center mt-4">
+          {canLoadMore ? (
             <button
               onClick={onLoadMore}
               className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600"
             >
               Xem thêm
             </button>
-          </div>
-        )}
+          ) : canHide ?(
+            <button
+              onClick={onCollapse}
+              className="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
+            >
+              Ẩn bớt
+            </button>
+          ): null}
+        </div>
       </div>
     </div>
   );
@@ -151,6 +163,9 @@ const StoryDetailPage = () => {
   const [story, setStory] = useState<Manga | null>(null);
   const [chapters, setChapters] = useState<MangaChapter[]>([]);
   const [visible, setVisible] = useState(15);
+  const handleCollapse = () => setVisible(15);
+  const totalRows = Math.ceil(chapters.length / 3);
+  const displayRows = Math.min(visible, totalRows)
 
   useEffect(() => {
     setVisible(15); 
@@ -188,7 +203,7 @@ const StoryDetailPage = () => {
   const handleFavoriteClick = async () => {
     if (!postId) return;
     try {
-      const updated = await updateFavorite({ post_id: postId, type: "manga" });
+      const updated = await updateFavorite(postId, "manga");
       if (story) setStory({ ...story, numFavorites: updated.numFavorites });
     } catch (error) {
       console.error("Lỗi khi cập nhật số lượt lưu:", error);
@@ -238,7 +253,7 @@ const StoryDetailPage = () => {
           )}
         </div>
       </div>
-      <ChapterList chapters={chapters} visible={visible} onLoadMore={handleLoadMore} />
+      <ChapterList chapters={chapters} visible={displayRows} onLoadMore={handleLoadMore} onCollapse={handleCollapse}/>
       <div className="flex-1 mt-10">
         <CommentList />
       </div>

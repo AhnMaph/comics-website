@@ -54,7 +54,7 @@ export default function LoginScreen() {
   }
 
   return (
-    <div className="bg-orange-800 text-white font-Nurito flex items-center justify-center min-h-screen px-4">
+    <div className="bg-orange-200 text-white font-Nurito flex items-center justify-center min-h-screen px-4">
       <div className="bg-white flex flex-col md:flex-row items-center justify-center rounded-2xl shadow-2xl w-full max-w-4xl">
         {/* Left: Image */}
         <div className="hidden md:flex md:w-2/5 items-center justify-center">
@@ -82,7 +82,7 @@ export default function LoginScreen() {
                 autoComplete="on"
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}
-                className="p-2 border rounded w-full text-black"
+                className="p-2 border rounded w-full text-white"
                 placeholder="Nhập username"
                 required
               />

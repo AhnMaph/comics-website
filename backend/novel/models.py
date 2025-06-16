@@ -30,6 +30,8 @@ class Novel(models.Model):
     numFavorites = models.IntegerField(default=0)
     numChapters = models.IntegerField(default=0)
     numLikes = models.IntegerField(default=0)
+    averageRating = models.FloatField(default=0.0)
+    numRatings = models.IntegerField(default=0)
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,

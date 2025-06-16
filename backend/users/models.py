@@ -91,6 +91,8 @@ class Likes(models.Model):
     ) # tăng tốc độ truy xuất 
     def __str__(self):
         return f"{self.user}"
+    class Meta:
+        unique_together = ('user', 'post_id')
 
 class Notification(models.Model):
     NOTIFY_TYPE = [

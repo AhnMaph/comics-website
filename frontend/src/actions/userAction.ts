@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { login, logout } from '../types/user/userSlice';
-import { LikeProp, User, FavoriteProp } from '../types/user/User';
+import { LikeProp, User} from '../types/user/User';
 import { Comment } from '../types/user/User';
 import store from '../store';
 import axiosAuth from './apiClient';
@@ -132,12 +132,19 @@ export const autoLogin = async () => {
         await fetchProfile();
         
         
-    } catch (error) {
+    } catch (error: any) {
         console.error("Tự động đăng nhập thất bại:", error);
+        if (error.response && error.response.status === 401)
+        {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
+
+          window.location.href = "http://localhost:5174/auth/login";
+        }
     }
 };
 
-
+  
 interface CommentsOptions {
   chapter_type?: string;
   chapter_id?: string;
@@ -191,7 +198,7 @@ export const fetchComments = async (options: CommentsOptions): Promise<Comment[]
     console.log("Comments fetched:", response.data.results);
     return response.data.results || [];
 }
-
+ 
 
 export const updateLike  = async ({ post_id, type }: LikeProp) => {
   try{
