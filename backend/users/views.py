@@ -158,8 +158,8 @@ def MyProfile(request):
 @permission_classes([AllowAny])
 def OtherProfile(request, username):
     target_user = get_object_or_404(User, username=username)
-    if(target_user.is_superuser):
-        return Response({"detail": "Không có quyền truy cập."}, status=status.HTTP_404_NOT_FOUND)
+    # if(target_user.is_superuser):
+    #     return Response({"detail": "Không có quyền truy cập."}, status=status.HTTP_404_NOT_FOUND)
     serializers = UserSerializer(target_user)
     return Response(serializers.data, status=status.HTTP_200_OK)
 @api_view(["POST"])
@@ -184,17 +184,27 @@ def UpdateAvatar(request):
     if not user or not user.is_authenticated:
         return Response({"detail": "Bạn cần đăng nhập để cập nhật ảnh đại diện."}, status=status.HTTP_401_UNAUTHORIZED)
     
-    if user.is_superuser:
-        return Response({"detail": "Không có quyền truy cập."}, status=status.HTTP_403_FORBIDDEN)
+    # if user.is_superuser:
+    #     return Response({"detail": "Không có quyền truy cập."}, status=status.HTTP_403_FORBIDDEN)
     
     avatar = request.FILES.get("avatar", None)
     if not avatar:
         return Response({"detail": "Bạn cần cung cấp ảnh đại diện mới."}, status=status.HTTP_400_BAD_REQUEST)
 
     user.cover = avatar
+    print("User instance before save:")
+    print("user:", user)
+    print("user.pk:", user.pk)
+    print("user.id:", user.id)
+    print("user.username:", user.username) 
     user.save()
+    serializer = UserSerializer(user, context={'request': request})
 
-    return Response({"detail": "Cập nhật ảnh đại diện thành công.", "avatar": user.cover.url}, status=status.HTTP_200_OK)
+    return Response({
+        "detail": "Cập nhật ảnh đại diện thành công.",
+        "user": serializer.data
+    }, status=status.HTTP_200_OK)
+    # return Response({"detail": "Cập nhật ảnh đại diện thành công.", "avatar": user.cover.url}, status=status.HTTP_200_OK)
 @api_view(["POST"])
 @authentication_classes([CookieJWTAuthentication])
 def UpdateProfile(request):
@@ -208,9 +218,9 @@ def UpdateProfile(request):
 
     username = request.data.get("username")
     email = request.data.get("email")
-    password = request.data.get("password")
+    bio = request.data.get("bio")
 
-    if not (username or email or password):
+    if not (username or email):
         return Response({"detail": "Bạn cần cung cấp ít nhất một thông tin để cập nhật."}, status=status.HTTP_400_BAD_REQUEST)
 
     # Kiểm tra username/email đã tồn tại chưa (ngoại trừ bản thân)
@@ -223,12 +233,15 @@ def UpdateProfile(request):
         if User.objects.filter(email=email).exclude(id=user.id).exists():
             return Response({"detail": "Email đã tồn tại."}, status=status.HTTP_400_BAD_REQUEST)
         user.email = email
-
-    if password:
-        user.set_password(password)
-
+    if bio:
+        user.bio = bio   
     user.save()
-    return Response({"detail": "Cập nhật tài khoản thành công."}, status=status.HTTP_200_OK)
+    serializer = UserSerializer(user, context={'request': request})
+
+    return Response({
+        "detail": "Đổi thông tin thành công.",
+        "user": serializer.data
+    }, status=status.HTTP_200_OK)
 
 
 @api_view(["POST"])

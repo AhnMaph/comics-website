@@ -19,19 +19,18 @@ class UserSerializer(serializers.ModelSerializer):
         elif obj.cover and hasattr(obj.cover, "url"):
             return obj.cover.url  # fallback to relative URL
         return None
- 
 
 class FavoriteSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField(read_only=True)
+    # user = serializers.SerializerMethodField(read_only=True)
     post = serializers.SerializerMethodField(read_only=True)
     target_model = serializers.CharField(write_only=True)
     target_object_id = serializers.UUIDField(write_only=True)
     numFavorites = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Favorite
-        fields = ['user','post','target_model', 
+        fields = ['post','target_model', 
                   'target_object_id','numFavorites']
-        read_only_fields = ['user','post','numFavorites']
+        read_only_fields = ['post','numFavorites']
     def get_user(self,obj):
         user = obj.user
         serializers = UserSerializer(user,many=False,context=self.context)

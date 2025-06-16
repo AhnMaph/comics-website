@@ -52,7 +52,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ setIsOpen }) => {
                     <>
                         <div>
                             <div className="flex flex-col bg-white text-black text-left dark:bg-gray-600">
-                                <Link to="/profile" className="block py-3 text-black pl-3 dark:text-white dark:bg-gray-600 hover:text-white hover:bg-yellow-400 hover:border-yellow-500 hover:rounded-lg transition duration-300">
+                                <Link to="/profile/me" className="block py-3 text-black pl-3 dark:text-white dark:bg-gray-600 hover:text-white hover:bg-yellow-400 hover:border-yellow-500 hover:rounded-lg transition duration-300">
                                 Hồ sơ
                                 </Link>
                                 <button onClick={handleLogout} className="block py-3 text-black pl-3 dark:text-white dark:bg-gray-600 hover:text-white hover:bg-yellow-400 hover:border-yellow-500 hover:rounded-lg transition duration-300">

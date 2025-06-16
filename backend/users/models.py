@@ -12,6 +12,22 @@ class CustomUser(AbstractUser):
     bio = models.TextField(blank=True, null=True, default ="Tiểu sử của bạn ở đây")
     def __str__(self):
         return self.username
+    def save(self, *args, **kwargs):
+        print("----[SAVE CALLED]----")
+        print("self.pk:", self.pk)
+        print("self.cover:", self.cover)
+        print("type(self.cover):", type(self.cover))
+        try:
+            old_user = CustomUser.objects.get(pk=self.pk)
+            if old_user.cover and self.cover != old_user.cover:
+                # Kiểm tra nếu ảnh cũ khác ảnh mặc định thì xóa
+                default_path = os.path.join('covers', 'default.jpg')
+                if old_user.cover.name != default_path and os.path.isfile(old_user.cover.path):
+                    os.remove(old_user.cover.path)
+        except CustomUser.DoesNotExist:
+            pass  # User mới, không cần kiểm tra ảnh cũ
+
+        super().save(*args, **kwargs)
 
 class Favorite(models.Model):
     FAVORITE_TYPE = [

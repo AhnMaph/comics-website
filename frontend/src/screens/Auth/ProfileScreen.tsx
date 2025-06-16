@@ -14,10 +14,10 @@ import {
   Eye,
   MessageCircle
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {selectUser } from "../../types/user/userSlice";
 import {useSelector } from "react-redux";
-import {getFavorite} from '../../actions/userAction';
+import {fetchProfile, getFavorite, updateProfile} from '../../actions/userAction';
 import { Novel } from '../../types/novel/novelDetails';
 import store from '../../store';
 import { updateAvatar } from '../../actions/userAction';
@@ -28,17 +28,16 @@ const ProfileScreen = () => {
   const [showAvatarUpload, setShowAvatarUpload] = useState(false);
   const [favNovel, setFavNovel] = useState<Novel[]>([]);
   const [upNovel, setUpNovel] = useState<Novel[]>([]);  
+  const [target,setTarget] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const baseInfo = useSelector(selectUser);
   const baseURL = import.meta.env.VITE_ADMIN_URL;
-  if(!baseInfo?.isLogin){
-    return <p> Chưa Đăng nhập hoặc Đăng ký</p>
-  }
+  const { username } = useParams();
   const [userInfo, setUserInfo] = useState({
     name: baseInfo?.name,
     email: baseInfo?.email,
     bio: baseInfo?.bio,
-    joinDate: baseInfo.date_joined,
+    joinDate: baseInfo?.date_joined || "2024-01-01",
     avatar: baseInfo?.cover,
     isUploader: true,
     stats: {
@@ -48,38 +47,62 @@ const ProfileScreen = () => {
       following: 0
     }
   });
-   useEffect(() => {
+
+  useEffect(() => {
+  // Đảm bảo CHỈ gán 1 lần nếu target chưa có
+      if (!target) {
+        if (username) {
+          setTarget(username);
+        } else if (baseInfo?.isLogin) {
+          setTarget(baseInfo.name);
+        }
+      }
+    }, [baseInfo, username, target]);
+    //   if (!target) {
+    //   return <p>Chưa Đăng nhập hoặc Đăng ký</p>;
+    // }
+    useEffect(() => {
       const fetchData = async () => {
-        const res_fav = await getFavorite({ username: baseInfo.name, type:"novel" });
+        if (!target) return;
+        const user = await fetchProfile(target);
+        if(!user)
+          {
+            console.log("Không tìm thấy user");
+            return;
+          } 
+        const res_fav = await getFavorite({ username: user.username, type:"novel" });
         const favCount = res_fav ? res_fav.length : 0;
         setFavNovel([]);
+        console.log("Favorite item:", favCount);
         for (let i = 0; i < favCount; i++) {
             const newNovel = res_fav[i].post;
             setFavNovel(prev => {
                 if (prev === null) return [newNovel]; // nếu ban đầu là null
                 return [...prev, newNovel]; // thêm vào cuối mảng
               });
-            console.log("Favorite post item:", newNovel.title); // ví dụ truy cập title
+            
             // xử lý gì đó với từng item
         }
-        const res_uploader = await getUploader(baseInfo.id);
+        const res_uploader = await getUploader(user.id.toString());
         const upCount = res_uploader ? res_uploader.length : 0;
         setUpNovel([]);
+        console.log("Favorite post item:", upCount);
+        
         for (let i = 0; i < upCount; i++) {
             const newNovel = res_uploader[i];
             setUpNovel(prev => {
                 if (prev === null) return [newNovel]; // nếu ban đầu là null
                 return [...prev, newNovel]; // thêm vào cuối mảng
               });
-            console.log("Favorite post item:", newNovel.title); // ví dụ truy cập title
+            // console.log("Favorite post item:", newNovel.title); // ví dụ truy cập title
             // xử lý gì đó với từng item
         }
         setUserInfo({
-            name: baseInfo?.name,
-            email: baseInfo?.email,
-            bio: baseInfo?.bio,
-            joinDate: baseInfo.date_joined,
-            avatar: baseInfo?.cover,
+            name: user?.username,
+            email: user?.email,
+            bio: user?.bio,
+            joinDate: user?.date_joined || "2024-01-01",
+            avatar: user?.cover,
             isUploader: true,
             stats: {
               bookmarks: favCount,
@@ -92,29 +115,22 @@ const ProfileScreen = () => {
       };
       fetchData();
       
-    }, [baseInfo]);
+    }, [target]);
+    
   
 
   const [editForm, setEditForm] = useState({ ...userInfo });
+  const handleSave = async () => {
+    try {
+      const res = await updateProfile(editForm.email, editForm.name, editForm.bio);
+      console.log("Cập nhật thành công:", res);
+    } catch (err) {
+      console.error("Lỗi khi cập nhật:", err);
+    }
 
-  // Mock data
-  const bookmarkedComics = [
-    { id: 1, title: 'The Amazing Spider-Man', cover: '/api/placeholder/150/200', author: 'Stan Lee', rating: 4.8 },
-    { id: 2, title: 'Attack on Titan', cover: '/api/placeholder/150/200', author: 'Hajime Isayama', rating: 4.9 },
-    { id: 3, title: 'Wonder Woman', cover: '/api/placeholder/150/200', author: 'George Pérez', rating: 4.7 },
-    { id: 4, title: 'One Piece', cover: '/api/placeholder/150/200', author: 'Eiichiro Oda', rating: 4.9 },
-  ];
-
-  const uploadedComics = [
-    { id: 1, title: 'City Tales', cover: '/api/placeholder/150/200', views: 1250, likes: 89, comments: 23 },
-    { id: 2, title: 'Neon Dreams', cover: '/api/placeholder/150/200', views: 2100, likes: 156, comments: 45 },
-    { id: 3, title: 'Forest Spirits', cover: '/api/placeholder/150/200', views: 890, likes: 67, comments: 12 },
-  ];
-
-  const handleSave = () => {
-    setUserInfo({ ...editForm });
     setIsEditing(false);
   };
+
 
   const handleCancel = () => {
     setEditForm({ ...userInfo });
@@ -221,18 +237,19 @@ const ProfileScreen = () => {
         {/* Header Section */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-            <div className="relative">
+            <div className="relative group">
               <img 
-                src={userInfo.avatar} 
+                src={baseURL +"/" + userInfo.avatar} 
                 alt="Profile Avatar"
                 className="w-24 h-24 rounded-full object-cover border-4 border-blue-100 cursor-pointer transition-opacity group-hover:opacity-80"
-                onClick={handleAvatarClick}
+                onClick={target===baseInfo?.name ? handleAvatarClick : undefined}
+                
               />
               <div className="absolute -bottom-1 -right-1 bg-green-500 w-6 h-6 rounded-full border-2 border-white"></div>
               {/* Avatar Upload Overlay */}
               <div 
-                onClick={handleAvatarClick}
-                className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                onClick={target===baseInfo?.name ? handleAvatarClick : undefined}
+                className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
               >
                 <Camera className="text-white" size={24} />
               </div>
@@ -300,6 +317,7 @@ const ProfileScreen = () => {
               ) : (
                 <button
                   onClick={() => setIsEditing(true)}
+                  hidden={target !== baseInfo?.name}
                   className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors"
                 >
                   <Edit3 size={18} />
@@ -336,7 +354,7 @@ const ProfileScreen = () => {
           <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold">Change Avatar</h3>
+                <h3 className="text-lg font-semibold">Đổi ảnh đại diện</h3>
                 <button
                   onClick={() => setShowAvatarUpload(false)}
                   className="text-gray-500 hover:text-gray-700"
@@ -347,7 +365,7 @@ const ProfileScreen = () => {
               
               <div className="text-center mb-6">
                 <img 
-                  src={userInfo.avatar} 
+                  src={baseURL+"/"+userInfo.avatar} 
                   alt="Current Avatar"
                   className="w-32 h-32 rounded-full object-cover border-4 border-gray-200 mx-auto mb-4"
                 />
@@ -443,7 +461,8 @@ const ProfileScreen = () => {
             <div>
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Truyện đã đăng</h2>
-                <button className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                <button hidden={target !== baseInfo?.name} className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                  
                   <Upload size={18} />
                   Đăng Truyện Mới
                 </button>

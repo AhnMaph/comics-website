@@ -79,6 +79,7 @@ export const fetchProfile = async (username?:string): Promise<User | null> => {
             headers: { 'Content-Type': 'application/json' },
             withCredentials:true,
         }
+        console.log("Target: ",username);
         var response = null, user = null;
         if(username) {
             response = await axios.get(
@@ -255,7 +256,7 @@ export const updateAvatar = async (formData: FormData) => {
     headers: { "Content-Type": "multipart/form-data" },
     withCredentials: true,
   });
-  console.log("Update avatar:", res.data.avatar);
+  console.log("Update avatar:", res.data);
   const userInfo = store.getState().user.user;
     if(userInfo)
         store.dispatch(
@@ -263,7 +264,7 @@ export const updateAvatar = async (formData: FormData) => {
                 id: userInfo.id,
                 email:userInfo.email,
                 name: userInfo.name,
-                cover: `${baseURL}${res.data.avatar}`,
+                cover: `${res.data.user.cover}`,
                 isLogin: true,
                 date_joined: userInfo.date_joined,
                 bio: userInfo.bio,
@@ -271,27 +272,30 @@ export const updateAvatar = async (formData: FormData) => {
         );
   return res;
 };
-export const updateProfile = async (user:User) => {
+export const updateProfile = async (email:string | undefined, username:string | undefined, bio:string | undefined) => {
   try{
     const config ={
     headers: { "Content-Type": "application/json" },
     withCredentials: true,
   }
     const res = await axiosAuth.post(`${baseURL}/api/me/update/`, {
-      email: user.email,
-      username: user.username,
-      password: user.password,
+      email: email,
+      username: username,
+      bio:bio,
     }, config);
-    const dispatch = useDispatch();
-     dispatch(
+    const updateUser = res.data.user;
+    console.log("Update profile: ",updateUser); 
+    const userInfo = store.getState().user.user;
+    if(userInfo)
+        store.dispatch(
             login({
-                id: String(user.id),
-                email:user.email,
-                name: user.username,
-                cover: `${baseURL}${user.cover}`,
+                id: userInfo.id,
+                email:updateUser.email,
+                name: updateUser.username,
+                cover: userInfo.cover,
                 isLogin: true,
-                date_joined: user.date_joined || new Date().toISOString(),
-                bio: user.bio,
+                date_joined: userInfo.date_joined,
+                bio: updateUser.bio,
             })
         );
     console.log("Update profile:", res);

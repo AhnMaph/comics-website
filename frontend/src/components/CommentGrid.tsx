@@ -21,7 +21,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
       <textarea
-        className="flex-grow resize-none border border-orange-500 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-orange-400 transition min-h-[80px] max-h-40 w-full sm:w-auto"
+        className="flex-grow resize-none border text-black border-orange-500 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-orange-400 transition min-h-[80px] max-h-40 w-full sm:w-auto"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Viết bình luận của bạn..."
