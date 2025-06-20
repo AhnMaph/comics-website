@@ -8,6 +8,7 @@ import { fetchStoryDetails, fetchStoryChapters} from '../../actions/novelAction'
 import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
+import StarRating from "../../components/StarRating";
 import { Rows } from "lucide-react";
 
 // Component: Thông tin truyện
@@ -37,6 +38,14 @@ function NovelInfo({
       {/* Thông tin */}
       <div style={{ flex: 1 }}>
         <h1 className="mb-2">{story.title}</h1>
+        <StarRating
+          storyId={story._id}
+          initialRating={story.averageRating}
+          totalVotes={story.numRatings}
+          type={"novel"} 
+        />
+        
+
         
         <p>
           <FontAwesomeIcon icon={faEye} className="w-3.5 h-3.5" /> {story.numViews}

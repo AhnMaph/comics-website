@@ -108,3 +108,27 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.message}"
+
+
+class Voting(models.Model):
+    VOTING_PLACES = [
+        ('novel', 'Tiểu thuyết'),
+        ('manga', 'Manga'),
+        ('audio', 'Audio'),
+        ('forum', 'Diễn đàn'), 
+    ]
+    _id = models.UUIDField(default=uuid.uuid4,  unique=True,
+                           primary_key=True, editable=False)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post_id = models.CharField(blank=True, max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField(default=0)  
+    type = models.CharField(
+        max_length=20,
+        choices=VOTING_PLACES,
+        default='novel'
+    ) # tăng tốc độ truy xuất 
+    def __str__(self):
+        return f"{self.user}"
+    class Meta:
+        unique_together = ('user', 'post_id')

@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { useDispatch } from 'react-redux';
 import { login, logout } from '../types/user/userSlice';
-import { LikeProp, User} from '../types/user/User';
+import { LikeProp, User, VoteProp} from '../types/user/User';
 import { Comment } from '../types/user/User';
 import store from '../store';
 import axiosAuth from './apiClient';
@@ -212,6 +212,7 @@ export const updateLike  = async ({ post_id, type }: LikeProp) => {
         },
         config
       );
+      console.log("Like update: ",`${baseURL}/api/like/`);
       console.log("Like update: ",response.data);
       return response.data;
   }
@@ -320,3 +321,29 @@ export const deleteProfile = async () => {
   });
   return res.data;
 };
+
+export const updateVoting = async ({post_id, rating, type}: VoteProp) => {
+  try 
+  {
+    const config = 
+    {
+      withCredentials: true,
+    }
+    const response = await axiosAuth.post(`${baseURL}/api/vote/`, 
+      {
+        post_id: post_id,
+        rating: rating,
+        type: type,
+      },
+      config
+    );
+
+    console.log("Vote update: ", response.data);
+    return response.data;
+  }
+  catch (error)
+  {
+    console.error("Error updating vote:", error);
+    throw error;
+  }
+}

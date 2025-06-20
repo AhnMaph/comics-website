@@ -17,6 +17,8 @@ urlpatterns = [
     path('favorite/profile/<str:model>/<str:username>/',FindFavorite, name='find_favorite'),
     path('favorite/<str:model>/<uuid:object_id>/', FavoriteToggleView.as_view(), name='favorite-toggle'),
     path('like/',ToggleLike,name='like_post'),
+    path('vote/<uuid:post_id>', VotingView.as_view(), name='vote_post'),
+    path('vote/', VotingView.as_view()),
     path('refresh/',RefreshTokenView,name='token_refresh'),
     path('login/', LoginUser,name='token_obtain_pair'),
     path('register/',RegisterUser ,name='register'),

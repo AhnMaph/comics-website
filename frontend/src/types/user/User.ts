@@ -21,6 +21,13 @@ export interface LikeProp{
     post_id: string;
     type: typeContent['type'];
 }
+
+export interface VoteProp{
+    post_id: string;
+    rating: number;
+    type: typeContent['type'];
+}
+
 export interface FavoriteProp{
     user_id: string;
     post_id: string;

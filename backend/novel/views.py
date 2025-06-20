@@ -83,7 +83,3 @@ class NovelViewSet(viewsets.ModelViewSet):
                 output_field=IntegerField()
             )
         return queryset.filter(query).annotate(score=relevance).order_by('-score')
-    
-
-
-

@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny,IsAuthenticated,IsAuthenticatedOrReadOnly
 from rest_framework.request import Request
 from django.contrib.auth import authenticate
-from .serializers import *
-from .models import Favorite
+from .serializers import * 
+from .models import Favorite, Voting
 from rest_framework import status
 from django.contrib.auth.hashers import make_password
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -19,6 +19,7 @@ import time
 from rest_framework import permissions, viewsets
 from django.contrib.contenttypes.models import ContentType
 from .models import Comments
+from .models import Voting
 from .serializers import CommentsSerializer
 from users.authentication import CookieJWTAuthentication
 from rest_framework.decorators import authentication_classes
@@ -482,3 +483,75 @@ class NotificationDeleteViewSet():
 
         # Xoá thông báo
         instance.delete()
+
+class VotingView(APIView):
+    authentication_classes = [CookieJWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        type = request.data.get("type")
+        post_id = request.data.get("post_id")
+        score = int(request.data.get("rating", 0))
+
+        if not post_id or not score or score < 1 or score > 5:
+            return Response({"error": "Thiếu dữ liệu hoặc điểm không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if type == "novel":
+            post = get_object_or_404(Novel, _id=post_id)
+        elif type == "manga":
+            post = get_object_or_404(Manga, _id=post_id)
+        else:
+            return Response({"error": "Loại bài viết không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
+
+        vote, created = Voting.objects.get_or_create(
+            user=user,
+            post_id=post_id,
+            type=type,
+            defaults={"score": score}
+        )
+
+        if not created:
+            vote.score = score
+            vote.save(update_fields=["score"])
+
+        all_votes = Voting.objects.filter(post_id=post_id, type=type)
+        total_votes = sum(v.score for v in all_votes)
+        avg_score = round(total_votes / all_votes.count(), 2) if all_votes.exists() else 0
+
+        post.averageRating = avg_score
+        post.numRatings = all_votes.count()
+        post.save(update_fields=["averageRating", "numRatings"])
+
+        return Response({
+            "status": "voted",
+            "avgRating": post.averageRating,
+            "ratingCount": post.numRatings,
+        }, status=status.HTTP_200_OK)
+
+    def get(self, request, post_id):
+        type = request.query_params.get("type")  # ví dụ: ?type=novel
+
+        if not type:
+            return Response({"error": "Thiếu type"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Lấy post
+        if type == "novel":
+            post = get_object_or_404(Novel, _id=post_id)
+        elif type == "manga":
+            post = get_object_or_404(Manga, _id=post_id)
+        else:
+            return Response({"error": "Type không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Lấy điểm user đã vote (nếu có)
+        try:
+            vote = Voting.objects.get(user=request.user, post_id=post_id, type=type)
+            user_score = vote.score
+        except Voting.DoesNotExist:
+            user_score = None
+
+        return Response({
+            "averageRating": post.averageRating,
+            "numRatings": post.numRatings,
+            "userVote": user_score,
+        }, status=status.HTTP_200_OK)
