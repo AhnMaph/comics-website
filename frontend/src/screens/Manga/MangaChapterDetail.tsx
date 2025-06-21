@@ -67,22 +67,25 @@ const ChapterMangaDetailPage = () => {
         {chapter.title}
       </h1>
 
-      <div className="flex flex-col gap-2 sm:gap-4 items-center mb-6 sm:mb-8">
+      <div className="flex flex-col items-center sm:mb-8">
         {chapter.images && chapter.images.length > 0 ? (
           chapter.images.map((img: any, index: number) => (
             <img
               key={index}
-              src={`${baseUrl}/${img.image}`}
+              src={img.image}
               alt={`Trang ${img.page}`}
-              className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl rounded-lg shadow-lg border border-orange-100"
-              style={{ background: "#fff" }}
+              className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl rounded-none shadow-none border-none m-0 p-0"
+              style={{ background: "#fff", display: 'block' }}
               loading="lazy"
             />
           ))
         ) : (
-          <div className="text-center text-gray-400 italic">Chưa có ảnh cho chương này.</div>
+          <div className="text-center text-gray-400 italic">
+            Chưa có ảnh cho chương này.
+          </div>
         )}
       </div>
+
 
       <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 mt-6 mb-6 sm:mt-8 sm:mb-8 overflow-x-auto">
         <button

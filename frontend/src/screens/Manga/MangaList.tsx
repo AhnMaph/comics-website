@@ -4,44 +4,26 @@ import { fetchManga } from "../../actions/mangaActions";
 import ListGrid from "../../components/ListGrid";
 
 const MangaList = () => {
-  // cache dữ liệu manga theo page
-  const [mangasCache, setMangasCache] = useState<Record<number, Manga[]>>({});
+  const [mangas, setMangas] = useState<Manga[]>([]);
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // tải dữ liệu khi page thay đổi nếu chưa có trong cache
   useEffect(() => {
-    const loadMangas = async () => {
-      if (mangasCache[page]) {
-        // đã có cache, không fetch nữa
-        return;
-      }
+    const loadNovels = async () => {
       setIsLoading(true);
-      try {
-        const data = await fetchManga(page);
-        setMangasCache(prev => ({ ...prev, [page]: data }));
-      } catch (error) {
-        console.error("Lỗi tải truyện:", error);
-      }
+      const data = await fetchManga(page);
+      setMangas(data);
       setIsLoading(false);
     };
-
-    loadMangas();
-   
+    loadNovels();
   }, [page]);
 
-  
-
-  // Lấy dữ liệu để hiển thị của trang hiện tại từ cache
-  const mangas = mangasCache[page] || [];
-
-  // các hàm chuyển trang
   const handlePrevPage = () => {
     if (page > 1) setPage(page - 1);
   };
 
   const handleNextPage = () => {
-    if (mangas.length <= 0) setPage(page + 1);
+    if(mangas.length!==0)setPage(page + 1);
   };
 
   return (
@@ -66,7 +48,7 @@ const MangaList = () => {
         <span className="text-base font-semibold text-gray-700">
           <span className="text-blue-600">Trang {page}</span>
         </span>
-
+ 
         <button
           onClick={handleNextPage}
           className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-300 bg-white shadow-sm text-gray-700 hover:bg-gray-100 transition"

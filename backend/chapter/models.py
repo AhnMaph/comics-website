@@ -18,25 +18,25 @@ class MangaChapter(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"{self.manga.title}-{self.title} - Chapter {self.chapter_number}"
-    def save(self, *args, **kwargs):
-        is_new = self._state.adding
-        if not self.pk:  # Chỉ chạy khi tạo mới, không chạy khi update
-            last_chapter = MangaChapter.objects.filter(manga=self.manga).order_by('-chapter_number').first()
-            if(last_chapter):
-                if(last_chapter.chapter_number):
-                    self.chapter_number = (last_chapter.chapter_number + 1) if last_chapter else 1
-                if(self.manga.numChapters):
-                    self.manga.numChapters += 1
-                self.manga.save()
-        super().save(*args, **kwargs)
-        if is_new:
-            from notify.utils import sendNotify
-            sendNotify(self)
+    # def save(self, *args, **kwargs):
+    #     is_new = self._state.adding
+    #     if not self.pk:  # Chỉ chạy khi tạo mới, không chạy khi update
+    #         last_chapter = MangaChapter.objects.filter(manga=self.manga).order_by('-chapter_number').first()
+    #         if(last_chapter):
+    #             if(last_chapter.chapter_number):
+    #                 self.chapter_number = (last_chapter.chapter_number + 1) if last_chapter else 1
+    #             if(self.manga.numChapters):
+    #                 self.manga.numChapters += 1
+    #             self.manga.save()
+    #     super().save(*args, **kwargs)
+    #     if is_new:
+    #         from notify.utils import sendNotify
+    #         sendNotify(self)
 class MangaChapterImage(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     chapter = models.ForeignKey(MangaChapter, related_name="images", on_delete=models.CASCADE)
-    image = models.ImageField(default='',upload_to=chapter_image_upload_path)
+    image = models.URLField(max_length=500, default='')
     page = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):

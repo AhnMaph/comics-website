@@ -9,7 +9,20 @@ export const fetchMangaDetails = async (mangaid: string) => {
       const response = await axios.get(`${baseURL}/api/manga/${mangaid}`);
       console.log("manga details:");
       console.log(response.data);
-      return response.data;
+      const mangaData = response.data;
+      let coverImage = mangaData.cover_image || '';
+      const prefixToRemove = 'http://localhost:8000/media/https%3A/';
+      if (coverImage.startsWith(prefixToRemove)) {
+        coverImage = coverImage.replace(prefixToRemove, '');
+      }
+      if (coverImage && !coverImage.startsWith('https://')) {
+        coverImage = `https://${coverImage}`;
+      }
+      return {
+        ...mangaData,
+        cover_image: coverImage,
+      };
+      
     }
     catch (error) {
         console.error("Error fetching manga details:", error);
@@ -35,8 +48,7 @@ export const fetchMangaChapters = async (mangaid: string) => {
 export const fetchMangaChapterDetail = async (chapterId: string) => {
   try {
     const response = await axios.get(`${baseURL}/api/manga/chapter/${chapterId}`);
-    console.log("chapter details:");
-    console.log(response.data);
+    console.log("Raw response data:", response.data);
 
     const raw = response.data;
     const chapter: MangaChapter = {
@@ -45,31 +57,62 @@ export const fetchMangaChapterDetail = async (chapterId: string) => {
       title: raw.title,
       chapter_number: raw.chapter_number,
       created_at: raw.created_at,
-      images: raw.chapterImages, 
+      images: raw.chapterImages.map((img: any) => {
+        return {
+          ...img,
+          image: img.image, // Giữ nguyên URL từ Cloudinary
+        };
+      }),
       previousChapterId: raw.previousChapterId ?? null,
       nextChapterId: raw.nextChapterId ?? null,
     };
     return chapter;
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error fetching chapter detail:", error);
     throw error;
   }
 };
 
 const API_BASE_URL = `${baseURL}/api/manga/`
-export const fetchManga = async (page=1): Promise<Manga[]> => {
-    try {
-            const response = await axios.get(API_BASE_URL+"?page="+page);
-            console.log(response)
-            console.log(API_BASE_URL+"?page="+page)
-            const data = await response.data
-            return Array.isArray(data.results) ? data.results : [];
-        } catch (error) {
-            console.error("Failed to fetch novel:", error);
-            return [];
-        }
+export const fetchManga = async (page = 1): Promise<Manga[]> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}?page=${page}`);
+    console.log(`${baseURL}/api/manga/?page=${page}`);
+    const data = await response.json();
+    console.log(data);
+
+    // Xử lý dữ liệu để lấy cover_image và làm sạch URL
+    const processedData = Array.isArray(data.results)
+      ? data.results.map((manga: any) => {
+          // Lấy giá trị cover_image
+          let coverImage = manga.cover_image || '';
+
+          // Loại bỏ tiền tố http://localhost:8000/media/https%3A/ nếu có
+          const prefixToRemove = 'http://localhost:8000/media/https%3A/';
+          if (coverImage.startsWith(prefixToRemove)) {
+            coverImage = coverImage.replace(prefixToRemove, '');
+          }
+
+          // Đảm bảo URL bắt đầu bằng https://
+          if (coverImage && !coverImage.startsWith('https://')) {
+            coverImage = `https://${coverImage}`;
+          }
+
+          // Trả về đối tượng manga với cover_image đã xử lý
+          return {
+            ...manga,
+            cover_image: coverImage,
+          };
+        })
+      : [];
+    console.log("processedData", processedData)
+    return processedData;
+  } catch (error) {
+    console.error("Failed to fetch manga:", error);
+    return [];
+  }
 };
+
 export const fetchAdvancedSearch = async (filters: AdvancedFilter): Promise<Manga[]> => {
     try {
         const query = new URLSearchParams();
