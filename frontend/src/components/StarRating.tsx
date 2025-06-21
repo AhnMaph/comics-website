@@ -59,20 +59,21 @@ const StarRating = ({
             <button
                 key={star}
                 onClick={() => ratingChanged(star)}
-                className="focus:outline-none"
+                className="focus:outline-none focus:ring-0 bg-transparent hover:bg-transparent p-0"
             >
                 <i
-                className={`fa-star text-2xl ${
+                className={`fa-star text-1xl ${
                     userRating >= star ? "fas text-yellow-400" : "far text-gray-400"
                 }`}
                 ></i>
             </button>
             ))}
-        </div>
-        <p className="text-sm text-gray-600 mt-1">
-            {(typeof averageRating === "number" ? averageRating.toFixed(1) : "0.0")} / 5 từ {votes} lượt đánh giá
-        </p>
+            <p className="text-sm text-gray-600 mt-1">
+                {(typeof averageRating === "number" ? averageRating.toFixed(1) : "0.0")} / 5 từ {votes} lượt đánh giá
+            </p>
 
+        </div>
+        
     </div>
   );
 };

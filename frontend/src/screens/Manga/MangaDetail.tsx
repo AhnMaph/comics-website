@@ -8,7 +8,7 @@ import { fetchMangaDetails, fetchMangaChapters} from '../../actions/mangaActions
 import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
-import ReactStars from "react-rating-stars-component";
+import StarRating from "../../components/StarRating";
 // Component: Thông tin truyện
 function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any) {
   return (
@@ -24,6 +24,12 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
       {/* Thông tin */}
       <div style={{ flex: 1 }}>
         <h1 className="mb-2">{story.title}</h1>
+        <StarRating
+          storyId={story._id}
+          initialRating={story.averageRating}
+          totalVotes={story.numRatings}
+          type={"manga"} 
+        />
         <p>
           <FontAwesomeIcon icon={faEye} className="w-3.5 h-3.5" /> {story.numViews}
           <FontAwesomeIcon icon={faThumbsUp} className="w-3.5 h-3.5 pl-5.5" /> {story.numLikes}

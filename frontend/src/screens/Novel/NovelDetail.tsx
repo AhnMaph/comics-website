@@ -9,7 +9,6 @@ import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-soli
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
 import StarRating from "../../components/StarRating";
-import { Rows } from "lucide-react";
 
 // Component: Thông tin truyện
 function NovelInfo({
@@ -45,7 +44,7 @@ function NovelInfo({
           type={"novel"} 
         />
         
-
+ 
         
         <p>
           <FontAwesomeIcon icon={faEye} className="w-3.5 h-3.5" /> {story.numViews}
