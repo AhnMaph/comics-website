@@ -83,3 +83,14 @@ class NovelViewSet(viewsets.ModelViewSet):
                 output_field=IntegerField()
             )
         return queryset.filter(query).annotate(score=relevance).order_by('-score')
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_novel(request):
+    data = request.data.copy()
+    data['uploader'] = request.user.id  # Gán uploader từ user đã đăng nhập
+
+    serializer = NovelSerializer(data=data)
+    if serializer.is_valid():
+        novel = serializer.save()
+        return Response(NovelSerializer(novel).data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

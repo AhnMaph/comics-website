@@ -3,9 +3,18 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { MangaChapter } from '../../types/manga/mangaChapters';
 import { fetchMangaChapterDetail, fetchMangaChapters } from '../../actions/mangaActions';
 import { CommentList } from '../../components/CommentGrid';
-
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const ChapterMangaDetailPage = () => {
-  const { chapterId } = useParams();
+  const { chapterId, postName } = useParams();
   const navigate = useNavigate();
   const [chapter, setChapter] = useState<MangaChapter & {
     previousChapterId?: string | null;
@@ -45,13 +54,13 @@ const ChapterMangaDetailPage = () => {
 
   const goToPrevious = () => {
     if (chapter?.previousChapterId) {
-      navigate(`/manga/chapter/${chapter.previousChapterId}`);
+      navigate(`/manga/${postName}/chapter/${toSlug(chapter.title)}/${chapter.previousChapterId}`);
     }
   };
 
   const goToNext = () => {
     if (chapter?.nextChapterId) {
-      navigate(`/manga/chapter/${chapter.nextChapterId}`);
+      navigate(`/manga/${postName}/chapter/${toSlug(chapter.title)}/${chapter.nextChapterId}`);
     }
   };
 
@@ -101,7 +110,7 @@ const ChapterMangaDetailPage = () => {
           <span className="hidden sm:inline">⬅ Chương trước</span>
         </button>
 
-        <Link to={`/manga/${chapter.manga}`} className="w-full sm:w-auto">
+        <Link to={`/manga/${toSlug(chapter.title)}/${chapter.manga}`} className="w-full sm:w-auto">
           <button className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 shadow">
             📚 Chi tiết
           </button>

@@ -10,6 +10,16 @@ import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
 import StarRating from "../../components/StarRating";
 // Component: Thông tin truyện
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any) {
   return (
     <div className="flex flex-col md:flex-row gap-5 items-start max-h-[600px]">
@@ -51,12 +61,12 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
         <p><span className="font-bold">Cập nhật:</span> {new Date(story.updated_at).toLocaleDateString('vi-VN')}</p>
         <div className="justify-between mt-2">
           {firstChapter && (
-            <Link to={`/manga/chapter/${firstChapter._id}`}>
+            <Link to={`/manga/${toSlug(story.title)}/chapter/${firstChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 px-2 mr-2 py-2 rounded">Đọc từ đầu</button>
             </Link>
           )}
           {lastChapter && (
-            <Link to={`/manga/chapter/${lastChapter._id}`}>
+            <Link to={`/manga/${toSlug(story.title)}/chapter/${lastChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 ml-2 px-2 py-2 rounded">Đọc mới nhất</button>
             </Link>
           )}
@@ -133,7 +143,7 @@ function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-center">
               {chapters.slice(rowIndex * 3, rowIndex * 3 + 3).map((chapter: MangaChapter, colIndex: number) => (
                 <div key={colIndex}>
-                  <Link to={`/manga/chapter/${chapter._id}`} className="text-neutral-700 hover:text-orange-500 dark:text-white">
+                  <Link to={`/manga/${toSlug(story.title)}/chapter/${chapter._id}`} className="text-neutral-700 hover:text-orange-500 dark:text-white">
                     Chương {chapter.chapter_number}
                   </Link>
                 </div>

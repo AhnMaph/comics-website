@@ -4,6 +4,16 @@ import {Link} from 'react-router-dom';
 interface SearchBarProps {
   isMobile: boolean;
 }
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const SearchBar:React.FC<SearchBarProps> = ({isMobile}) => {
   const [query,setQuery] = useState<string>('');
   const [results,setResults] = useState<any[]>([]);
@@ -46,7 +56,7 @@ const SearchBar:React.FC<SearchBarProps> = ({isMobile}) => {
           <ul className="search-results" aria-live="assertive">
             {results.map((item) => (
               <li key={item._id} className="search-result-item">
-                <Link to = {`/novel/${item._id}`} 
+                <Link to = {`/novel/${toSlug(item.title)}/${item._id}`} 
                     onClick={()=>{
                       setQuery('');
                       setResults([]);

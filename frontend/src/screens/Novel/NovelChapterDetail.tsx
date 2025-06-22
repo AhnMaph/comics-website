@@ -4,9 +4,18 @@ import { NovelChapter } from '../../types/novel/novelChapters';
 import { fetchChapterDetail, fetchStoryChapters } from '../../actions/novelAction';
 import AudioPlay from '../../components/AudioPlay';
 import { CommentList } from '../../components/CommentGrid';
-
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const ChapterDetailPage = () => {
-  const { chapterId } = useParams();
+  const { chapterId, postName } = useParams();
   const navigate = useNavigate();
   const [chapter, setChapter] = useState<(NovelChapter & {
     previousChapterId?: string | null;
@@ -48,13 +57,13 @@ const ChapterDetailPage = () => {
 
   const goToPrevious = () => {
     if (chapter?.previousChapterId) {
-      navigate(`/novel/chapter/${chapter.previousChapterId}`);
+      navigate(`/novel/${postName}/chapter/${toSlug(chapter.title)}/${chapter.previousChapterId}`);
     }
   };
 
   const goToNext = () => {
     if (chapter?.nextChapterId) {
-      navigate(`/novel/chapter/${chapter.nextChapterId}`);
+      navigate(`/novel/${postName}/chapter/${toSlug(chapter.title)}/${chapter.nextChapterId}`);
     }
   };
 
@@ -81,7 +90,7 @@ const ChapterDetailPage = () => {
         <span className="inline sm:hidden">&lt;</span>
         <span className="hidden sm:inline">⬅ Chương trước</span>
       </button>
-      <Link to={`/novel/${chapter.novel}`}>
+      <Link to={`/novel/${postName}/${chapter.novel}`}>
         <button className="px-6 py-3 rounded-full font-medium bg-blue-600 text-white hover:bg-blue-700 transition-all duration-200 shadow">
           📚 Chi tiết
         </button>

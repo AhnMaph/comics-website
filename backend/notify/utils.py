@@ -19,7 +19,7 @@ def sendNotify(chapter):
     else:
         return
     
-    favs = Favorite.objects.filter(post_id = item._id, type=_type)
+    favs = Favorite.objects.filter(object_id = item._id, type=_type)
 
     for fav in favs:
         Notification.objects.create(

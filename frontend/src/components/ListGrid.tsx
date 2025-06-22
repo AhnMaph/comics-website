@@ -4,7 +4,16 @@ import { Manga } from "../types/manga/mangaDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faCommentDots, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const ListGrid = ({ posts, type }: { posts: Novel[]|Manga[], type: string }) => {
   if (!posts.length)
     return <p className="text-gray-500">Không có truyện nào để hiển thị.</p>;
@@ -18,7 +27,7 @@ const ListGrid = ({ posts, type }: { posts: Novel[]|Manga[], type: string }) => 
           key={post._id}
           className="bg-white shadow-md p-3 rounded-lg flex flex-col justify-between min-h-[360px]"
         >
-          <Link to={`/${type}/${post._id}`} className="flex flex-col h-full">
+          <Link to={`/${type}/${toSlug(post.title)}/${post._id}`} className="flex flex-col h-full">
             <div className="w-full overflow-hidden rounded"
               style={{ aspectRatio: "5 / 7" }}>
               <img

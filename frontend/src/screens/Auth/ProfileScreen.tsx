@@ -22,6 +22,16 @@ import { Novel } from '../../types/novel/novelDetails';
 import store from '../../store';
 import { updateAvatar } from '../../actions/userAction';
 import { getUploader } from '../../actions/novelAction';
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const ProfileScreen = () => {
   const [activeTab, setActiveTab] = useState('info');
   const [isEditing, setIsEditing] = useState(false);
@@ -153,7 +163,7 @@ const ProfileScreen = () => {
   );
 
   const ComicCard = ({ comic, showStats = false }: { comic: any; showStats?: boolean }) => (
-    <Link to={`/novel/${comic._id}`}>
+    <Link to={`/novel/${toSlug(comic.title)}/${comic._id}`}>
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4" 
       style={{ aspectRatio: "5 / 7" }}>
       <img 
@@ -461,11 +471,12 @@ const ProfileScreen = () => {
             <div>
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Truyện đã đăng</h2>
+                <Link to = "/profile/me/upload">
                 <button hidden={target !== baseInfo?.name} className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
-                  
                   <Upload size={18} />
                   Đăng Truyện Mới
                 </button>
+                </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {upNovel.map(comic => (

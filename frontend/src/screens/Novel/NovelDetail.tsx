@@ -9,7 +9,16 @@ import { faEye, faCommentDots, faHeart, faThumbsUp} from "@fortawesome/free-soli
 import { CommentList } from "../../components/CommentGrid";
 import RecommendGrid from "../../components/RecommendGrid";
 import StarRating from "../../components/StarRating";
-
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 // Component: Thông tin truyện
 function NovelInfo({
   story,
@@ -76,12 +85,12 @@ function NovelInfo({
         <p><span className="Emphasize font-bold">Lượt favorites: </span> {story.numFavorites}</p>
         <div className="justify-between mt-2">
           {firstChapter && (
-            <Link to={`/novel/chapter/${firstChapter._id}`}>
+            <Link to={`/novel/${toSlug(story.title)}/chapter/${toSlug(firstChapter.title)}/${firstChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 px-2 mr-2 py-2 rounded">Đọc từ đầu</button>
             </Link>
           )}
           {lastChapter && (
-            <Link to={`/novel/chapter/${lastChapter._id}`}>
+            <Link to={`/novel/${toSlug(story.title)}/chapter/${toSlug(lastChapter.title)}/${lastChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 ml-0.5 px-2 py-2 rounded">Đọc mới nhất</button>
             </Link>
           )}
@@ -151,7 +160,7 @@ function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
   const rows = Array.from({ length: Math.ceil(chapters.length / 3) });
   const canLoadMore = visible < rows.length;
   const canHide = visible === rows.length && visible > 15
-
+  const { postName } = useParams();
   return (
     <div className="flex-1 mt-10">
       <div className="bg-orange-300 text-center py-2">
@@ -164,7 +173,7 @@ function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
               {chapters.slice(rowIndex * 3, rowIndex * 3 + 3).map((chapter: NovelChapter, colIndex: number) => (
                 <div key={colIndex}>
                   <Link
-                    to={`/novel/chapter/${chapter._id}`}
+                    to={`/novel/${postName}/chapter/${toSlug(chapter.title)}/${chapter._id}`}
                     className="text-neutral-700 hover:text-orange-500 dark:text-white"
                   >
                     Chương {chapter.chapter_number}

@@ -6,4 +6,8 @@ class NovelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Novel
         fields = '__all__'
-        read_only_fields = ['numViews', 'numFavorites','numChapters', 'numLikes', 'numComments']
+        read_only_fields = [
+            '_id', 'created_at', 'updated_at', 'uploader',
+            'numViews', 'numFavorites', 'numComments', 
+            'numChapters', 'numLikes', 'averageRating', 'numRatings'
+        ]

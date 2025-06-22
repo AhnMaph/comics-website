@@ -68,7 +68,7 @@ const StarRating = ({
                 ></i>
             </button>
             ))}
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-white mt-1">
                 {(typeof averageRating === "number" ? averageRating.toFixed(1) : "0.0")} / 5 từ {votes} lượt đánh giá
             </p>
 

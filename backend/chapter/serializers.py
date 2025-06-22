@@ -27,3 +27,4 @@ class NovelChapterDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = NovelChapter
         fields = '__all__'
+        read_only_fields = ['_id', 'created_at', 'chapter_number']        

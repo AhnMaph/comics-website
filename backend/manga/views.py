@@ -7,6 +7,9 @@ from .serializers import MangaSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny,IsAuthenticated,IsAdminUser
+from users.authentication import CookieJWTAuthentication
+from rest_framework.decorators import authentication_classes
+from rest_framework import status
 # get,delete,post
 class MangaViewSet(viewsets.ModelViewSet):
     queryset = Manga.objects.all()
@@ -34,6 +37,21 @@ class MangaViewSet(viewsets.ModelViewSet):
     #     if self.action in ['list', 'retrieve']:  # GET requests
     #         return [AllowAny()]
     #     return [IsAdminUser()]
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_manga(request):
+    data = request.data.copy()
+    data['uploader'] = request.user.id  # Gán uploader là user hiện tại
+
+    serializer = MangaSerializer(data=data)
+    if serializer.is_valid():
+        manga = serializer.save()
+        return Response(MangaSerializer(manga).data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def advanced_search(request):

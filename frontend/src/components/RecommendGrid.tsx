@@ -12,6 +12,16 @@ function getRandom(n: number, mangas: Manga[], excludeId?: string) {
   const shuffled = [...filtered].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, n);
 }
+function toSlug(str: string): string {
+  return str
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+}
 const RecommendGrid = ({ type, genre, currentId }: { type:string, genre: Genre|undefined, currentId:string }) => {
   if(type !== 'manga' && type !== 'novel') {
     return <p className="text-red-500">Loại truyện không hợp lệ.</p>;
@@ -44,7 +54,7 @@ const RecommendGrid = ({ type, genre, currentId }: { type:string, genre: Genre|u
         <div className="space-y-4">
           {results.map(post => (
             <Link
-              to={`/${type}/${post._id}`}
+              to={`/${type}/${toSlug(post.title)}/${post._id}`}
               key={post._id}
               className="flex items-center gap-3 hover:bg-sky-100 rounded p-2 transition"
             >

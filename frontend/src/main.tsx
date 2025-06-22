@@ -5,6 +5,7 @@ import App from "./App";
 import HomePage from "./screens/Home/HomePage";
 import Error from "./screens/Error";
 import UserProfilePage from "./screens/Auth/ProfileScreen";
+import UploadScreen from "./screens/Auth/UploadScreen";
 import MangaList from "./screens/Manga/MangaList.tsx";
 import NovelList from "./screens/Novel/NovelList.tsx";
 // import Forum from "./screens/Forum/Forum";
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: "/home", element: <HomePage /> },
       { path: "/profile/me", element: <UserProfilePage /> },
       { path: "/profiles/:username", element: <UserProfilePage /> },
+      { path: "/profile/me/upload", element: <UploadScreen/> },
       { path: "/manga", element: <MangaList /> },
       { path: "/novel", element: <NovelList /> },
       { path: "/leaderboard", element: <Leaderboard /> },
@@ -40,11 +42,11 @@ const router = createBrowserRouter([
       { path: "/genre", element: <Genre /> },
       { path: "/avsearch", element: <AdvanceSearch /> },
       { path: "/auth/*", element: <AuthRoutes /> },
-      { path: "/novel/:postId", element: <NovelData />},
-      { path: "/manga/:postId", element: <MangaData />},
-      { path: "/novel/chapter/:chapterId", element: <NovelChapterDetail/>},
+      { path: "/novel/:postName/:postId", element: <NovelData />},
+      { path: "/manga/:postName/:postId", element: <MangaData />},
+      { path: "/novel/:postName/chapter/:chapterName/:chapterId", element: <NovelChapterDetail/>},
       { path: "/chapter/:chapterId", element: <NovelChapterDetailPage />},
-      { path: "/manga/chapter/:chapterId", element: <MangaChapterDetail/>},
+      { path: "/manga/:postName/chapter/:chapterName/:chapterId", element: <MangaChapterDetail/>},
       { path: "/chapter/:chapterId", element: <MangaChapterDetailPage />},
     ],
   },

@@ -61,6 +61,7 @@ def import_novel(json_file_path):
         cover_name = cover_url.split("/")[-1] + ".jpg"
         novel.cover_image.save(cover_name, cover_file, save=True)
     genre_names = item.get('genres', [])
+    print(len(genre_names))
     genre_instances = []
     for name in genre_names:
         genre, _ = Genre.objects.get_or_create(name=name)

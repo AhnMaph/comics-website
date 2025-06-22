@@ -54,9 +54,10 @@ def import_json_file(filepath):
     for g in data.get("genres", []):
         genre, _ = Genre.objects.get_or_create(name=g)
         manga.genres.add(genre)
-    
+    numChap = 0
     # Tạo chapter
     for chap_data in data.get("chapters", []):
+        numChap = numChap + 1
         chapter = MangaChapter.objects.create(
             manga=manga,
             title=chap_data.get("title", f"Chapter {chap_data.get('number')}"),
@@ -71,7 +72,7 @@ def import_json_file(filepath):
             )
     
     # Cập nhật số chapter
-    manga.numChapters = manga.chapters.count()
+    manga.numChapters = numChap
     manga.save()
     print(f"✅ Nhập thành công: {manga.title}")
 
