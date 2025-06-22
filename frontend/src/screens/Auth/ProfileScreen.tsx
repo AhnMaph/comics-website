@@ -19,7 +19,6 @@ import {selectUser } from "../../types/user/userSlice";
 import {useSelector } from "react-redux";
 import {fetchProfile, getFavorite, updateProfile} from '../../actions/userAction';
 import { Novel } from '../../types/novel/novelDetails';
-import store from '../../store';
 import { updateAvatar } from '../../actions/userAction';
 import { getUploader } from '../../actions/novelAction';
 function toSlug(str: string): string {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { navbarItems } from "../../components/Navbarapi";
 import { FiMenu } from "react-icons/fi";
 import { useSelector } from "react-redux";

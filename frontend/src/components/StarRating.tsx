@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { updateVoting } from "../actions/userAction";
 import axiosAuth from '../actions/apiClient';
 import { typeContent } from "../types/user/User";

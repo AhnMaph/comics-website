@@ -20,7 +20,6 @@ const ChapterMangaDetailPage = () => {
     previousChapterId?: string | null;
     nextChapterId?: string | null;
   } | null>(null);
-  const baseUrl = import.meta.env.VITE_ADMIN_URL;
 
   useEffect(() => {
     const fetchData = async () => {

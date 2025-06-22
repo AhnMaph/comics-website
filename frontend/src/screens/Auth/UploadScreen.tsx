@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Upload, X, Plus, Search, Book, Camera, Trash2 } from 'lucide-react';
 import {fetchGenre} from "../../actions/genreAction";
 import { Genre } from "../../types/genre/genreDetails";
