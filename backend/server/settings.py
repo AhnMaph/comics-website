@@ -230,6 +230,7 @@ CORS_ALLOW_HEADERS = [
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
+    "https://comics-website-production.up.railway.app",
     "http://localhost:5174",
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
