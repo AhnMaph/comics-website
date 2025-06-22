@@ -14,3 +14,4 @@ gTTS
 django-debug-toolbar
 python-dotenv
 channels
+dj_database_url
