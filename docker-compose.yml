@@ -28,21 +28,6 @@ services:
     networks:
       - webnet
 
-  nginx:
-    image: nginx:alpine
-    container_name: nginx-reverse-proxy
-    ports:
-      - "80:80"  # chỉ mở cổng 80 ra ngoài
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./backend/staticfiles:/static
-      - ./frontend/dist:/frontend
-    depends_on:
-      - backend
-      - frontend
-    networks:
-      - webnet
-
 networks:
   webnet:
     driver: bridge
