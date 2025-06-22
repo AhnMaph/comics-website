@@ -1,13 +1,14 @@
 import { defineConfig } from "vite";
-import tailwindcss from '@tailwindcss/vite'
-//import react from "@vitejs/plugin-react";
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [tailwindcss(),],
+  plugins: [tailwindcss()],
   resolve: {
     alias: {
       "@": "/src",
     },
+  },
+  server: {
+    allowedHosts: ['comics-website-production.up.railway.app'],
   },
 });
