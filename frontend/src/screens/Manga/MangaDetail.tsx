@@ -52,7 +52,12 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
           {Array.isArray(story.genres) &&
             story.genres.map((genre: {_id: string; name: string}, idx: number) => (
               <span key={genre._id}>
-                {genre.name}
+                <Link
+                  to={`/avsearch?include_genres=${genre._id}`}
+                  className="text-blue-600 hover:underline"
+                >
+                  {genre.name}
+                </Link>
                 {idx < story.genres.length - 1 && ', '}
               </span>
             ))}
@@ -61,12 +66,12 @@ function MangaInfo({ story, firstChapter, lastChapter, onLike, onFavorite }: any
         <p><span className="font-bold">Cập nhật:</span> {new Date(story.updated_at).toLocaleDateString('vi-VN')}</p>
         <div className="justify-between mt-2">
           {firstChapter && (
-            <Link to={`/manga/${toSlug(story.title)}/chapter/${firstChapter._id}`}>
+            <Link to={`/manga/${toSlug(story.title)}/chapter/${firstChapter.title}/${firstChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 px-2 mr-2 py-2 rounded">Đọc từ đầu</button>
             </Link>
           )}
           {lastChapter && (
-            <Link to={`/manga/${toSlug(story.title)}/chapter/${lastChapter._id}`}>
+            <Link to={`/manga/${toSlug(story.title)}/chapter/${lastChapter.title}/${lastChapter._id}`}>
               <button className="text-white bg-orange-500 hover:bg-yellow-400 ml-2 px-2 py-2 rounded">Đọc mới nhất</button>
             </Link>
           )}
@@ -131,7 +136,7 @@ function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
   const rows = Array.from({ length: Math.ceil(chapters.length / 3) });
   const canLoadMore = visible < rows.length;
   const canHide = visible === rows.length && visible > 15
-  
+  const { postName } = useParams();
   return (
     <div className="flex-1 mt-10">
       <div className="bg-orange-300 text-center py-2">
@@ -143,7 +148,7 @@ function ChapterList({ chapters, visible, onLoadMore, onCollapse}: any) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-2 text-center">
               {chapters.slice(rowIndex * 3, rowIndex * 3 + 3).map((chapter: MangaChapter, colIndex: number) => (
                 <div key={colIndex}>
-                  <Link to={`/manga/${toSlug(story.title)}/chapter/${chapter._id}`} className="text-neutral-700 hover:text-orange-500 dark:text-white">
+                  <Link to={`/manga/${postName}/chapter/${chapter.title}/${chapter._id}`} className="text-neutral-700 hover:text-orange-500 dark:text-white">
                     Chương {chapter.chapter_number}
                   </Link>
                 </div>

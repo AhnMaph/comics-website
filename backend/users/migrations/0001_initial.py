@@ -8,26 +8,9 @@ import django.db.models.deletion
 import django.utils.timezone
 import uuid
 import os
-from dotenv import load_dotenv
-load_dotenv()
-def create_superuser(apps, schema_editor):
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-
-    # Lấy thông tin từ biến môi trường
-    username = os.getenv('SUPERUSER_USERNAME')
-    email = os.getenv('SUPERUSER_EMAIL')
-    password = os.getenv('SUPERUSER_PASSWORD')
-    if not all([username, email, password]):
-        raise ValueError(f"Thiếu biến môi trường: username={username}, email={email}, password={'***' if password else None}")
-    if not User.objects.filter(username=username).exists():
-        User.objects.create_superuser(username, email, password)
-
 
 class Migration(migrations.Migration):
-
     initial = True
-
     dependencies = [
         ('auth', '0012_alter_user_first_name_max_length'),
         ('contenttypes', '0002_remove_content_type_name'),
@@ -95,5 +78,4 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
-        migrations.RunPython(create_superuser),
     ]
