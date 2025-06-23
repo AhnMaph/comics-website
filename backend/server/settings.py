@@ -166,8 +166,8 @@ if os.getenv("PGDATABASE"):
             'NAME': 'railway',
             'USER': 'postgres',
             'PASSWORD': 'GoETFxdAsXmMmtesxpwunQLXHjlseWhq',
-            'HOST': 'mainline.proxy.rlwy.net',
-            'PORT': '27360',
+            'HOST': 'postgres.railway.internal',
+            'PORT': '5432',
         }
     }
 
