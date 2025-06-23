@@ -17,9 +17,14 @@ Một website đầy đủ tính năng dành cho Truyện tranh, Tiểu thuyết
 ## Tính năng
 
 * 📚 **Truyện tranh** (kiểu manga, có hình ảnh minh họa)
+  ![image](https://github.com/user-attachments/assets/7e5d62a6-9442-41bb-80c8-cb3c90ffda8a)
+
 * 📖 **Tiểu thuyết** (truyện văn bản thuần túy)
+  ![image](https://github.com/user-attachments/assets/016c7da8-4ef8-4893-98ef-72e50a1bbcdc)
+
 * 🎧 **Sách nói** (nghe truyện được đọc lại)
-* 👤 **Tài khoản người dùng** với tư cách thành viên VIP và nội dung cao cấp
+  ![image](https://github.com/user-attachments/assets/623bf27e-ff87-49f1-beda-37facfb82eac)
+
 
 ---
 
