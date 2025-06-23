@@ -237,7 +237,7 @@ CORS_ALLOW_HEADERS = [
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "comics-website-production.up.railway.app",
+    "https://comics-website-production.up.railway.app",
     "https://mangadakh.up.railway.app",
     "http://empowering-truth.railway.internal:5174",
     "http://localhost:5174",
