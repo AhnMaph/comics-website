@@ -13,13 +13,48 @@ Một website đầy đủ tính năng dành cho Truyện tranh, Tiểu thuyết
 | Nguyễn Ngọc Diệu Duyên  | 23520401 |
 | Trần Việt Khải    | 23520673 |
 
+## Giới thiệu:  
 
-## Tính năng
+✨ **mangadakh** ✨ – Nền tảng đọc truyện trực tuyến với nhiều tính năng ưu việt!  
+📚 Tại đây, bạn có thể thỏa sức khám phá kho truyện phong phú với hàng ngàn đầu truyện hấp dẫn: 
 
-* 📚 **Truyện tranh** (kiểu manga, có hình ảnh minh họa)
-* 📖 **Tiểu thuyết** (truyện văn bản thuần túy)
-* 🎧 **Sách nói** (nghe truyện được đọc lại)
-* 👤 **Tài khoản người dùng** với tư cách thành viên VIP và nội dung cao cấp
+>🎨 Truyện tranh sinh động, sắc nét  
+>✍️ Truyện chữ lôi cuốn, dễ đọc  
+>💡 Đặc biệt, AI, biến truyện chữ thành giọng đọc tiếng Việt tự nhiên 🎧, giúp bạn dễ dàng nghe truyện mọi lúc, mọi nơi như đang thưởng thức sách nói!  
+
+🎉 Trải nghiệm ngay tại [mangadakh](https://mangadakh.up.railway.app/) để bước vào thế giới truyện đầy màu sắc, sinh động và tiện ích! 
+    
+![](asset/homepage.PNG)
+
+## Công nghệ website:  
+
+💻 **Frontend**: Typescript, Vite, Tailwind CSS  
+⚙️ **Backend**: Django  
+🗄️ **Database**: SQLite (Develop), PostgreSQL (Deploy)
+
+## Sơ đồ tính năng mong muốn:  
+
+![](asset/diagram.png)
+
+## Tính năng:  
+
+📚 **Truyện tranh** (manga, có hình ảnh minh họa)  
+📖 **Tiểu thuyết** (truyện văn bản thuần túy)
+🎧 **Sách nói** (truyện chữ thành audio)    
+⭐ **Chức năng truyện** (like truyện, yêu thích (lưu) truyện, đánh giá)  
+🔔 **Thông báo** (được trả lời comment, truyện yêu thích cập nhật chương mới)  
+🧑 **User Profile** (lưu truyện yêu thích, thay đổi ảnh đại diện)  
+🔍 **Advance Search** (tìm kiếm nâng cao, nhiều thể loại một lúc, chọn thể loại yêu thích, và thể loại không thích) 
+
+## Hướng phát triển thêm:  
+
+🛠️ **Hệ thống VIP**: Nạp tiền, người dùng free, người dùng có vàng.  
+🛠️ **Phân loại người dùng**: Tác giả (Đăng truyện), Người dùng thường, Người dùng VIP.  
+🛠️ **Bảng xếp hạng truyện hot**: Theo lượt views.  
+
+## Video:  
+🎬 **Demo**: [Link](https://drive.google.com/drive/u/4/folders/1uAf40Ym1mrhGfIhkM4IOZ5aE4plVi9qF)  
+🎬 **Trải nghiệm sản phẩm**:  [Tiktok](https://www.tiktok.com/@cantevenusemyrealname/video/7519089829850647809?is_from_webapp=1&sender_device=pc)  
 
 ---
 
@@ -206,4 +241,3 @@ Chúc bạn đọc truyện và nghe sách vui vẻ!
 
 ---
 
-Nếu bạn muốn mình chuyển nội dung này sang file `.md` tiếng Việt hoặc đóng gói thành tài liệu hướng dẫn, mình có thể hỗ trợ luôn nhé.
