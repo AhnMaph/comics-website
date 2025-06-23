@@ -84,12 +84,8 @@ export const fetchManga = async (page = 1): Promise<Manga[]> => {
       ? data.results.map((manga: any) => {
           // Lấy giá trị cover_image
           let coverImage = manga.cover_image || '';
-
           // Loại bỏ tiền tố http://localhost:8000/media/https%3A/ nếu có
-          const prefixToRemove = `${baseURL}/media/https%3A/`;
-          if (coverImage.startsWith(prefixToRemove)) {
-            coverImage = coverImage.replace(prefixToRemove, '');
-          }
+          coverImage = coverImage.replace(new RegExp(`${baseURL}/media/https%3A/`, 'g'), '');
 
           // Đảm bảo URL bắt đầu bằng https://
           if (coverImage && !coverImage.startsWith('https://')) {
