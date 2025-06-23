@@ -238,7 +238,7 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "https://mangadakh.up.railway.app",
-    "https://empowering-truth.railway.internal:5174"
+    "http://empowering-truth.railway.internal:5174"
     "http://localhost:5174",
 ]
 AUTH_USER_MODEL = 'users.CustomUser'
