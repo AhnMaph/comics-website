@@ -1,211 +1,157 @@
-<h1 align="center">CNA Platform</h1>
-<h2 align="center">
-  
-![Version](https://img.shields.io/badge/version-1.0.0-blue) 
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
-</h2>
-<p align="center">
-  A full-featured website for Comics, Novels and Audio.
-</p>
+# CNA Platform
 
-## I. Overview
-This project is a full-featured online platform where users can enjoy:
+A full-featured website for Comics, Novels, and Audio Books.
 
+---
+
+## Features
 - 📚 Comics (manga-style graphic stories)
-  
 - 📖 Novels (text-based stories)
-
 - 🎧 Audio Books (listen to narrated stories)
+- 👤 User accounts with VIP membership and premium content
 
-The system supports different content types seamlessly and offers a smooth reading and listening experience.
+---
 
-Additionally, it features a comprehensive user account system with VIP membership benefits, including premium content access and personalized user experiences.
-## II. How to use?
-### 1. Install with Docker
-
-### Description
-
-This project uses Docker and Docker Compose to deploy a web application consisting of a backend (Django) and a frontend (React/TypeScript). Using Docker Compose makes it easy to deploy both the backend and frontend services in separate containers.
-
-### Prerequisites
-
-Before getting started, ensure that Docker and Docker Compose are installed on your machine.
-
-- [Install Docker](https://docs.docker.com/get-docker/)
-- [Install Docker Compose](https://docs.docker.com/compose/install/)
-
-### Project Directory Structure
-
+## Project Structure
+```
+├── backend/      # Django backend
+├── frontend/     # React/TypeScript frontend
+├── docker-compose.yml
+├── Makefile      # Automation for local & Docker workflows
+└── README.md
 ```
 
-├── backend/                  # Backend source code (Django)
-├── frontend/                 # Frontend source code (React/TypeScript)
-├── docker-compose.yml        # Docker Compose configuration
-├── .env                      # Environment variables for the project
-└── README.md                 # Project usage guide
+---
 
-````
+## 1. Environment Setup
 
-### Setup
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/install/) (recommended)
+- Or: Python 3.8+, Node.js 18+, npm 9+ (for local development)
 
-1. **Clone the repository**
-
+### Clone the Repository
 ```bash
-git clone https://github.com/AhnMaph/comics-website
+git clone https://github.com/AhnMaph/comics-website.git
 cd comics-website
-````
+```
 
-2. **Install dependencies**
+### Environment Variables
 
-Since both the backend and frontend use Docker, you don't need to manually install dependencies. However, you'll need to prepare some configuration files before running Docker Compose.
+#### a. Local demo
 
-3. **Configure environment variables**
-
-Create a `.env` file in the root directory of the project and provide the necessary environment variables for your admin account.
-
-```env
+Create a `.env` file in the backend directory for a local demo with at least:
+```
 SUPERUSER_USERNAME=your_username
 SUPERUSER_EMAIL=your_email
 SUPERUSER_PASSWORD=your_password
-
 ```
 
-### Using Docker Compose
-
-#### 1. **First time start the services**
-
-Run the following command to start all services (backend and frontend) in Docker Compose:
-
-```bash
-docker-compose up --build
+Create a `.env` file in the frontend directory for a local demo with at least:
 ```
-
-This command will:
-
-* **Rebuild** the containers if necessary (if there are changes in the Dockerfile or source code).
-* **Start the services** (backend and frontend) in their respective containers.
-
-After running the command, you can access:
-
-* **Backend (Django)** at `http://127.0.0.1:8000/`.
-* **Frontend (React/TypeScript)** at `http://127.0.0.1:5174/`.
-
-Then whenever you want to turn it on just run:
-
-```bash
-docker-compose up
+VITE_ADMIN_URL=http://localhost:8000
+VITE_FRONTEND_URL=http://localhost:5174
 ```
+#### b. Docker demo
 
-**If you've already build a container and want to rebuild:**
-
-```bash
-docker-compose down
-docker-compose build
-docker-compose up
+Add a another `.env` file in the project root (for Docker) with at least:
 ```
-
-#### 2. **View logs of services**
-
-To view the logs of the running containers:
-
-```bash
-docker-compose logs
+SUPERUSER_USERNAME=your_username
+SUPERUSER_EMAIL=your_email
+SUPERUSER_PASSWORD=your_password
+VITE_ADMIN_URL=http://localhost:8000
+VITE_FRONTEND_URL=http://localhost:5174
 ```
+---
 
-To view logs of a specific service (e.g., backend):
+## 2. Usage with Makefile
 
-```bash
-docker-compose logs backend
-```
+All common tasks are automated via the `Makefile`. Run `make help` to see all commands.
 
-#### 3. **Stop the services**
+### Local Development (without Docker)
+- **Start backend:**
+  ```bash
+  make run-backend
+  ```
+  Runs Django at http://127.0.0.1:8000/
+- **Start frontend:**
+  ```bash
+  make run-frontend
+  ```
+  Runs React app at http://127.0.0.1:5174/
+- **Migrate database:**
+  ```bash
+  make migrate
+  ```
+- **Create migrations:**
+  ```bash
+  make makemigrations
+  ```
+- **Add demo data:**
+  ```bash
+  make add-demo-data
+  ```
 
-To stop the running containers without shutting them down completely:
+> **Note:** For local dev, install dependencies first:
+> - Backend: `pip install -r backend/requirements.txt`
+> - Frontend: `cd frontend && npm install`
 
-```bash
-docker-compose stop
-```
-
-#### 4. **Shutdown and remove containers**
-
-When you want to stop and remove all containers and their associated resources (volumes if needed), use the following command:
-
-```bash
-docker-compose down
-```
-
-To also remove volumes (data), use:
-
-```bash
-docker-compose down -v
-```
-
-#### 5. **Restart the services**
-
-If you want to restart the containers after making changes to configurations or source code, run:
-
-```bash
-docker-compose restart
-```
-
-### Docker Compose Configuration
-
-The `docker-compose.yml` file in this project configures the following services:
-
-#### Backend (Django)
-
-* This service runs your Django application and exposes port `8000` for external access.
-* **Dockerfile**: Uses the Django Dockerfile to set up the environment and install dependencies.
-
-#### Frontend (React/TypeScript)
-
-* This service runs your frontend application (React/TypeScript) and exposes port `5174`.
-* **Dockerfile**: Uses the React/TypeScript Dockerfile to build and run the frontend.
-
-### Example `docker-compose.yml` Configuration
-
-```yaml
-version: '3.8'
-
-services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: django-backend
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./backend:/app
-      - ./frontend/dist:/app/frontend/dist
-    env_file:
-      - .env
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: typescript-frontend
-    ports:
-      - "5174:5174"
-    volumes:
-      - ./frontend:/app
-    stdin_open: true
-    command: ["npm", "run", "dev"]
-```
-
-#### Service Configuration:
-
-* **backend**: This service uses volume mappings to sync the backend source code from the `./backend` folder on the host to the `/app` folder in the container and maps the `./frontend/dist` folder to serve static files.
-* **frontend**: This service uses volume mappings to sync the frontend source code from the `./frontend` folder on the host to the `/app` folder in the container.
-
-### Notes
-
-* Make sure the ports defined in `docker-compose.yml` do not conflict with other services running on your machine.
-* If you encounter any issues during startup, check the logs of the containers for more details.
+### Docker-based Development
+- **Start all services (build if needed):**
+  ```bash
+  make up
+  ```
+- **Stop and remove containers/volumes:**
+  ```bash
+  make down
+  ```
+- **Restart services:**
+  ```bash
+  make restart
+  ```
+- **View logs:**
+  ```bash
+  make logs
+  ```
+- **Open shell in backend container:**
+  ```bash
+  make shell-backend
+  ```
+- **Open shell in frontend container:**
+  ```bash
+  make shell-frontend
+  ```
+- **Clean up everything:**
+  ```bash
+  make clean
+  ```
+- **Rebuild everything:**
+  ```bash
+  make rebuild
+  ```
 
 ---
+
+## 3. Accessing the Website
+- **Backend:** http://127.0.0.1:8000/
+- **Frontend:** http://127.0.0.1:5174/
+
+---
+
+## 4. Troubleshooting
+- Use `make logs` to check logs.
+- Use `make clean-port` if ports 8000/5174 are in use.
+- Use `make prune` to remove all unused Docker data.
+
+---
+
+## 5. Additional Notes
+- For more commands, run `make help`.
+- Ensure your `.env` file is set up for admin creation.
+- For production, review Docker and environment settings.
+
+---
+
+Happy reading and listening!
 
 
 
