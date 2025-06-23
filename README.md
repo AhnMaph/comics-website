@@ -131,7 +131,13 @@ SUPERUSER_PASSWORD=your_password
 VITE_ADMIN_URL=http://localhost:8000
 VITE_FRONTEND_URL=http://localhost:5174
 ```
+#### c. Setup môi trường cho Local
 
+Chạy lệnh sau để cài đặt môi trường frontend, backend và demo data
+
+```
+make install 
+```
 ---
 
 ## 2. Sử dụng Makefile
@@ -176,8 +182,7 @@ Tất cả tác vụ phổ biến đã được tự động hóa thông qua `Ma
 
 > **Lưu ý:** Với môi trường local, cần cài dependency trước:
 >
-> * Backend: `pip install -r backend/requirements.txt`
-> * Frontend: `cd frontend && npm install`
+> * Backend và frontend: `make install`
 
 ---
 

@@ -2,9 +2,17 @@ COMPOSE = docker-compose
 DC_FILE = docker-compose.yml
 
 # ===== For local ===== #
-run-backend: 
+install: # yêu cầu .env để chạy
+	cd frontend && npm install || true
+	cd backend && pip install -r requirements.txt
+	make makemigrations || true
+	make migrate || true
+	make add-demo-data 
+run-backend: # yêu cầu .env để chạy 
+	make makemigrations || true
+	make migrate || true
 	python3 backend/manage.py runserver
-run-frontend:
+run-frontend: # yêu cầu .env để chạy
 	cd frontend && npm run dev
 migrate:
 	python3 backend/manage.py migrate
@@ -58,6 +66,7 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Local command:"
+	@echo "  install     	  setup environment"
 	@echo "  run-backend      Start backend"
 	@echo "  run-frontend     Start frontend"
 	@echo "  migrate     	  Migrate database"
@@ -78,4 +87,4 @@ help:
 	@echo "  rebuild          Clean, build, and up containers"
 	@echo "  clean-port       Stop any container using port 8000/5174 on host"
 	@echo "  rm-network       Remove the docker network"
-.PHONY: run-backend rm-network run-frontend migrate makemigrations up down restart logs build shell-backend shell-frontend ps clean prune rebuild add-data-base help clean-port
+.PHONY: install run-backend rm-network run-frontend migrate makemigrations up down restart logs build shell-backend shell-frontend ps clean prune rebuild add-data-base help clean-port
