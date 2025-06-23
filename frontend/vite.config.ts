@@ -9,6 +9,6 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ['comics-website-production.up.railway.app'],
+    allowedHosts: ['comics-website-production.up.railway.app','mangadakh.up.railway.app'],
   },
 });
