@@ -14,7 +14,6 @@ add-demo-data:
 	mkdir -p backend/media
 	python3 backend/novel/import_data.py || true
 	python3 backend/manga/import_data.py || true
-	python3 backend/chapter/import_unreal_chapter.py
 # ===== For docker ===== #
 up:
 	$(COMPOSE) -f $(DC_FILE) up --build
