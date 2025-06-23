@@ -160,8 +160,8 @@ ASGI_APPLICATION = 'server.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if not os.getenv("DJANGO_ALLOWED_HOSTS"):
-    print("PGDB found: ",os.getenv("DJANGO_ALLOWED_HOSTS"))
+if os.getenv("PGUSER"):
+    print("PGDB found: ",os.getenv("PGUSER"))
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

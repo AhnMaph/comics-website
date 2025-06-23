@@ -166,7 +166,7 @@ const ProfileScreen = () => {
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-4" 
       style={{ aspectRatio: "5 / 7" }}>
       <img 
-        src={baseURL+"/"+comic.cover_image}
+        src={baseURL+comic.cover_image}
         alt={comic.title}
         className="w-full h-full object-cover rounded"
       />
