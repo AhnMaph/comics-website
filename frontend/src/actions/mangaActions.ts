@@ -87,6 +87,7 @@ export const fetchManga = async (page = 1): Promise<Manga[]> => {
           let coverImage = manga.cover_image || '';
           // Loại bỏ tiền tố http://localhost:8000/media/https%3A/ nếu có
           coverImage = coverImage.replace(new RegExp(`${baseURL}/media/https%3A/`, 'g'), '');
+          coverImage = coverImage.replace(new RegExp(`https://http//comics-website-production.up.railway.app/media/https%3A/`, 'g'), '');
           console.log("debug image: ",coverImage, `${baseURL}/media/https%3A/`)
           // Đảm bảo URL bắt đầu bằng https://
           if (coverImage && !coverImage.startsWith('https://')) {
