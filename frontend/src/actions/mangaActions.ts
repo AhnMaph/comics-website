@@ -15,6 +15,7 @@ export const fetchMangaDetails = async (mangaid: string) => {
       if (coverImage.startsWith(prefixToRemove)) {
         coverImage = coverImage.replace(prefixToRemove, '');
       }
+      console.log("Debug image",coverImage)
       if (coverImage && !coverImage.startsWith('https://')) {
         coverImage = `https://${coverImage}`;
       }
