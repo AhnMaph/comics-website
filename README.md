@@ -1,59 +1,77 @@
-# CNA Platform
+---
 
-A full-featured website for Comics, Novels, and Audio Books.
+# Nền tảng CNA
+
+Một website đầy đủ tính năng dành cho Truyện tranh, Tiểu thuyết và Sách nói.
+
+---
+## Thành viên nhóm thực hiện:
+
+| Họ và tên    | MSSV     |
+| ------------ | -------- |
+| Phạm Thanh An | 23520027 |
+| Nguyễn Ngọc Diệu Duyên  | 23520401 |
+| Trần Việt Khải    | 23520673 |
+
+
+## Tính năng
+
+* 📚 **Truyện tranh** (kiểu manga, có hình ảnh minh họa)
+* 📖 **Tiểu thuyết** (truyện văn bản thuần túy)
+* 🎧 **Sách nói** (nghe truyện được đọc lại)
+* 👤 **Tài khoản người dùng** với tư cách thành viên VIP và nội dung cao cấp
 
 ---
 
-## Features
-- 📚 Comics (manga-style graphic stories)
-- 📖 Novels (text-based stories)
-- 🎧 Audio Books (listen to narrated stories)
-- 👤 User accounts with VIP membership and premium content
+## Cấu trúc Dự án
 
----
-
-## Project Structure
 ```
-├── backend/      # Django backend
-├── frontend/     # React/TypeScript frontend
+├── backend/      # Backend Django
+├── frontend/     # Frontend React/TypeScript
 ├── docker-compose.yml
-├── Makefile      # Automation for local & Docker workflows
+├── Makefile      # Tự động hóa quy trình làm việc với Docker và local
 └── README.md
 ```
 
 ---
 
-## 1. Environment Setup
+## 1. Cài đặt Môi trường
 
-### Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/install/) (recommended)
-- Or: Python 3.8+, Node.js 18+, npm 9+ (for local development)
+### Yêu cầu trước
 
-### Clone the Repository
+* [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/install/) (khuyến nghị)
+* Hoặc: Python 3.8+, Node.js 18+, npm 9+ (nếu phát triển local)
+
+### Clone repository
+
 ```bash
 git clone https://github.com/AhnMaph/comics-website.git
 cd comics-website
 ```
 
-### Environment Variables
+### Biến môi trường
 
-#### a. Local demo
+#### a. Chạy demo local
 
-Create a `.env` file in the backend directory for a local demo with at least:
+Tạo file `.env` trong thư mục `backend` với nội dung tối thiểu:
+
 ```
 SUPERUSER_USERNAME=your_username
 SUPERUSER_EMAIL=your_email
 SUPERUSER_PASSWORD=your_password
 ```
 
-Create a `.env` file in the frontend directory for a local demo with at least:
+Tạo file `.env` trong thư mục `frontend` với nội dung tối thiểu:
+
 ```
 VITE_ADMIN_URL=http://localhost:8000
 VITE_FRONTEND_URL=http://localhost:5174
 ```
-#### b. Docker demo
 
-Add a another `.env` file in the project root (for Docker) with at least:
+#### b. Chạy demo với Docker
+
+Tạo thêm một file `.env` ở thư mục gốc của dự án với nội dung tối thiểu:
+
 ```
 SUPERUSER_USERNAME=your_username
 SUPERUSER_EMAIL=your_email
@@ -61,98 +79,131 @@ SUPERUSER_PASSWORD=your_password
 VITE_ADMIN_URL=http://localhost:8000
 VITE_FRONTEND_URL=http://localhost:5174
 ```
+
 ---
 
-## 2. Usage with Makefile
+## 2. Sử dụng Makefile
 
-All common tasks are automated via the `Makefile`. Run `make help` to see all commands.
+Tất cả tác vụ phổ biến đã được tự động hóa thông qua `Makefile`. Chạy `make help` để xem tất cả lệnh có sẵn.
 
-### Local Development (without Docker)
-- **Start backend:**
+### Phát triển local (không dùng Docker)
+
+* **Khởi động backend:**
+
   ```bash
   make run-backend
   ```
-  Runs Django at http://127.0.0.1:8000/
-- **Start frontend:**
+
+  Chạy Django tại [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+* **Khởi động frontend:**
+
   ```bash
   make run-frontend
   ```
-  Runs React app at http://127.0.0.1:5174/
-- **Migrate database:**
+
+  Chạy React tại [http://127.0.0.1:5174/](http://127.0.0.1:5174/)
+
+* **Chạy migrate database:**
+
   ```bash
   make migrate
   ```
-- **Create migrations:**
+
+* **Tạo migration mới:**
+
   ```bash
   make makemigrations
   ```
-- **Add demo data:**
+
+* **Thêm dữ liệu demo:**
+
   ```bash
   make add-demo-data
   ```
 
-> **Note:** For local dev, install dependencies first:
-> - Backend: `pip install -r backend/requirements.txt`
-> - Frontend: `cd frontend && npm install`
+> **Lưu ý:** Với môi trường local, cần cài dependency trước:
+>
+> * Backend: `pip install -r backend/requirements.txt`
+> * Frontend: `cd frontend && npm install`
 
-### Docker-based Development
-- **Start all services (build if needed):**
+---
+
+### Phát triển với Docker
+
+* **Khởi động toàn bộ dịch vụ (và build nếu cần):**
+
   ```bash
   make up
   ```
-- **Stop and remove containers/volumes:**
+
+* **Dừng và xóa container/volume:**
+
   ```bash
   make down
   ```
-- **Restart services:**
+
+* **Khởi động lại dịch vụ:**
+
   ```bash
   make restart
   ```
-- **View logs:**
+
+* **Xem log:**
+
   ```bash
   make logs
   ```
-- **Open shell in backend container:**
+
+* **Mở shell trong container backend:**
+
   ```bash
   make shell-backend
   ```
-- **Open shell in frontend container:**
+
+* **Mở shell trong container frontend:**
+
   ```bash
   make shell-frontend
   ```
-- **Clean up everything:**
+
+* **Dọn dẹp toàn bộ:**
+
   ```bash
   make clean
   ```
-- **Rebuild everything:**
+
+* **Build lại mọi thứ:**
+
   ```bash
   make rebuild
   ```
 
 ---
 
-## 3. Accessing the Website
-- **Backend:** http://127.0.0.1:8000/
-- **Frontend:** http://127.0.0.1:5174/
+## 3. Truy cập Website
+
+* **Backend:** [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+* **Frontend:** [http://127.0.0.1:5174/](http://127.0.0.1:5174/)
 
 ---
 
-## 4. Troubleshooting
-- Use `make logs` to check logs.
-- Use `make clean-port` if ports 8000/5174 are in use.
-- Use `make prune` to remove all unused Docker data.
+## 4. Xử lý sự cố
+
+* Dùng `make logs` để xem log.
+* Dùng `make clean-port` nếu cổng 8000/5174 đang bị chiếm.
+* Dùng `make prune` để xóa dữ liệu Docker không sử dụng.
 
 ---
 
-## 5. Additional Notes
-- For more commands, run `make help`.
-- Ensure your `.env` file is set up for admin creation.
-- For production, review Docker and environment settings.
+## 5. Ghi chú thêm
+
+* Dùng `make help` để xem thêm lệnh.
+* Đảm bảo file `.env` của bạn đã được thiết lập để tạo admin.
+---
+
+Chúc bạn đọc truyện và nghe sách vui vẻ!
 
 ---
 
-Happy reading and listening!
-
-
-
-
+Nếu bạn muốn mình chuyển nội dung này sang file `.md` tiếng Việt hoặc đóng gói thành tài liệu hướng dẫn, mình có thể hỗ trợ luôn nhé.
