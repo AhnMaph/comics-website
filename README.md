@@ -5,13 +5,29 @@
 Một website đầy đủ tính năng dành cho Truyện tranh, Tiểu thuyết và Sách nói.
 
 ---
-## Thành viên nhóm thực hiện:
+# Tổng hợp đồ án môn học Nhóm 3 chủ đề Website đọc truyện
 
+## Thành viên:
 | Họ và tên    | MSSV     |
 | ------------ | -------- |
 | Phạm Thanh An | 23520027 |
 | Nguyễn Ngọc Diệu Duyên  | 23520401 |
-| Trần Việt Khải    | 23520673 |
+| Đoàn Việt Khải    | 23520673 |
+
+## Source code: 
+Link github của source code web: [Link](https://github.com/AhnMaph/comics-website)
+
+## Video phỏng vấn PR Website:
+Tiktok: [Link](https://www.tiktok.com/@cantevenusemyrealname/video/7519089829850647809)
+
+## Website deploy internet:
+Website: [mangadakh](https://mangadakh.up.railway.app/)
+
+## Video demo website :
+Demo: [Link](https://drive.google.com/drive/folders/1uAf40Ym1mrhGfIhkM4IOZ5aE4plVi9qF?usp=sharing)
+
+## Voice Cloning Model:
+Demo: [Link](https://drive.google.com/drive/u/4/folders/1TyTrSdCOm37T7NzFg8UTiK3tynRTgmxv)
 
 ## Giới thiệu:  
 
