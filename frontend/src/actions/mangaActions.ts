@@ -11,10 +11,7 @@ export const fetchMangaDetails = async (mangaid: string) => {
       console.log(response.data);
       const mangaData = response.data;
       let coverImage = mangaData.cover_image || '';
-      const prefixToRemove = `${baseURL}/media/https%3A/`;
-      if (coverImage.startsWith(prefixToRemove)) {
-        coverImage = coverImage.replace(prefixToRemove, '');
-      }
+      coverImage = coverImage.replace(new RegExp(`${baseURL}/media/https%3A/`, 'g'), '');
       console.log("Debug image",coverImage)
       if (coverImage && !coverImage.startsWith('https://')) {
         coverImage = `https://${coverImage}`;
