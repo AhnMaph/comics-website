@@ -40,7 +40,8 @@ Demo: [Link](https://drive.google.com/drive/u/4/folders/1TyTrSdCOm37T7NzFg8UTiK3
 
 🎉 Trải nghiệm ngay tại [mangadakh](https://mangadakh.up.railway.app/) để bước vào thế giới truyện đầy màu sắc, sinh động và tiện ích! 
     
-![](asset/homepage.PNG)
+![image](https://github.com/user-attachments/assets/0c31da47-7591-4948-8bf3-5fd18e5bb7ae)
+
 
 ## Công nghệ website:  
 
