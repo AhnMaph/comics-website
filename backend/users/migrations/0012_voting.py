@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='Voting',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('post_id', models.CharField(blank=True, max_length=255)),
+                ('post_id', models.CharField(blank=True, max_length=500)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('score', models.IntegerField(default=0)),
                 ('type', models.CharField(choices=[('novel', 'Tiểu thuyết'), ('manga', 'Manga'), ('audio', 'Audio'), ('forum', 'Diễn đàn')], default='novel', max_length=20)),

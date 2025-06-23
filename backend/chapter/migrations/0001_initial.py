@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
             name='MangaChapter',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('number', models.CharField(blank=True, max_length=255, null=True)),
-                ('title', models.CharField(default='Chương mới', max_length=255)),
+                ('number', models.CharField(blank=True, max_length=500, null=True)),
+                ('title', models.CharField(default='Chương mới', max_length=500)),
                 ('chapter_number', models.IntegerField(blank=True, null=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('manga', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='chapters', to='manga.manga')),

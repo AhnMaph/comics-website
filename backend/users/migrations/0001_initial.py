@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             name='Likes',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('post_id', models.CharField(blank=True, max_length=255)),
+                ('post_id', models.CharField(blank=True, max_length=500)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('type', models.CharField(choices=[('novel', 'Tiểu thuyết'), ('manga', 'Manga'), ('audio', 'Audio'), ('forum', 'Diễn đàn')], default='novel', max_length=20)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
             name='Favorite',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('post_id', models.CharField(blank=True, max_length=255)),
+                ('post_id', models.CharField(blank=True, max_length=500)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('type', models.CharField(choices=[('novel', 'Tiểu thuyết'), ('manga', 'Manga'), ('audio', 'Audio'), ('forum', 'Diễn đàn')], default='novel', max_length=20)),
                 ('user', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL)),
@@ -70,8 +70,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('object_id', models.CharField(blank=True, max_length=255, null=True)),
-                ('chapter_object_id', models.CharField(blank=True, max_length=255, null=True)),
+                ('object_id', models.CharField(blank=True, max_length=500, null=True)),
+                ('chapter_object_id', models.CharField(blank=True, max_length=500, null=True)),
                 ('chapter_content_type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='comment_chapter_type', to='contenttypes.contenttype')),
                 ('content_type', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='comment_post_type', to='contenttypes.contenttype')),
                 ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='replies', to='users.comments')),

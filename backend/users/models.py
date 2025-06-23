@@ -82,7 +82,7 @@ class Likes(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post_id = models.CharField(blank=True, max_length=255)
+    post_id = models.CharField(blank=True, max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     type = models.CharField(
         max_length=20,
@@ -120,7 +120,7 @@ class Voting(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post_id = models.CharField(blank=True, max_length=255)
+    post_id = models.CharField(blank=True, max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     score = models.IntegerField(default=0)  
     type = models.CharField(

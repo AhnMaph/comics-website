@@ -4,7 +4,7 @@ import uuid
 class Genre(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=500)
     createdAt = models.DateTimeField(auto_now_add=True)
     isCommon = models.BooleanField(default=False)
     def __str__(self):
@@ -12,7 +12,7 @@ class Genre(models.Model):
 class Author(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
-    name = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

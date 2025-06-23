@@ -17,15 +17,15 @@ class Manga(models.Model):
                                  on_delete=models.CASCADE,
                                  null=False,
                                  default=1)
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255) 
+    title = models.CharField(max_length=500)
+    author = models.CharField(max_length=500) 
     description = models.TextField()
-    cover_image = models.ImageField(upload_to='manga_covers/', default='manga_covers/default.jpg', blank=True)
+    cover_image = models.ImageField(max_length=500,upload_to='manga_covers/', default='manga_covers/default.jpg', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     genres = models.ManyToManyField(
         Genre, related_name='manga_genres', blank=True)
-    source = models.CharField(max_length=255,default='Không rõ')
+    source = models.CharField(max_length=500,default='Không rõ')
     numComments = models.IntegerField(default=0)
     numViews = models.IntegerField(default=0)
     numFavorites = models.IntegerField(default=0)

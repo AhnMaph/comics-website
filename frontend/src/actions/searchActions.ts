@@ -2,7 +2,7 @@ import axios from 'axios';
 import { AdvancedFilter } from "../types/search/advanceSearch";
 import { Novel } from '../types/novel/novelDetails';
 import { GenreState } from '../types/search/advanceSearch';
-const baseURL = 'http://localhost:8000';
+const baseURL = import.meta.env.VITE_ADMIN_URL;
 export const searchKeyword = async(query:string,type:string) =>{
     try
     {

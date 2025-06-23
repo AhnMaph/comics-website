@@ -41,10 +41,11 @@ export default function CommentSection({ postId, type }: CommentSectionProps) {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
 
+const baseURL = import.meta.env.VITE_ADMIN_URL;
   // Fetch comments from backend
   const fetchComments = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/comments/`, {
+      const res = await axios.get(`${baseURL}}/api/comments/`, {
         withCredentials: true, // Sử dụng cookie để xác thực     
       });
       console.log(res.data);
@@ -100,7 +101,7 @@ export default function CommentSection({ postId, type }: CommentSectionProps) {
 
     try {
       await axios.post(
-        "http://localhost:8000/api/comments/",
+        `${baseURL}/api/comments/`,
         {
           content: replyText.trim(),
           post_id: postId,

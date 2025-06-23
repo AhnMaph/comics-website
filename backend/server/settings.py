@@ -14,7 +14,8 @@ from pathlib import Path
 import os
 from datetime import timedelta
 import dj_database_url
-
+from dotenv import load_dotenv
+load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_PUBLIC_URL")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,7 +160,8 @@ ASGI_APPLICATION = 'server.asgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-if os.getenv("PGDATABASE"):
+if not os.getenv("DJANGO_ALLOWED_HOSTS"):
+    print("PGDB found: ",os.getenv("DJANGO_ALLOWED_HOSTS"))
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -170,7 +172,13 @@ if os.getenv("PGDATABASE"):
             'PORT': '5432',
         }
     }
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

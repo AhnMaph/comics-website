@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
             name='Author',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(blank=True, max_length=255, null=True)),
+                ('name', models.CharField(blank=True, max_length=500, null=True)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
             ],
         ),
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             name='Genres',
             fields=[
                 ('_id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(max_length=255)),
+                ('name', models.CharField(max_length=500)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
             ],

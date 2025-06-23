@@ -37,8 +37,9 @@ def import_json_file(filepath):
     if Manga.objects.filter(title=data["title"]).exists():
         print(f"❗ Bỏ qua: {data['title']} đã tồn tại")
         return
-
     # Tạo Manga
+    print("Debug Manga:", len(data["title"]))
+    
     manga = Manga.objects.create(
         title=data["title"],
         author=data.get("author", "Không rõ"),

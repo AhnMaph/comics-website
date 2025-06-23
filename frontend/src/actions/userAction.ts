@@ -121,6 +121,7 @@ export const fetchProfile = async (username?:string): Promise<User | null> => {
 };
 
 
+const webURL = import.meta.env.VITE_FRONTEND_URL;
 export const autoLogin = async () => {
     const config = { withCredentials: true };
     try {
@@ -139,7 +140,7 @@ export const autoLogin = async () => {
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");
 
-          window.location.href = "http://localhost:5174/auth/login";
+          window.location.href = `${webURL}/auth/login`;
         }
     }
 };

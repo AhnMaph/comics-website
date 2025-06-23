@@ -11,7 +11,7 @@ export const fetchMangaDetails = async (mangaid: string) => {
       console.log(response.data);
       const mangaData = response.data;
       let coverImage = mangaData.cover_image || '';
-      const prefixToRemove = 'http://localhost:8000/media/https%3A/';
+      const prefixToRemove = `${baseURL}/media/https%3A/`;
       if (coverImage.startsWith(prefixToRemove)) {
         coverImage = coverImage.replace(prefixToRemove, '');
       }
@@ -88,7 +88,7 @@ export const fetchManga = async (page = 1): Promise<Manga[]> => {
           let coverImage = manga.cover_image || '';
 
           // Loại bỏ tiền tố http://localhost:8000/media/https%3A/ nếu có
-          const prefixToRemove = 'http://localhost:8000/media/https%3A/';
+          const prefixToRemove = `${baseURL}/media/https%3A/`;
           if (coverImage.startsWith(prefixToRemove)) {
             coverImage = coverImage.replace(prefixToRemove, '');
           }

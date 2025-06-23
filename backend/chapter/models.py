@@ -13,7 +13,7 @@ class MangaChapter(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     manga = models.ForeignKey(Manga, related_name="chapters", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255,default="Chương mới")
+    title = models.CharField(max_length=500,default="Chương mới")
     chapter_number = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -36,7 +36,7 @@ class MangaChapterImage(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     chapter = models.ForeignKey(MangaChapter, related_name="images", on_delete=models.CASCADE)
-    image = models.URLField(max_length=500, default='')
+    image = models.URLField(max_length=1000, default='')
     page = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -45,7 +45,7 @@ class NovelChapter(models.Model):
     _id = models.UUIDField(default=uuid.uuid4,  unique=True,
                            primary_key=True, editable=False)
     novel = models.ForeignKey(Novel, related_name="chapters", on_delete=models.CASCADE)
-    title = models.CharField(max_length=255,default="Chương mới")
+    title = models.CharField(max_length=500,default="Chương mới")
     chapter_number = models.IntegerField(blank=True, null=True)
     content = models.TextField() # nội dung chương
     created_at = models.DateTimeField(auto_now_add=True)
